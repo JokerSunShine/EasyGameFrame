@@ -16,6 +16,28 @@ namespace XLua
     public partial class DelegateBridge : DelegateBridgeBase
     {
 		
+		public void __Gen_Delegate_Imp0(object p0)
+		{
+#if THREAD_SAFE || HOTFIX_ENABLE
+            lock (luaEnv.luaEnvLock)
+            {
+#endif
+                RealStatePtr L = luaEnv.rawL;
+                int errFunc = LuaAPI.pcall_prepare(L, errorFuncRef, luaReference);
+                ObjectTranslator translator = luaEnv.translator;
+                translator.PushAny(L, p0);
+                
+                PCall(L, 1, 0, errFunc);
+                
+                
+                
+                LuaAPI.lua_settop(L, errFunc - 1);
+                
+#if THREAD_SAFE || HOTFIX_ENABLE
+            }
+#endif
+		}
+        
         
 		static DelegateBridge()
 		{
@@ -24,6 +46,11 @@ namespace XLua
 		
 		public override Delegate GetDelegateByType(Type type)
 		{
+		
+		    if (type == typeof(XluaMgr.XLuaMgr_Init))
+			{
+			    return new XluaMgr.XLuaMgr_Init(__Gen_Delegate_Imp0);
+			}
 		
 		    return null;
 		}

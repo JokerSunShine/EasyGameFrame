@@ -1,0 +1,2 @@
+package.path = package.path..";"..CS.UnityEngine.Application.persistentDataPath.."/?.lua"
+require "luaRes.main"
