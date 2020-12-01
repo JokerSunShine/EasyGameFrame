@@ -5,6 +5,14 @@ using UnityEngine;
 public class CSGameManager : MonoBehaviour
 {
     public List<AbstractManager> managerList = new List<AbstractManager>();
+    /// <summary>
+    /// 刷新频率
+    /// </summary>
+    public int updateFrequency = 5;
+    /// <summary>
+    /// 当前刷新
+    /// </summary>
+    private int curFrequency = 0;
     #region 初始化
     private void Awake()
     {
@@ -42,7 +50,12 @@ public class CSGameManager : MonoBehaviour
     #region Update
     private void Update()
     {
-        ManagerListUpdateCallBack();
+        if (curFrequency >= updateFrequency)
+        {
+            ManagerListUpdateCallBack();
+            curFrequency = 0;
+        }
+        curFrequency++;
     }
 
     private void ManagerListUpdateCallBack()

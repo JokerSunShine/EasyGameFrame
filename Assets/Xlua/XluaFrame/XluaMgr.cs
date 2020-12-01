@@ -18,6 +18,14 @@ public class XluaMgr:AbstractManager
     #endregion
 
     #region 数据
+    private static XluaMgr instance;
+    public static XluaMgr Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
     public LuaEnv luaEnv;
     private CSGameManager gameManager;
     private float lastLuaGcTime = 0;
@@ -44,6 +52,7 @@ public class XluaMgr:AbstractManager
     public XluaMgr(CSGameManager gameManager)
     {
         this.gameManager = gameManager;
+        instance = this;
         Init();
     }
     #endregion

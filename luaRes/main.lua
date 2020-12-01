@@ -1,14 +1,6 @@
---package.path = package.path .. ";" .. CS.UnityEngine.Application.persistentDataPath .. "/?.lua"
+package.path = package.path .. ";" .. CS.UnityEngine.Application.persistentDataPath .. "/?.lua"
 -----加载xlua
---util = require 'xlua.util'
------加载协程相关
---local cs_coroutine = require 'luaRes.common.cs_coroutine'
------lua协程中调用C#的yield return方式
---yield_return = cs_coroutine.yield_return
------开启C#协程方法(Lua中定义,C#中运行)
---StartCoroutine = cs_coroutine.StartCoroutine
------关闭Lua中定义,在C#中运行的协程的方法
---StopCoroutine = cs_coroutine.StopCoroutine
+util = require 'xlua.util'
 -----文件读写
 --file_util = require 'luaRes.common.file_util'
 -----@type luaStringBuilder

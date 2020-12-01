@@ -1,6 +1,13 @@
 ﻿using UnityEngine;
 public class CSPlatformManager:AbstractManager{
     #region 数据
+    private static CSPlatformManager instance;
+    public static CSPlatformManager Instance {
+        get {
+            return instance;
+        }
+    }
+
     private CSGameManager gameManager;
     public CSGameManager GameManager {
         get {
@@ -50,6 +57,7 @@ public class CSPlatformManager:AbstractManager{
     #region 构造函数
     public CSPlatformManager(CSGameManager gameManager) {
         this.gameManager = gameManager;
+        instance = this;
     }
     #endregion
 

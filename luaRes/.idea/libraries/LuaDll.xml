@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="LuaDll" type="Lua">
+    <CLASSES>
+      <root url="jar://F:/project/IOSRoot/Client3d/wzcq3D/Client/ClassLibrary_wzcq3D/DllOutput/LuaDll.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
