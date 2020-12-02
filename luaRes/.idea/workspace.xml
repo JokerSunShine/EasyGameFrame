@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="547143de-7767-491c-bf20-af40f17cd194" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/CSClient.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/LuaDll.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/NameSpaceMap.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/UnityEngine.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Assets/Scripts/Abstract/AbstractManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/Scripts/Abstract/AbstractManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Assets/Scripts/Interface.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Assets/Scripts/Manager/CSGameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/Scripts/Manager/CSGameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Assets/Scripts/Manager/CSPlatformManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/Scripts/Manager/CSPlatformManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Assets/Xlua/XluaFrame/XluaMgr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/Xlua/XluaFrame/XluaMgr.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/luaRes.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/luaRes.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.lua" beforeDir="false" afterPath="$PROJECT_DIR$/main.lua" afterDir="false" />
-    </list>
+    <list default="true" id="547143de-7767-491c-bf20-af40f17cd194" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,8 +13,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="56">
-              <caret line="4" column="46" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="46" />
+            <state relative-caret-position="378">
+              <caret line="111" column="43" lean-forward="true" selection-start-line="111" selection-start-column="43" selection-end-line="111" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -54,10 +41,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="386" />
-    <option name="y" value="122" />
+    <option name="x" value="1912" />
+    <option name="y" value="-8" />
     <option name="width" value="1936" />
-    <option name="height" value="842" />
+    <option name="height" value="1096" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -131,16 +118,17 @@
       <updated>1606729815267</updated>
       <workItem from="1606729816781" duration="673000" />
       <workItem from="1606808630840" duration="1075000" />
+      <workItem from="1606900851005" duration="623000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1748000" />
+    <option name="totallyTimeSpent" value="2371000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25266525" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2553305" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -188,8 +176,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="4" column="46" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="46" />
+        <state relative-caret-position="378">
+          <caret line="111" column="43" lean-forward="true" selection-start-line="111" selection-start-column="43" selection-end-line="111" selection-end-column="43" />
         </state>
       </provider>
     </entry>
