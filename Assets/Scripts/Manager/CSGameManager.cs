@@ -33,6 +33,7 @@ public class CSGameManager : MonoBehaviour
             manager.Awake();
         }
     }
+
     private void Start()
     {
         ManagerListStartCallBack();

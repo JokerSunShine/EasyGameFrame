@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-public class CSPlatformManager:AbstractManager{
+public class CSPlatformManager : AbstractManager {
     #region 数据
     private static CSPlatformManager instance;
     public static CSPlatformManager Instance {
@@ -18,6 +18,24 @@ public class CSPlatformManager:AbstractManager{
     public RuntimePlatform runTimePlatform {
         get {
             return Application.platform;
+        }
+    }
+
+    public UnityEditor.BuildTargetGroup BuildTargetGroup {
+        get {
+            if (runTimePlatform == RuntimePlatform.WindowsEditor || runTimePlatform == RuntimePlatform.WindowsPlayer)
+            {
+                return UnityEditor.BuildTargetGroup.Standalone;
+            }
+            else if (runTimePlatform == RuntimePlatform.Android)
+            {
+                return UnityEditor.BuildTargetGroup.Android;
+            }
+            else if (runTimePlatform == RuntimePlatform.IPhonePlayer)
+            {
+                return UnityEditor.BuildTargetGroup.iOS;
+            }
+            return UnityEditor.BuildTargetGroup.Unknown;
         }
     }
 

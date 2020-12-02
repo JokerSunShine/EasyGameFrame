@@ -53,9 +53,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="34" />
-    <option name="y" value="236" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="386" />
+    <option name="y" value="122" />
     <option name="width" value="1936" />
     <option name="height" value="842" />
   </component>
@@ -99,7 +99,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="F:/project/IOSRoot/Client3d/wzcq3D/Client/Branch/ClientProject_2019.2.16/luaRes" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Libraries" />
