@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEditor;
 using UnityEngine;
+using XLua;
 
 [InitializeOnLoad]
 public class LuaResTool_AutoReloadLua
@@ -12,8 +14,39 @@ public class LuaResTool_AutoReloadLua
     /// 开启自动重载lua的宏名
     /// </summary>
     public static string Macro_OpenAutoReloadLua = "AutoReloadLuaThread";
+    private static string ReloadLuaFileArrayFunctionName = "ReloadLuaFileArray";
     private static FileSystemWatcher fileSystemWatcher;
     private static List<string> changedFileNameList = new List<string>();
+    private static StringBuilder stringBuilder = new StringBuilder();
+    private static LuaTable luaFileReloadManager = null;
+    public static LuaTable LuaFileReloadManager {
+        get {
+            if (luaFileReloadManager != null)
+            {
+                return luaFileReloadManager;
+            }
+            if(XluaMgr.Instance.luaEnv != null)
+            {
+                luaFileReloadManager = XluaMgr.Instance.luaEnv.Global.Get<LuaTable>("LuaFileReloadManager");
+            }
+            return luaFileReloadManager;
+        }
+    }
+
+    private static Action<object> reloadLuaFileArrayFunction = null;
+    public static Action<object> ReloadLuaFileArrayFunction {
+        get {
+            if (reloadLuaFileArrayFunction != null)
+            {
+                return reloadLuaFileArrayFunction;
+            }
+            if (LuaFileReloadManager != null)
+            {
+                reloadLuaFileArrayFunction = LuaFileReloadManager.Get<Action<object>>(ReloadLuaFileArrayFunctionName);
+            }
+            return reloadLuaFileArrayFunction;
+        }
+    }
     #endregion
 
     #region 构造
@@ -79,11 +112,11 @@ public class LuaResTool_AutoReloadLua
 #region 自动更新开关
     public static void StartAutoReloadLua()
     {
-        CSDebug.Log("开始监听LuaRes文件夹" + CSPlatformManager.Instance.PlatformInfo.LuaRoot);
+        CSDebug.Log("开始监听LuaRes文件夹" + CSEditorPlatformInfo.LuaRoot);
         StopAutoReloadLua();
         fileSystemWatcher = new FileSystemWatcher();
         fileSystemWatcher.NotifyFilter = NotifyFilters.LastWrite;
-        fileSystemWatcher.Path = CSPlatformManager.Instance.PlatformInfo.LuaRoot;
+        fileSystemWatcher.Path = CSEditorPlatformInfo.LuaRoot;
         fileSystemWatcher.Filter = "*.lua";
         fileSystemWatcher.IncludeSubdirectories = true;
         fileSystemWatcher.Changed += FileSystemWatcher_Changed;
@@ -146,7 +179,28 @@ public class LuaResTool_AutoReloadLua
         {
             return;
         }
+        if (XluaMgr.Instance != null && changedFileNameList != null && changedFileNameList.Count > 0 && LuaFileReloadManager != null)
+        {
+            if (ReloadLuaFileArrayFunction != null)
+            {
+                ReloadLuaFileArrayFunction(allModifiedLuaFiles);
+                stringBuilder.Clear();
+                stringBuilder.Append(allModifiedLuaFiles.Length);
+                stringBuilder.Append("个lua文件有修改,重新载入\r\n");
+                for (int i = 0; i < allModifiedLuaFiles.Length; i++)
+                {
+                    stringBuilder.Append(i);
+                    stringBuilder.Append("  ");
+                    stringBuilder.Append(allModifiedLuaFiles[i]);
+                    if (i != allModifiedLuaFiles.Length - 1)
+                    {
+                        stringBuilder.Append("\r\n");
+                    }
+                }
+                CSDebug.Log(stringBuilder.ToString());
+                stringBuilder.Clear();
+            }
+        }
     }
     #endregion
-
 }

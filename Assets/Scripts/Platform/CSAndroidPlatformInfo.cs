@@ -2,16 +2,6 @@
 
 public class CSAndroidPlatformInfo : AbstractPlatformInfo
 {
-    public override string LuaRoot
-    {
-        get
-        {
-            return Application.persistentDataPath + "/luaRes";
-        }
-    }
-    public override string XLuaMainPath {
-        get {
-            return Application.persistentDataPath + "/luaRes/main.lua";
-        }
-    }
+    public static string LuaRoot = Application.persistentDataPath + "/luaRes";
+    public static string XLuaMainPath = Application.persistentDataPath + "/luaRes/main.lua";
 }

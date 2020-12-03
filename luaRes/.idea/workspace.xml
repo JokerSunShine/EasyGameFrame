@@ -1,29 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="547143de-7767-491c-bf20-af40f17cd194" name="Default Changelist" comment="" />
+    <list default="true" id="547143de-7767-491c-bf20-af40f17cd194" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../LuaGrammarTips/CSClient.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../LuaGrammarTips/LuaDll.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../LuaGrammarTips/NameSpaceMap.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../LuaGrammarTips/UnityEngine.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Common/LuaFileReloadManager.lua" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Common/Utility/Utility.lua" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Common/Utility/Utility_Table.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/Editor/Common/EditorUtility.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/Editor/Common/EditorUtility.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/Editor/Xlua/LuaResTool_AutoReloadLua.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/Editor/Xlua/LuaResTool_AutoReloadLua.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/Scripts/Abstract/AbstractPlatformInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/Scripts/Abstract/AbstractPlatformInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/Scripts/Common/CommonLoadPath.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/Scripts/Common/CommonLoadPath.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/Scripts/Platform/CSAndroidPlatformInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/Scripts/Platform/CSAndroidPlatformInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/Scripts/Platform/CSEditorPlatformInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/Scripts/Platform/CSEditorPlatformInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSClient.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LuaDll.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NameSpaceMap.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UnityEngine.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.lua" beforeDir="false" afterPath="$PROJECT_DIR$/main.lua" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="111" column="43" lean-forward="true" selection-start-line="111" selection-start-column="43" selection-end-line="111" selection-end-column="43" />
+            <state relative-caret-position="168">
+              <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://$APPLICATION_PLUGINS_DIR$/EmmyLua/lib/EmmyLua-1.2.9-eap-16-IDEA182.jar!/std/Lua53/global.lua">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2856">
+              <caret line="204" column="11" selection-start-line="204" selection-start-column="11" selection-end-line="204" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Common/LuaFileReloadManager.lua">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="15" column="7" lean-forward="true" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Common/Utility/Utility_Table.lua">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="14">
+              <caret line="1" column="23" lean-forward="true" selection-start-line="1" selection-start-column="23" selection-end-line="1" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Common/Utility/Utility.lua">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="56">
+              <caret line="4" column="26" lean-forward="true" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://$APPLICATION_PLUGINS_DIR$/EmmyLua/lib/EmmyLua-1.2.9-eap-16-IDEA182.jar!/std/Lua53/package.lua">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="686">
+              <caret line="49" column="8" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="8" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="NewLua" />
+      </list>
+    </option>
+  </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>uilogin</find>
+      <find>reload</find>
+      <find>XLuaMgr_Init</find>
+      <find>try to dispose a LuaEnv with C# callback</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -36,24 +114,31 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/main_out.lua" />
+        <option value="$PROJECT_DIR$/Common/LuaFilesReload.lua" />
+        <option value="$PROJECT_DIR$/Common/ReloadLuaFiles.lua" />
+        <option value="$PROJECT_DIR$/Common/LuaFieldReloadManager.lua" />
+        <option value="$PROJECT_DIR$/Common/Utility/Utility_Normal.lua" />
+        <option value="$PROJECT_DIR$/Common/Utility/Utility_Table.lua" />
         <option value="$PROJECT_DIR$/main.lua" />
+        <option value="$PROJECT_DIR$/Common/Utility/Utility.lua" />
+        <option value="$PROJECT_DIR$/Common/LuaFileReloadManager.lua" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="1912" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
-    <option name="height" value="1096" />
+    <option name="height" value="1009" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -63,23 +148,25 @@
             </path>
             <path>
               <item name="luaRes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="luaRes" type="462c0819:PsiDirectoryNode" />
+              <item name="Common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="luaRes" type="b2602c69:ProjectViewProjectNode" />
+              <item name="luaRes" type="462c0819:PsiDirectoryNode" />
+              <item name="Common" type="462c0819:PsiDirectoryNode" />
+              <item name="Utility" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="luaRes" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="NameSpaceMap" type="70bed36:NamedLibraryElementNode" />
-            </path>
-            <path>
-              <item name="luaRes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="NameSpaceMap" type="70bed36:NamedLibraryElementNode" />
-              <item name="NameSpaceMap.zip" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -87,6 +174,12 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -119,16 +212,35 @@
       <workItem from="1606729816781" duration="673000" />
       <workItem from="1606808630840" duration="1075000" />
       <workItem from="1606900851005" duration="623000" />
+      <workItem from="1606907749067" duration="610000" />
+      <workItem from="1606959985173" duration="1889000" />
+      <workItem from="1606975575400" duration="113000" />
+      <workItem from="1606975785423" duration="161000" />
+      <workItem from="1606975993806" duration="2597000" />
+      <workItem from="1606978673024" duration="692000" />
+      <workItem from="1606979431429" duration="3016000" />
+      <workItem from="1606985435952" duration="71000" />
+      <workItem from="1606985587832" duration="1620000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2371000" />
+    <option name="totallyTimeSpent" value="13140000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="1912" y="-8" width="1936" height="1096" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2553305" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15778251" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -141,14 +253,14 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="GenProtobuf" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32952183" />
+      <window_info anchor="bottom" id="GenProtobuf" order="7" weight="0.32952183" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32952183" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
-      <window_info anchor="bottom" id="Version Control" order="12" />
-      <window_info anchor="bottom" id="LuaCheck" order="13" />
+      <window_info anchor="bottom" id="Version Control" order="12" weight="0.32952183" />
+      <window_info anchor="bottom" id="LuaCheck" order="13" weight="0.32952183" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -174,10 +286,49 @@
     <entry file="jar://F:/project/IOSRoot/Client3d/wzcq3D/Client/ClassLibrary_wzcq3D/DllOutput/NameSpaceMap.zip!/NameSpaceMap.lua">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/Common/LuaFilesReload.lua" />
+    <entry file="file://$PROJECT_DIR$/Common/ReloadLuaFiles.lua" />
+    <entry file="file://$PROJECT_DIR$/Common/LuaFieldReloadManager.lua" />
+    <entry file="file://$PROJECT_DIR$/Common/Utility/Utility_Normal.lua" />
+    <entry file="jar://$APPLICATION_PLUGINS_DIR$/EmmyLua/lib/EmmyLua-1.2.9-eap-16-IDEA182.jar!/std/Lua53/global.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2856">
+          <caret line="204" column="11" selection-start-line="204" selection-start-column="11" selection-end-line="204" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_PLUGINS_DIR$/EmmyLua/lib/EmmyLua-1.2.9-eap-16-IDEA182.jar!/std/Lua53/package.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="686">
+          <caret line="49" column="8" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="111" column="43" lean-forward="true" selection-start-line="111" selection-start-column="43" selection-end-line="111" selection-end-column="43" />
+        <state relative-caret-position="168">
+          <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/Utility/Utility_Table.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="14">
+          <caret line="1" column="23" lean-forward="true" selection-start-line="1" selection-start-column="23" selection-end-line="1" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/Utility/Utility.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="56">
+          <caret line="4" column="26" lean-forward="true" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/LuaFileReloadManager.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="15" column="7" lean-forward="true" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
         </state>
       </provider>
     </entry>

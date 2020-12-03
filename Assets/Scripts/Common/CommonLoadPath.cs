@@ -18,8 +18,7 @@ public class CommonLoadPath {
         get {
             if (string.IsNullOrEmpty(loadRootPath))
             {
-                loadRootPath = System.Text.RegularExpressions.Regex.Replace(Application.dataPath, "Client/(\\w+)/" + LocalProjectName + "/Assets",
-            "Data/$1/CurrentUseData/Normal/");
+                loadRootPath = (Application.dataPath.Substring(0, Application.dataPath.Length - 7)).Replace("/", "\\");
             }
             return loadRootPath;
         }

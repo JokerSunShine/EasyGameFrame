@@ -21,13 +21,14 @@ public partial class EditorUtility {
             CSDebug.LogError("请不要在运行游戏的时候修改宏");
             return false;
         }
-        string macroStr = PlayerSettings.GetScriptingDefineSymbolsForGroup(CSPlatformManager.Instance.BuildTargetGroup);
+        CSDebug.Log(EditorUserBuildSettings.selectedBuildTargetGroup);
+        string macroStr = PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup);
         List<string> defineMacroList = new List<string>(macroStr.Split(';'));
         if (isAdd)
             defineMacroList.Add_NoSame(macro);
         else
             defineMacroList.RemoveAll(macro);
-        PlayerSettings.SetScriptingDefineSymbolsForGroup(CSPlatformManager.Instance.BuildTargetGroup, string.Join(";", defineMacroList.ToArray()));
+        PlayerSettings.SetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup, string.Join(";", defineMacroList.ToArray()));
         return true;
     }
 
@@ -42,7 +43,7 @@ public partial class EditorUtility {
         {
             return true;
         }
-        string macroStr = PlayerSettings.GetScriptingDefineSymbolsForGroup(CSPlatformManager.Instance.BuildTargetGroup);
+        string macroStr = PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup);
         List<string> defineMacroList = new List<string>(macroStr.Split(';'));
         return defineMacroList.Contains(macro);
     }
