@@ -86,19 +86,5 @@ public class XluaMgr:AbstractManager
             luaEnv.Tick();
         }
     }
-
-    public override void Destroy()
-    {
-        if (luaEnv != null)
-        {
-            luaEnv.Dispose();
-            luaEnv = null;
-        }
-        if (luaUIManager != null)
-        {
-            luaUIManager.Dispose();
-            luaUIManager = null;
-        }
-    }
     #endregion
 }
