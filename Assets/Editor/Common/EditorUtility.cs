@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEditor;
 
-public partial class EditorUtility {
+public partial class EditorUtil {
     public static bool EditorIsPlaying()
     {
         return EditorApplication.isPlaying == true || EditorApplication.isPaused == true || EditorApplication.isPlayingOrWillChangePlaymode == true;

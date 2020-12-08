@@ -87,13 +87,13 @@ public class LuaResTool_AutoReloadLua
     [MenuItem("XLua/查看自动更新状态")]
     public static void CheckAutoUpdateLuaState()
     {
-        CSDebug.LogError(EditorUtility.HaveMacro(Macro_OpenAutoReloadLua));
+        CSDebug.LogError(EditorUtil.HaveMacro(Macro_OpenAutoReloadLua));
     }
 
     [MenuItem("XLua/开启自动更新Lua")]
     public static void OpenAutoReloadLua()
     {
-        if (EditorUtility.SetMacro(Macro_OpenAutoReloadLua,true))
+        if (EditorUtil.SetMacro(Macro_OpenAutoReloadLua,true))
         {
             StartAutoReloadLua();
         }
@@ -102,7 +102,7 @@ public class LuaResTool_AutoReloadLua
     [MenuItem("XLua/关闭自动更新Lua")]
     public static void CloseAutoReloadLua()
     {
-        if (EditorUtility.SetMacro(Macro_OpenAutoReloadLua,false))
+        if (EditorUtil.SetMacro(Macro_OpenAutoReloadLua,false))
         {
             StopAutoReloadLua();
         }
