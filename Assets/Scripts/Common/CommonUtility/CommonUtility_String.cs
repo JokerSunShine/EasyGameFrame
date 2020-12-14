@@ -1,4 +1,4 @@
-﻿public class CommonUtility_String
+﻿public static partial class CommonUtility
 {
     /// <summary>
     /// 移除指定数量目录

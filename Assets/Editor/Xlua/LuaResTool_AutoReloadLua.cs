@@ -58,9 +58,6 @@ public class LuaResTool_AutoReloadLua
             return;
         }
         EditorApplication.playModeStateChanged += EidtorApplication_PlayModeStateChange;
-#if AutoReloadLuaThread
-        
-#endif
     }
 
     private static void EidtorApplication_PlayModeStateChange(PlayModeStateChange stateChange)
@@ -70,11 +67,15 @@ public class LuaResTool_AutoReloadLua
             case PlayModeStateChange.EnteredPlayMode:
                 if (Application.isPlaying)
                 {
-                    StartAutoReloadLua();
+#if AutoReloadLuaThread
+                            StartAutoReloadLua();
+#endif
                 }
                 break;
             case PlayModeStateChange.ExitingPlayMode:
-                StopAutoReloadLua();
+#if AutoReloadLuaThread
+               StopAutoReloadLua();  
+#endif
                 break;
             default:
                 break;

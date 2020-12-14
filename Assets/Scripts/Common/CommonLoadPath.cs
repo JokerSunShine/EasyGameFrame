@@ -23,4 +23,15 @@ public class CommonLoadPath {
             return loadRootPath;
         }
     }
+
+    private static string createLuaGrammarTipPath;
+    public static string CreateLuaGrammarTipPath {
+        get {
+            if (string.IsNullOrEmpty(createLuaGrammarTipPath))
+            {
+                createLuaGrammarTipPath = CommonUtility.RemoveBackDir(Application.dataPath, 1) + "/LuaGrammarTips";
+            }
+            return createLuaGrammarTipPath;
+        }
+    }
 }
