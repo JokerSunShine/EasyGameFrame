@@ -5,6 +5,7 @@ using UnityEngine;
 public class CSGameManager : MonoBehaviour
 {
     public List<AbstractManager> managerList = new List<AbstractManager>();
+    public bool OpenLog = true;
     /// <summary>
     /// 刷新频率
     /// </summary>
@@ -16,6 +17,7 @@ public class CSGameManager : MonoBehaviour
     #region 初始化
     private void Awake()
     {
+        InitOther();
         RegisterManager();
         ManagerListAwakeCallBack();
     }
@@ -32,6 +34,11 @@ public class CSGameManager : MonoBehaviour
         {
             manager.Awake();
         }
+    }
+
+    private void InitOther()
+    {
+        CSDebug.LogSwitch = OpenLog;
     }
 
     private void Start()

@@ -131,7 +131,7 @@ public class LuaResTool_AutoReloadLua
     {
         if (fileSystemWatcher != null)
         {
-            UnityEngine.Debug.Log("停止监听luaRes文件夹");
+            CSDebug.Log("停止监听luaRes文件夹");
             fileSystemWatcher.Dispose();
             fileSystemWatcher = null;
             EditorApplication.update -= OnUpdate;

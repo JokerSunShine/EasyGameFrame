@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using XLua;
 
 public static partial class CommonUtility {
     private static string[] IgnoreFileNameChars = new string[] { "+",".", "`","&","[","]","," };
@@ -85,7 +86,7 @@ public static partial class CommonUtility {
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
-    public static string GetTypeTagName(Type type)
+    public static string GetTypeTagName(this Type type)
     {
         return GetTypeTagName(type.ToString());
     }
@@ -106,5 +107,29 @@ public static partial class CommonUtility {
             typeName.Replace(ignoreChar, "");
         }
         return typeName;
+    }
+
+    /// <summary>
+    /// 是否是指定的类型
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="curType"></param>
+    /// <returns></returns>
+    public static bool IsDefined(this Type type, Type curType)
+    {
+        if (type == null)
+        {
+            return false;
+        }
+        return type.IsDefined(curType,false);
+    }
+
+    public static bool IsDefined(this MemberInfo memberInfo,Type curType)
+    {
+        if (memberInfo == null)
+        {
+            return false;
+        }
+        return memberInfo.IsDefined(curType,false);
     }
 }

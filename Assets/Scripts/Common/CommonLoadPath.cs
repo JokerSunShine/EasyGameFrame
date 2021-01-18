@@ -34,4 +34,17 @@ public class CommonLoadPath {
             return createLuaGrammarTipPath;
         }
     }
+
+    private static string loadVideoPath;
+    public static string LoadVideoPath
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(loadVideoPath))
+            {
+                loadVideoPath = CommonUtility.RemoveBackDir(Application.dataPath, 1) + "/Resource/Video";
+            }
+            return loadVideoPath;
+        }
+    }
 }
