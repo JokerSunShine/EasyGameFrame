@@ -35,6 +35,19 @@ public class CommonLoadPath {
         }
     }
 
+    private static string createCSClientTipPath;
+    public static string CreateCSClientTipPath
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(createCSClientTipPath))
+            {
+                createCSClientTipPath = CreateLuaGrammarTipPath + "/CSClient/";
+            }
+            return createCSClientTipPath;
+        }
+    }
+
     private static string loadVideoPath;
     public static string LoadVideoPath
     {

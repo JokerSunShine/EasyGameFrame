@@ -42,6 +42,7 @@ public class XluaNameSpaceMapGenerator
             Directory.CreateDirectory(CommonLoadPath.CreateLuaGrammarTipPath);
         }
         yield return GenAllNameSpace();
+        GenAllMethod();
         EditorUtility.DisplayDialog("完成","完成lua语法提示","确定");
     }
 
@@ -129,6 +130,10 @@ public class XluaNameSpaceMapGenerator
     #region 生成脚本提示
     private static void GenAllMethod()
     {
+        if (!Directory.Exists(CommonLoadPath.CreateCSClientTipPath))
+        {
+            Directory.CreateDirectory(CommonLoadPath.CreateCSClientTipPath);
+        }
         List<Type> typeList = CommonUtility.GetAllTypes();
         for (int i = 0; i < typeList.Count; i++)
         {
@@ -156,8 +161,7 @@ public class XluaNameSpaceMapGenerator
                     string createFileName = CommonUtility.GetTypeTagName(type);
                     if (!GenTipsList.Contains(createFileName)) GenTipsList.Add(createFileName);
                 }
-                string createPath = CommonLoadPath.CreateLuaGrammarTipPath + fileName;
-                using (StreamWriter writer = new StreamWriter(createPath,false,System.Text.Encoding.UTF8))
+                using (StreamWriter writer = new StreamWriter(CommonLoadPath.CreateCSClientTipPath + fileName, false, System.Text.Encoding.UTF8))
                 {
                     writer.Write("---@class ");
                     writer.Write(CommonUtility.GetTypeTagName(type));
@@ -173,7 +177,8 @@ public class XluaNameSpaceMapGenerator
                             writer.WriteLine((int)item);
                         }
                     }
-                    else {
+                    else
+                    {
                         //基类
                         var baseType = type.BaseType;
                         if (baseType != null && baseType != typeof(object))
@@ -181,7 +186,8 @@ public class XluaNameSpaceMapGenerator
                             writer.Write(" : ");
                             writer.WriteLine(CommonUtility.GetTypeTagName(baseType));
                         }
-                        else {
+                        else
+                        {
                             writer.WriteLine();
                         }
                         if (baseType != null)
@@ -223,7 +229,7 @@ public class XluaNameSpaceMapGenerator
         }
         EditorUtility.DisplayProgressBar("正在生成zip", "", 1);
 
-        DirectoryInfo wrapDir = new DirectoryInfo(CommonLoadPath.CreateLuaGrammarTipPath);
+        DirectoryInfo wrapDir = new DirectoryInfo(CommonLoadPath.CreateCSClientTipPath);
         FileInfo[] files = wrapDir.GetFiles("*", SearchOption.AllDirectories);
         Dictionary<string, byte[]> fileDict = new Dictionary<string, byte[]>();
         foreach (var cur in files)
@@ -234,7 +240,7 @@ public class XluaNameSpaceMapGenerator
             byte[] luaScriptBytes = Encoding.UTF8.GetBytes(content);
             fileDict.Add(fileName, luaScriptBytes);
         }
-        ZipManager.CreateZip(CommonLoadPath.CreateLuaGrammarTipPath, fileDict);
+        ZipManager.CreateZip(CommonLoadPath.CreateLuaGrammarTipPath + "/CSClient.zip", fileDict);
         EditorUtility.ClearProgressBar();
     }
 
