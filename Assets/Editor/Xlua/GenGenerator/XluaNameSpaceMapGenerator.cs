@@ -270,7 +270,7 @@ public class XluaNameSpaceMapGenerator
         if (string.IsNullOrEmpty(type.Namespace)) return false;
         string fileName = CommonUtility.GetTypeTagName(type.Name);
         string curFileName = fileName + "_Wrap.lua";
-        string createPath = CommonLoadPath.CreateLuaGrammarTipPath + curFileName;
+        string createPath = CommonLoadPath.CreateCSClientTipPath + curFileName;
         using (StreamWriter writer = new StreamWriter(createPath,false,System.Text.Encoding.UTF8))
         {
             writer.WriteLine(type.Namespace + " = {}");
