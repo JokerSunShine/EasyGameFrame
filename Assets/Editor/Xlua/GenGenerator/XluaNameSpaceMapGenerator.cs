@@ -95,7 +95,7 @@ public class XluaNameSpaceMapGenerator
             stringBuilder.Append(nameSpace);
             stringBuilder.Append(" = ");
             stringBuilder.Append(nameSpace);
-            stringBuilder.AppendLine();
+            stringBuilder.AppendLine(";");
         }
         stringBuilder.AppendLine();
         foreach (string noNameSpace in noNameSpaceList)
@@ -114,7 +114,7 @@ public class XluaNameSpaceMapGenerator
             stringBuilder.Append(curNoNameSpace);
             stringBuilder.Append(" = ");
             stringBuilder.Append(curNoNameSpace);
-            stringBuilder.AppendLine();
+            stringBuilder.AppendLine(";");
         }
         stringBuilder.Append("}");
 
@@ -145,7 +145,6 @@ public class XluaNameSpaceMapGenerator
             string fileName = CommonUtility.GetTypeFileName(type) + "_Wrap.lua";
             EditorUtility.DisplayProgressBar("生成中", "生成" + fileName, (float)(i + 1) / typeList.Count);
             List<string> NoTipsGenericList = new List<string>();
-            List<string> GenTipsList = new List<string>();
             if (IsContainsIgnoreSubClass(type))
             {
                 if (NoTipsGenericList.Contains(type.Name) == false)
@@ -156,11 +155,7 @@ public class XluaNameSpaceMapGenerator
             }
             try
             {
-                if (GenNameSpaceFile(type))
-                {
-                    string createFileName = CommonUtility.GetTypeTagName(type);
-                    if (!GenTipsList.Contains(createFileName)) GenTipsList.Add(createFileName);
-                }
+                GenNameSpaceFile(type);
                 using (StreamWriter writer = new StreamWriter(CommonLoadPath.CreateCSClientTipPath + fileName, false, System.Text.Encoding.UTF8))
                 {
                     writer.Write("---@class ");
@@ -265,17 +260,15 @@ public class XluaNameSpaceMapGenerator
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
-    private static bool GenNameSpaceFile(Type type)
+    private static void GenNameSpaceFile(Type type)
     {
-        if (string.IsNullOrEmpty(type.Namespace)) return false;
-        string fileName = CommonUtility.GetTypeTagName(type.Name);
-        string curFileName = fileName + "_Wrap.lua";
-        string createPath = CommonLoadPath.CreateCSClientTipPath + curFileName;
-        using (StreamWriter writer = new StreamWriter(createPath,false,System.Text.Encoding.UTF8))
+        if (string.IsNullOrEmpty(type.Namespace)) return;
+        string fileName = type.GetTypeTagName();
+        string wrapPath = fileName + "_Wrap.lua";
+        using (StreamWriter writer = new StreamWriter(CommonLoadPath.CreateCSClientTipPath + wrapPath, false, System.Text.Encoding.UTF8))
         {
-            writer.WriteLine(type.Namespace + " = {}");
+            writer.WriteLine(type.Namespace + " = {};");
         }
-        return true;
     }
 
     #region 类名

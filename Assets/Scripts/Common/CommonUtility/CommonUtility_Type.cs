@@ -25,7 +25,11 @@ public static partial class CommonUtility {
                 Type[] types = assemblyList[i].GetTypes();
                 foreach (var type in types)
                 {
-                    if ((type.Namespace != null && type.Namespace.StartsWith("UnityEditor")) || IsNameCurSpace(type, "UnityEditor"))
+                    if ((type.Namespace != null && type.Namespace.StartsWith("UnityEditor")))
+                    {
+                        continue;
+                    }
+                    if (IsNameCurSpace(type, "UnityEditor"))
                     {
                         continue;
                     }
@@ -74,11 +78,12 @@ public static partial class CommonUtility {
         {
             return typeName;
         }
+        string curTypeName = typeName;
         foreach (string ignoreChar in IgnoreFileNameChars)
         {
-            typeName.Replace(ignoreChar,"");
+            curTypeName = curTypeName.Replace(ignoreChar,"");
         }
-        return typeName;
+        return curTypeName;
     }
 
     /// <summary>
@@ -104,7 +109,7 @@ public static partial class CommonUtility {
         }
         foreach (string ignoreChar in IgnoreTagNameChars)
         {
-            typeName.Replace(ignoreChar, "");
+            typeName = typeName.Replace(ignoreChar, "");
         }
         return typeName;
     }
