@@ -25,3 +25,17 @@ public enum GenMethodType
     /// </summary>
     Extension,
 }
+
+/// <summary>
+/// 登录的服务器类型(联服....)
+/// </summary>
+public enum LoginServerType {
+    /// <summary>
+    /// 游戏服
+    /// </summary>
+    GameServer = 1,
+    /// <summary>
+    /// 联服
+    /// </summary>
+    ShardServer = 2,
+}
