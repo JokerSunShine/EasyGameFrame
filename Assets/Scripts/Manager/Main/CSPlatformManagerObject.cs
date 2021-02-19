@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-public class CSPlatformManager : AbstractManager {
+public class CSPlatformManagerObject : ManagerObject,I_CSPlatformManager {
     #region 数据
-    private static CSPlatformManager instance;
-    public static CSPlatformManager Instance {
+    private static CSPlatformManagerObject instance;
+    public static CSPlatformManagerObject Instance {
         get {
             return instance;
         }
@@ -15,7 +15,7 @@ public class CSPlatformManager : AbstractManager {
         }
     }
 
-    public RuntimePlatform runTimePlatform {
+    public RuntimePlatform RunTimePlatform {
         get {
             return Application.platform;
         }
@@ -23,15 +23,15 @@ public class CSPlatformManager : AbstractManager {
 
     public UnityEditor.BuildTargetGroup BuildTargetGroup {
         get {
-            if (runTimePlatform == RuntimePlatform.WindowsEditor || runTimePlatform == RuntimePlatform.WindowsPlayer)
+            if (RunTimePlatform == RuntimePlatform.WindowsEditor || RunTimePlatform == RuntimePlatform.WindowsPlayer)
             {
                 return UnityEditor.BuildTargetGroup.Standalone;
             }
-            else if (runTimePlatform == RuntimePlatform.Android)
+            else if (RunTimePlatform == RuntimePlatform.Android)
             {
                 return UnityEditor.BuildTargetGroup.Android;
             }
-            else if (runTimePlatform == RuntimePlatform.IPhonePlayer)
+            else if (RunTimePlatform == RuntimePlatform.IPhonePlayer)
             {
                 return UnityEditor.BuildTargetGroup.iOS;
             }
@@ -46,15 +46,15 @@ public class CSPlatformManager : AbstractManager {
             {
                 return operationPlatform;
             }
-            if (runTimePlatform == RuntimePlatform.WindowsEditor || runTimePlatform == RuntimePlatform.OSXEditor || runTimePlatform == RuntimePlatform.LinuxEditor)
+            if (RunTimePlatform == RuntimePlatform.WindowsEditor || RunTimePlatform == RuntimePlatform.OSXEditor || RunTimePlatform == RuntimePlatform.LinuxEditor)
             {
                 operationPlatform = OperationPlatform.Editor;
             }
-            else if (runTimePlatform == RuntimePlatform.Android)
+            else if (RunTimePlatform == RuntimePlatform.Android)
             {
                 operationPlatform = OperationPlatform.Android;
             }
-            else if (runTimePlatform == RuntimePlatform.OSXPlayer)
+            else if (RunTimePlatform == RuntimePlatform.OSXPlayer)
             {
                 operationPlatform = OperationPlatform.IOS;
             };
@@ -73,7 +73,7 @@ public class CSPlatformManager : AbstractManager {
     #endregion
 
     #region 构造函数
-    public CSPlatformManager(CSGameManager gameManager) {
+    public CSPlatformManagerObject(CSGameManager gameManager) {
         this.gameManager = gameManager;
         instance = this;
     }

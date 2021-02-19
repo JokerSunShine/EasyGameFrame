@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CSGameManager : MonoBehaviour
 {
-    public List<AbstractManager> managerList = new List<AbstractManager>();
+    public Dictionary<string,ManagerObject> managerDic = new Dictionary<string,ManagerObject>();
     public bool OpenLog = true;
     /// <summary>
     /// 刷新频率
@@ -19,18 +19,25 @@ public class CSGameManager : MonoBehaviour
     {
         InitOther();
         RegisterManager();
+        RegiseterInterfaceSingleton();
         ManagerListAwakeCallBack();
     }
 
     private void RegisterManager()
     {
-        managerList.Add(new CSPlatformManager(this));
-        managerList.Add(new XluaMgr(this));
+        managerDic["CSPlatformManagerObject"] = new CSPlatformManagerObject(this);
+        managerDic["XluaMgr"] = new XluaMgr(this);
+        managerDic["CSNetWorkManager"] = new CSNetWorkManager(this);
+    }
+    
+    private void RegiseterInterfaceSingleton()
+    {
+        InterfaceSingleton.IPlatformManager = GetManagerByName<CSPlatformManagerObject>("CSPlatformManagerObject");
     }
 
     private void ManagerListAwakeCallBack()
     {
-        foreach (AbstractManager manager in managerList)
+        foreach (ManagerObject manager in managerDic.Values)
         {
             manager.Awake();
         }
@@ -48,7 +55,7 @@ public class CSGameManager : MonoBehaviour
 
     private void ManagerListStartCallBack()
     {
-        foreach (AbstractManager manager in managerList)
+        foreach (ManagerObject manager in managerDic.Values)
         {
             manager.Start();
         }
@@ -68,7 +75,7 @@ public class CSGameManager : MonoBehaviour
 
     private void ManagerListUpdateCallBack()
     {
-        foreach (AbstractManager manager in managerList)
+        foreach (ManagerObject manager in managerDic.Values)
         {
             manager.Update();
         }
@@ -83,10 +90,25 @@ public class CSGameManager : MonoBehaviour
 
     private void ManagerListDestroyCallBack()
     {
-        foreach (AbstractManager manager in managerList)
+        foreach (ManagerObject manager in managerDic.Values)
         {
             manager.Destroy();
         }
+    }
+    #endregion
+    
+    #region 获取
+    /// <summary>
+    /// 通过管理类名字获取管理类实例
+    /// </summary>
+    /// <param name="managerName"></param>
+    /// <returns></returns>
+    public T GetManagerByName<T>(string managerName) where T:ManagerObject
+    {
+        ManagerObject manager;
+        managerDic.TryGetValue(managerName, out manager);
+        T curManager = manager == null ? null: manager as T;
+        return curManager;
     }
     #endregion
 }

@@ -1,6 +1,5 @@
-﻿public abstract class AbstractManager
+﻿public class ManagerObject
 {
-    public int testInt = 0;
     public virtual void Awake() { }
 
     public virtual void Start() { }

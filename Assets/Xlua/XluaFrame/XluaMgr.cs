@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using XLua;
-public class XluaMgr:AbstractManager
+public class XluaMgr:ManagerObject
 {
     #region 委托类型
     [CSharpCallLua]
