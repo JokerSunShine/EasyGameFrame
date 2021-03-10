@@ -60,4 +60,30 @@ public class CommonLoadPath {
             return loadVideoPath;
         }
     }
+
+    private static string resourcePath;
+    public static string ResourcePath
+    {
+        get
+        {
+            if(string.IsNullOrEmpty(resourcePath))
+            {
+                resourcePath = CommonUtility.RemoveBackDir(Application.dataPath, 1) + "/Data";
+            }
+            return resourcePath;
+        }
+    }
+
+    private static string serverXmlPath;
+    public static string ServerXmlPath
+    {
+        get
+        {
+            if(string.IsNullOrEmpty(serverXmlPath))
+            {
+                serverXmlPath = ResourcePath + "/server_message";
+            }
+            return serverXmlPath;
+        }
+    }
 }
