@@ -1,0 +1,405 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<messages id="8" queueId="2" package="com.sh.game.msg.system.role">
+
+    <message id="1" type="toClient" class="ResPlayerAttributeChangeMessage" proto="true" desc="通知属性发生变化">
+        <proto name="com.sh.game.proto.RoleProto.ResPlayerAttributeChange"/>
+    </message>
+
+    <message id="2" type="toClient" class="ResPlayerBasicInfoMessage" proto="true" desc="玩家基本数据">
+        <proto name="com.sh.game.proto.RoleProto.ResPlayerBasicInfo"/>
+    </message>
+
+    <message id="3" type="toClient" class="ResPlayerExpChangeMessage" proto="true" desc="通知玩家经验发生变化">
+        <proto name="com.sh.game.proto.RoleProto.ResPlayerExpChange"/>
+    </message>
+
+    <message id="4" type="toClient" class="ResPlayerLevelChangeMessage" proto="true" desc="通知玩家等级发生变化">
+        <proto name="com.sh.game.proto.RoleProto.ResPlayerLevelChange"/>
+    </message>
+
+    <message id="6" type="toServer" class="ReqGetRoleReinInfoMessage" proto="true" desc="请求获取角色转生信息">
+	</message>
+
+    <message id="7" type="toClient" class="ResSendRoleReinInfoMessage" proto="true" desc="发送角色转生信息">
+        <proto name="com.sh.game.proto.RoleProto.ResSendRoleReinInfo"/>
+    </message>
+
+    <message id="8" type="toServer" class="ReqRoleExchangeReinMessage" proto="true" desc="角色请求兑换修为">
+    </message>
+
+    <message id="9" type="toServer" class="ReqUpLevelRoleReinMessage" proto="true" desc="请求角色转生">
+    </message>
+
+    <message id="10" type="toClient" class="ResRoleExchangeReinResultMessage" proto="true" desc="发送角色兑换修为结果">
+        <proto name="com.sh.game.proto.RoleProto.ResRoleExchangeReinResult"/>
+    </message>
+
+    <message id="11" type="toClient" class="ResTotalFightValueChangeMessage" proto="true" desc="发送总战斗力">
+        <proto name="com.sh.game.proto.RoleProto.ResTotalFightValueChange"/>
+    </message>
+
+    <message id="12" type="toClient" class="ResPetListMessage" proto="true" desc="发送宠物列表">
+        <proto name="com.sh.game.proto.RoleProto.ResPetList"/>
+    </message>
+
+    <message id="13" type="toClient" class="ResCreatePetMessage" proto="true" desc="发送玩家宠物信息">
+        <proto name="com.sh.game.proto.RoleProto.ResCreatePet"/>
+    </message>
+
+    <message id="16" type="toServer" class="ReqChangeRoleDieStateMessage" proto="true" desc="请求改变玩家死亡状态">
+        <proto name="com.sh.game.proto.RoleProto.ChangeRoleDieStateRequest"/>
+    </message>
+
+    <message id="21" type="toServer" class="ReqRoleImmediatelyReliveMessage" proto="true" desc="请求立即复活">
+    </message>
+
+    <message id="22" type="toClient" class="ResRoleSuccessReliveMessage" proto="true" desc="发送立即复活成功消息">
+    </message>
+
+    <message id="23" type="toServer" class="ReqRoleSettingMessage" proto="true" desc="请求角色设置">
+        <proto name="com.sh.game.proto.RoleProto.RoleSettingRequest"/>
+    </message>
+
+    <message id="24" type="toClient" class="ResRoleSettingChangeMessage" proto="true" desc="角色设置变化返回">
+        <proto name="com.sh.game.proto.RoleProto.ResRoleSettingChange"/>
+    </message>
+
+    <message id="25" type="toClient" class="ResRoleSettingInfoMessage" proto="true" desc="角色设置消息">
+        <proto name="com.sh.game.proto.RoleProto.ResRoleSettingInfo"/>
+    </message>
+
+    <message id="26" type="toClient" class="ResSendRoleVeinInfoMessage" proto="true" desc="发送角色经脉信息">
+        <proto name="com.sh.game.proto.RoleProto.ResSendRoleVeinInfo"/>
+    </message>
+
+    <message id="27" type="toClient" class="ResSendInnerPowerInfoMessage" proto="true" desc="发送内功信息">
+        <proto name="com.sh.game.proto.RoleProto.ResSendInnerPowerInfo"/>
+    </message>
+
+    <message id="28" type="toServer" class="ReqLevelUpInnerPowerMessage" proto="true" desc="请求一键升级内功">
+    </message>
+
+    <message id="29" type="toClient" class="ResInnerPowerInfoChangeMessage" proto="true" desc="内功信息变化">
+        <proto name="com.sh.game.proto.RoleProto.ResInnerPowerInfoChange"/>
+    </message>
+
+    <message id="30" type="toServer" class="ReqResetRoleSettingMessage" proto="true" desc="请求重置角色设置">
+    </message>
+
+    <message id="31" type="toServer" class="ReqHandyKeySettingMessage" proto="true" desc="请求快捷键设置">
+        <proto name="com.sh.game.proto.RoleProto.HandyKeySettingRequest"/>
+    </message>
+
+    <message id="32" type="toServer" class="ReqExchangeHandyKeyMessage" proto="true" desc="请求交换快捷键设置">
+        <proto name="com.sh.game.proto.RoleProto.ExchangeHandyKeyRequest"/>
+    </message>
+
+    <message id="33" type="toClient" class="ResHandyKeySettingInfosMessage" proto="true" desc="返回快捷键设置信息">
+        <proto name="com.sh.game.proto.RoleProto.ResHandyKeySettingInfos"/>
+    </message>
+
+    <message id="34" type="toClient" class="ResSwitchExpBuffStateMessage" proto="true" desc="返回切换经验buff状态">
+	</message>
+
+	<message id="35" type="toServer" class="ReqOtherRoleInfoMessage" proto="true" desc="查看其他玩家信息请求">
+		<proto name="com.sh.game.proto.RoleProto.GetRoleInfo"/>
+	</message>
+
+	<message id="36" type="toClient" class="ResOtherRoleInfoMessage" proto="true" desc="查看其他玩家信息响应">
+		<proto name="com.sh.game.proto.RoleProto.RoleToOtherInfo"/>
+	</message>
+
+	<message id="37" type="toClient" class="ResOtherPlayerCommonInfoMessage" proto="true" desc="客户端查看别的玩家的通用信息响应">
+		<proto name="com.sh.game.proto.RoleProto.OtherPlayerCommonInfo"/>
+	</message>
+
+	<message id="38" type="toServer" class="ReqOtherPlayerCommonInfoMessage" proto="true" desc="客户端查看别的玩家的通用信息请求">
+		<proto name="com.sh.game.proto.RoleProto.GetRoleInfo"/>
+	</message>
+
+	<message id="39" type="toServer" class="ReqSaveRoleSettingsMessage" proto="true" desc="保存玩家设置">
+		<proto name="com.sh.game.proto.RoleProto.SaveRoleSettingsMsg"/>
+	</message>
+
+	<message id="40" type="toClient" class="ResCDChangedMessage" proto="true" desc="cd 改变">
+		<proto name="com.sh.game.proto.RoleProto.CDBean"/>
+	</message>
+
+	<message id="41" type="toServer" class="ReqLookInnerPowerMessage" proto="true" desc="查看内功信息">
+    </message>
+
+	<message id="42" type="toServer" class="ReqEditNameMessage" proto="true" desc="改名请求">
+		<proto name="com.sh.game.proto.RoleProto.EditName"/>
+	</message>
+
+	<message id="43" type="toServer" class="ReqSaveRoleSkillSettingsMessage" proto="true" desc="保存玩家技能设置">
+		<proto name="com.sh.game.proto.RoleProto.SaveRoleSkillSettingsMsg"/>
+	</message>
+
+	<message id="44" type="toClient" class="ResRoleReinSuccess" proto="true" desc="转生成功">
+		<proto name="com.sh.game.proto.RoleProto.ResRoleReinSuccess"/>
+	</message>
+
+	<message id="45" type="toClient" class="SystemOpenReminderMessage" proto="true" desc="系统开启提醒">
+		<proto name="com.sh.game.proto.RoleProto.SystemOpenReminder"/>
+	</message>
+
+	<message id="46" type="toClient" class="ResOpenKeySettingPanelMessage" proto="true" desc="打开快捷栏">
+	</message>
+
+    <message id="47" type="toClient" class="ResBubbleOnlineExpMessage" proto="true" desc="在线增加泡点经验消息">
+        <proto name="com.sh.game.proto.RoleProto.ResBubbleOnlineExp"/>
+    </message>
+    <message id="48" type="toClient" class="ResOverBubblePointMessage" proto="true" desc="泡点结束消息">
+    </message>
+    <message id="49" type="toClient" class="ResBubbleOfflineExpMessage" proto="true" desc="返回泡点离线经验消息">
+        <proto name="com.sh.game.proto.RoleProto.BubbleOfflineExp"/>
+    </message>
+    <message id="50" type="toServer" class="ReqReceiveBubbleOfflineExpMessage" proto="true" desc="请求领取离线泡点经验">
+    </message>
+    <message id="51" type="toClient" class="ResReceiveBubbleOfflineExpMessage" proto="true" desc="返回领取离线泡点经验">
+        <proto name="com.sh.game.proto.RoleProto.BubbleOfflineExp"/>
+    </message>
+    <message id="52" type="toServer" class="ReqBubbleOfflineExpMessage" proto="true" desc="请求泡点离线经验消息">
+    </message>
+    <message id="53" type="toServer" class="ReqChangeAutoOperateMessage" proto="true" desc="切换自动寻路自动战斗状态">
+        <proto name="com.sh.game.proto.RoleProto.AutoOperate"/>
+    </message>
+
+	 <message id="54" type="toClient" class="ResRefreshInfoMessage" proto="true" desc="玩家零点刷新信息">
+		<proto name="com.sh.game.proto.RoleProto.ResRefreshInfo"/>
+    </message>
+
+	<message id="55" type="toServer" class="ReqGetMinerInfoMessage" proto="true" desc="请求查看矿工信息">
+	</message>
+
+	<message id="56" type="toClient" class="ResGetMinerInfoMessage" proto="true" desc="返回查看矿工信息">
+		<proto name="com.sh.game.proto.RoleProto.ResGetMinerInfo"/>
+	</message>
+
+	<message id="57" type="toClient" class="ResUpdateMineInfoMessage" proto="true" desc="刷新矿石信息">
+		<proto name="com.sh.game.proto.RoleProto.ResUpdateMineInfo"/>
+	</message>
+
+	<message id="58" type="toServer" class="ReqHireMinerMessage" proto="true" desc="请求雇佣矿工">
+		<proto name="com.sh.game.proto.RoleProto.ReqHireMiner"/>
+	</message>
+
+	<message id="59" type="toServer" class="ReqReceiveMineralMessage" proto="true" desc="请求领取矿石">
+	</message>
+
+    <message id="60" type="toClient" class="ResPlayerSpyInfoMessage" proto="true" desc="返回变或取消间谍消息">
+        <proto name="com.sh.game.proto.RoleProto.ResPlayerSpyInfo"/>
+    </message>
+
+	 <message id="61" type="toServer" class="ReqSaveSecretaryInfoMessage" proto="true" desc="请求保存或修改小秘书记录">
+        <proto name="com.sh.game.proto.RoleProto.ReqSaveSecretaryInfo"/>
+    </message>
+
+	<message id="62" type="toClient" class="ResSeeSecretaryInfoMessage" proto="true" desc="返回查看小秘书历史记录">
+        <proto name="com.sh.game.proto.RoleProto.ResSeeSecretaryInfo"/>
+    </message>
+
+	<message id="63" type="toServer" class="ReqDeleteSecretaryInfoMessage" proto="true" desc="请求删除小秘书记录">
+        <proto name="com.sh.game.proto.RoleProto.ReqDeleteSecretaryInfo"/>
+    </message>
+
+	<message id="64" type="toClient" class="ResSecretaryPushMessage" proto="true" desc="小秘书推送">
+        <proto name="com.sh.game.proto.RoleProto.ResSecretaryPush"/>
+    </message>
+
+	<message id="65" type="toClient" class="ResRoleFirstRechargeChangeMessage" proto="true" desc="是否首冲改变">
+        <proto name="com.sh.game.proto.RoleProto.ResRoleFirstRechargeChange"/>
+    </message>
+	<message id="66" type="toServer" class="ReqCheckPreTaskIsCompleteMessage" proto="true" desc="检查小秘书推送前置任务是否完成">
+        <proto name="com.sh.game.proto.RoleProto.ReqCheckPreTaskIsComplete"/>
+    </message>
+	<message id="67" type="toClient" class="ResCheckPreTaskIsCompleteMessage" proto="true" desc="返回前置任务是否完成">
+        <proto name="com.sh.game.proto.RoleProto.ResCheckPreTaskIsComplete"/>
+    </message>
+    <message id="68" type="toClient" class="ResEditNameMessage" proto="true" desc="改名返回">
+        <proto name="com.sh.game.proto.RoleProto.ResEditName"/>
+    </message>
+
+	<message id="69" type="toServer" class="ReqMainTaskPushMessage" proto="true" desc="小秘书主线任务推送">
+        <proto name="com.sh.game.proto.RoleProto.ReqMainTaskPush"/>
+    </message>
+
+	<message id="70" type="toClient" class="ResMainTaskPushMessage" proto="true" desc="返回小秘书主线推送是否已经发过">
+        <proto name="com.sh.game.proto.RoleProto.ResMainTaskPush"/>
+    </message>
+
+	<message id="71" type="toServer" class="ReqSeeSecretaryInfoMessage" proto="true" desc="请求小秘书历史记录">
+    </message>
+
+    <message id="72" type="toServer" class="ReqRefineMasterPanelMessage" proto="true" desc="请求炼制大师面板信息">
+        <proto name="com.sh.game.proto.RoleProto.ReqRefineMasterPanel"/>
+    </message>
+
+    <message id="73" type="toClient" class="ResRefineMasterPanelMessage" proto="true" desc="返回炼制大师面板信息">
+        <proto name="com.sh.game.proto.RoleProto.ResRefineMasterPanel"/>
+    </message>
+
+    <message id="74" type="toServer" class="ReqRefineMasterMessage" proto="true" desc="请求炼制">
+        <proto name="com.sh.game.proto.RoleProto.ReqRefine"/>
+    </message>
+
+    <message id="75" type="toClient" class="ResRefineMasterResultMessage" proto="true" desc="返回炼制结果">
+        <proto name="com.sh.game.proto.RoleProto.ResRefineResult"/>
+    </message>
+
+	<message id="76" type="toClient" class="ResUpdateAuctionDiamondMessage" proto="true" desc="更新钻石额度">
+        <proto name="com.sh.game.proto.RoleProto.UpdateAuctionDiamond"/>
+    </message>
+
+	<message id="77" type="toClient" class="ResBackSecretaryInfoMessage" proto="true" desc="返回小秘书信息">
+        <proto name="com.sh.game.proto.RoleProto.ResBackSecretaryInfo"/>
+    </message>
+    <message id="78" type="toServer" class="ReqSendQuestionInfoMessage" proto="true" desc="发送小秘书问题">
+        <proto name="com.sh.game.proto.RoleProto.ReqSendQuestionInfo"/>
+    </message>
+
+	 <message id="79" type="toClient" class="ResPlayerDieDropEquipByWearMessage" proto="true" desc="身上的装备掉落变动">
+        <proto name="com.sh.game.proto.RoleProto.ResPlayerDieDropEquipByWear"/>
+    </message>
+
+	 <message id="80" type="toServer" class="ReqPaperCraneDeliveryMessage" proto="true" desc="请求千纸鹤传送">
+        <proto name="com.sh.game.proto.RoleProto.ReqPaperCraneDelivery"/>
+    </message>
+
+	 <message id="81" type="toClient" class="ResPaperCraneDeliveryMessage" proto="true" desc="千纸鹤传送返回">
+        <proto name="com.sh.game.proto.RoleProto.ResPaperCraneDelivery"/>
+    </message>
+
+	<message id="82" type="toClient" class="ResFirstChargePushMessage" proto="true" desc="首充推送">
+    </message>
+
+	<message id="83" type="toClient" class="ResNewFirstChargePushMessage" proto="true" desc="首充推送-新服优势">
+	<proto name="com.sh.game.proto.RoleProto.ResNewFirstChargePush"/>
+    </message>
+
+	<message id="84" type="toClient" class="ResNeedPromptMessage" proto="true" desc="系统开起感叹号提示">
+	<proto name="com.sh.game.proto.RoleProto.ResNeedPrompt"/>
+    </message>
+
+    <message id="85" type="toServer" class="ReqShareOtherRoleInfoMessage" proto="true" desc="查看联服其他玩家信息请求">
+        <proto name="com.sh.game.proto.RoleProto.GetRoleInfo"/>
+    </message>
+	
+	<message id="86" type="toClient" class="ResGameBasicShareInfoMessage" proto="true" desc="返回玩家在游戏服的联服的基本数据">
+        <proto name="com.sh.game.proto.RoleProto.GameBasicShareInfo"/>
+    </message>
+
+	<message id="87" type="toClient" class="ResRoleRefreshWanLiMessage" proto="true" desc="腕力刷新">
+        <proto name="com.sh.game.proto.RoleProto.ResRoleRefreshWanLi"/>
+    </message>
+	
+	<message id="88" type="toClient" class="RoleAddFakeBuffMessage" proto="true" desc="给客户端发送假buff消息">
+        <proto name="com.sh.game.proto.RoleProto.RoleAddFakeBuff"/>
+    </message>
+
+    <message id="89" type="toClient" class="ResRoleTameMessage" proto="true" desc="给客户端发送驯服次数信息">
+        <proto name="com.sh.game.proto.RoleProto.ResRoleTame"/>
+    </message>
+
+    <message id="90" type="toClient" class="ResRefineMasterRedDotMessage" proto="true" desc="炼制大师红点信息">
+        <proto name="com.sh.game.proto.RoleProto.ResRefineMasterRedDot"/>
+    </message>
+
+    <message id="91" type="toClient" class="ResTitleTianfuMessage" proto="true" desc="给客户端发送封号天赋数据">
+        <proto name="com.sh.game.proto.RoleProto.ResTitleTianfu"/>
+    </message>
+
+    <message id="92" type="toServer" class="ReqSaveTitleTianfuMessage" proto="true" desc="请求保存封号天赋">
+        <proto name="com.sh.game.proto.RoleProto.ReqSaveTitleTianfu"/>
+    </message>
+
+    <message id="93" type="toServer" class="ReqResetTitleTianfuMessage" proto="true" desc="请求重置封号天赋">
+    </message>
+	
+	 <message id="94" type="toServer" class="ReqOpenKongFuHousePanelMessage" proto="true" desc="请求打开练功房面板">
+    </message>
+	
+	<message id="95" type="toClient" class="ResKongFuHouseTimeLimitMessage" proto="true" desc="练功房时间限制">
+        <proto name="com.sh.game.proto.RoleProto.ResKongFuHouseTimeLimit"/>
+    </message>
+	
+	<message id="96" type="toServer" class="ReqPotentialInfoMessage" proto="true" desc="请求潜能信息">
+    </message>
+	
+	<message id="97" type="toClient" class="ResPotentialInfoMessage" proto="true" desc="返回潜能信息">
+        <proto name="com.sh.game.proto.RoleProto.RespotentialInfo"/>
+    </message>
+	
+	<message id="98" type="toServer" class="ReqActivePotentialMessage" proto="true" desc="请求激活潜能">
+        <proto name="com.sh.game.proto.RoleProto.ReqActivePotential"/>
+    </message>
+	
+	<message id="99" type="toServer" class="ReqUpgradePotentialMessage" proto="true" desc="请求升级潜能">
+        <proto name="com.sh.game.proto.RoleProto.ReqUpgradePotential"/>
+    </message>
+	
+	<message id="100" type="toClient" class="ResSinglePotentialInfoMessage" proto="true" desc="返回单个潜能信息">
+        <proto name="com.sh.game.proto.RoleProto.potentialInfo"/>
+    </message>
+	
+	<message id="101" type="toClient" class="ResRedPointPotentialMessage" proto="true" desc="返回潜能红点信息">
+        <proto name="com.sh.game.proto.RoleProto.ResPotentialRedPoint"/>
+    </message>
+	
+	<message id="102" type="toServer" class="ReqCollectionSettingMessage" proto="true" desc="请求设置回收配置">
+        <proto name="com.sh.game.proto.RoleProto.CollectionSetting"/>
+    </message>
+	
+	<message id="103" type="toClient" class="ResCollectionSettingMessage" proto="true" desc="返回回收配置">
+        <proto name="com.sh.game.proto.RoleProto.CollectionSetting"/>
+    </message>
+	
+	<message id="104" type="toServer" class="ReqPickUpSettingMessage" proto="true" desc="请求自动拾取配置">
+        <proto name="com.sh.game.proto.RoleProto.PickUpSetting"/>
+    </message>
+	
+	<message id="105" type="toClient" class="ResPickUpSettingMessage" proto="true" desc="返回自动拾取配置">
+        <proto name="com.sh.game.proto.RoleProto.PickUpSetting"/>
+    </message>
+	
+	<message id="106" type="toServer" class="ReqGetRoleModelInfoMessage" proto="true" desc="请求玩家模型数据">
+		<proto name="com.sh.game.proto.RoleProto.ReqRoleModelInfo"/>
+    </message>
+	
+	<message id="107" type="toClient" class="ResRoleModelInfoMessage" proto="true" desc="返回玩家模型数据">
+        <proto name="com.sh.game.proto.RoleProto.RoleModelInfo"/>
+    </message>
+	
+	<message id="108" type="toServer" class="ReqMysteriousExchangeMessage" proto="true" desc="神秘老人请求兑换物品">
+        <proto name="com.sh.game.proto.RoleProto.ReqMysteriousExchange"/>
+    </message>
+	
+	<message id="109" type="toClient" class="ResMysteriousExchangeMessage" proto="true" desc="神秘老人兑换详情">
+        <proto name="com.sh.game.proto.RoleProto.ResMysteriousExchange"/>
+    </message>
+	<message id="110" type="toClient" class="ResBossKillDataMessage" proto="true" desc="终极boss击杀数据">
+        <proto name="com.sh.game.proto.RoleProto.BossKillData"/>
+    </message>
+	
+	<message id="111" type="toServer" class="ReqAddBossKillTimesMessage" proto="true" desc="增加boss击杀次数">
+        <proto name="com.sh.game.proto.RoleProto.ReqAddBossKillTimes"/>
+    </message>
+	
+	<message id="112" type="toClient" class="ResRoleSystemPreviewMessage" proto="true" desc="玩家系统预告开启信息">
+        <proto name="com.sh.game.proto.RoleProto.ResRoleSystemPreview"/>
+    </message>
+	
+	<message id="113" type="toServer" class="ReqRewardSystemPreviewMessage" proto="true" desc="请求领取系统预告奖励">
+        <proto name="com.sh.game.proto.RoleProto.ReqRewardSystemPreview"/>
+    </message>
+	
+	<message id="114" type="toServer" class="ReqAddRoleExpByResourcesMessage" proto="true" desc="请求消耗资源兑换经验">
+        <proto name="com.sh.game.proto.RoleProto.ReqAddRoleExpByResources"/>
+    </message>
+	
+	<message id="115" type="toClient" class="ResRoleExpAccumulateMessage" proto="true" desc="返回当前累计的经验值">
+        <proto name="com.sh.game.proto.RoleProto.ResRoleExpAccumulate"/>
+    </message>
+	
+</messages>
