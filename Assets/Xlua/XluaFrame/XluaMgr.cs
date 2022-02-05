@@ -62,6 +62,7 @@ public class XluaMgr:ManagerObject
     private void Init()
     {
         luaEnv = new LuaEnv();
+        luaEnv.AddBuildin("pb", XLua.LuaDLL.Lua.LoadLuaProfobuf);
         luaEnv.DoString("require 'main_in'");
         XLuaMgr_Init init = luaEnv.Global.Get<XLuaMgr_Init>("Init");
         if(init != null)
