@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Instance.LogAOP;
+using Newtonsoft.Json.Bson;
 using UnityEngine;
 
 public class CSGameManager : MonoBehaviour
@@ -21,6 +23,7 @@ public class CSGameManager : MonoBehaviour
         RegisterManager();
         RegiseterInterfaceSingleton();
         ManagerListAwakeCallBack();
+        AOPTest();
     }
 
     private void RegisterManager()
@@ -41,6 +44,18 @@ public class CSGameManager : MonoBehaviour
         {
             manager.Awake();
         }
+    }
+    
+    /// <summary>
+    /// 方法调用拦截
+    /// </summary>
+    private void AOPTest()
+    {
+        AOPTest a = new AOPTest();
+        a.TestMethod(1,2);
+        int c = 3,d = 4;
+        Instance.LogAOP.AOPTest.Before(ref c,ref d);
+        Instance.LogAOP.AOPTest.After(5);
     }
 
     private void InitOther()
