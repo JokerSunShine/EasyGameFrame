@@ -20,6 +20,10 @@ namespace Common.OneWayLoopChainList
             {
                 return next;
             }
+            set
+            {
+                next = value;
+            }
         }
         #endregion
         
@@ -48,8 +52,10 @@ namespace Common.OneWayLoopChainList
                 data = item;
                 return this;
             }
-            Node<T> 
-            next = new Node<T>(item);
+            Node<T> originNext = Next == null ? this : Next;
+            Node<T> newNext = new Node<T>(item);
+            Next = newNext;
+            newNext.Next = originNext;
             return next;
         }
         

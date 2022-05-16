@@ -66,7 +66,7 @@ namespace Common.BothWayChainList
             {
                 return null;
             }
-            int index = 0;
+            int index = 1;
             Node<T> node = Head;
             while(index < i - 1)
             {
@@ -119,7 +119,7 @@ namespace Common.BothWayChainList
                 Append(item);
             }
 
-            Node<T> node = GetNode(i);
+            Node<T> node = GetNode(i - 1);
             if(node == null || node.HaveData() == false)
             {
                 return;

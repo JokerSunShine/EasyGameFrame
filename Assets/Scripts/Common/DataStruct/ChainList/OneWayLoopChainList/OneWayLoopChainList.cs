@@ -1,6 +1,6 @@
 namespace Common.OneWayLoopChainList
 {
-    public class OneWayChainList<T>
+    public class OneWayLoopChainList<T>
     {
         //单链表
         #region 数据
@@ -32,23 +32,24 @@ namespace Common.OneWayLoopChainList
                 Insert(value,index);
             }
         }
-        
+
+        private int count = 0;
         public int Count
         {
             get
             {
-                return GetLength();
+                return count;
             }
         }
         #endregion
 
         #region 构造
-        public OneWayChainList()
+        public OneWayLoopChainList()
         {
             Clear();
         }
         
-        public OneWayChainList(T[] array)
+        public OneWayLoopChainList(T[] array)
         {
             foreach(T data in array)
             {
@@ -58,34 +59,23 @@ namespace Common.OneWayLoopChainList
         #endregion
 
         #region 获取
-        public int GetLength()
-        {
-            if(IsEmpty())
-            {
-                return 0;
-            }
-            Node<T> node = Head;
-            int length = 0;
-            while(node != null && node.HaveData())
-            {
-                node = node.Next;
-                length++;
-            }
-
-            return length;
-        }
         
         private Node<T> GetNode(int i)
         {
-            if(IsEmpty() || i < 0 || i > GetLength())
+            if(IsEmpty() || i < 0 || i > Count)
             {
                 return null;
             }
 
             Node<T> node = Head;
-            int index = 0;
-            while(node.HaveNextData() && index < i)
+            int index = 1;
+            while(index < i - 1)
             {
+                if(node == null || node.Data == null)
+                {
+                    return null;
+                }
+
                 node = node.Next;
                 index++;
             }
@@ -113,12 +103,14 @@ namespace Common.OneWayLoopChainList
         #region 功能
         public void Append(T item)
         {
-            Node<T> node = Head;
-            while(node.HaveNextData())
+            Node<T> node = GetNode(Count);
+            if(node == null)
             {
-                node = node.Next;
+                node = Head;
             }
+
             node.AddNext(item);
+            count++;
         }
         
         public void Insert(T item,int i = -1)
@@ -128,15 +120,14 @@ namespace Common.OneWayLoopChainList
                 Append(item);
             }
 
-            Node<T> node = GetNode(i - 1);
+            Node<T> node = GetNode(i);
             if(node == null || node.HaveData() == false)
             {
                 return;
             }
 
-            Node<T> nextNode = node.Next;
-            Node<T> newNextNode = node.AddNext(item);
-            newNextNode.AddNext(nextNode);
+            node.AddNext(item);
+            count++;
         }
         
         public void Delete(int i)
@@ -151,63 +142,25 @@ namespace Common.OneWayLoopChainList
             {
                 return;
             }
-
+            
             Node<T> deleteNextNode = node.Next.Next;
-            node.AddNext(deleteNextNode);
+            node.Next = deleteNextNode;
+            count--;
         }
         
-        public void Reverse()
-        {
-            if(Count == 1 || Head == null)
-            {
-                return;
-            }
-            
-            Node<T> NewHead = null;
-            Node<T> NowNode = Head;
-            Node<T> ParentNode;
-
-            while (NowNode != null)
-            {
-                ParentNode = NowNode.Next;
-                NowNode.AddNext(NewHead);
-                NewHead = NowNode;
-                NowNode = ParentNode;
-            }
-
-            head = NewHead;
-        }
-        
-        public T GetMiddleValue()
-        {
-            Node<T> A = Head;
-            Node<T> B = Head;
-            
-            while(B != null && B.Next != null)
-            {
-                A = A.Next;
-                B = B.Next;
-            }
-            
-            if(B == null)
-            {
-                //奇数
-                return A.Data;
-            }
-            else
-            {
-                //偶数
-                return A.Data;
-            }
-        }
-        
-        public void Merge(OneWayChainList<T> list)
+        public void Merge(OneWayLoopChainList<T> list)
         {
             Node<T> node = list.Head;
-            while(node != null && node.Data != null)
+            int index = 0;
+            while(index < list.Count)
             {
+                if(node == null || node.Data == null)
+                {
+                    return;
+                }
                 Append(node.Data);
                 node = node.Next;
+                index++;
             }
         }
         
