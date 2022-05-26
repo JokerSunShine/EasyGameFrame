@@ -23,6 +23,5 @@ public class ZipManager
         }
         zipStream.Flush();
         zipStream.Close();
-        zipStream.Close();
     }
 }

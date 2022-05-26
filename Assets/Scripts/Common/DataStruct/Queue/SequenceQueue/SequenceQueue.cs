@@ -1,3 +1,5 @@
+using System;
+
 namespace Common.DataStruct.Queue.SequenceQueue
 {
     public class SequenceQueue<T>
@@ -32,6 +34,10 @@ namespace Common.DataStruct.Queue.SequenceQueue
         #endregion
         
         #region 构造
+        public SequenceQueue()
+        {
+            items = new T[4];
+        }
         public SequenceQueue(int count)
         {
             items = new T[count];
@@ -82,11 +88,21 @@ namespace Common.DataStruct.Queue.SequenceQueue
         private void Dilatation()
         {
             T[] newItems = new T[items.Length * 2];
-            for(int i = 0;i < items.Length;i++)
+            if(Count > 0)
             {
-                newItems[i] = items[i];
+                if(head < tail)
+                {
+                    Array.Copy(items,head,newItems,0,Count);
+                }
+                else
+                {
+                    Array.Copy(items,head,newItems,0,items.Length - head);
+                    Array.Copy(items,0,newItems,items.Length - head,tail);
+                }
             }
 
+            head = 0;
+            tail = Count;
             items = newItems;
         }
         #endregion
