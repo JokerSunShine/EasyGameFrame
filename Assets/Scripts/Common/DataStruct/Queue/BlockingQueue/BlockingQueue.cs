@@ -34,7 +34,6 @@ namespace Common.DataStruct.Queue.BlockingQueue
                     Monitor.Wait(queue);
                 }
                 
-                CSDebug.Log("+++++++添加数据" + item);
                 queue.Enqueue(item);
                 if(queue.Count == 1)
                 {
@@ -50,11 +49,10 @@ namespace Common.DataStruct.Queue.BlockingQueue
             {
                 while(queue.Count == 0)
                 {
-                    value = default(T);
-                    return false; 
+                    //当没有数据时，持续等待有数据的时候再提取
+                    Monitor.Wait(queue);
                 }
                 value = queue.Dequeue();
-                CSDebug.Log("------提取数据" + value);
                 if(queue.Count == maxSize - 1)
                 {
                     //提取了一个脉冲通知等待队列所有线程到就绪队列争夺queue
