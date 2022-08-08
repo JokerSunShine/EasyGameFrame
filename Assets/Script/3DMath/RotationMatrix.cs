@@ -82,6 +82,25 @@ namespace _3DMath
                 cosh * cosp
             );
         }
+        
+        /// <summary>
+        /// 四元数转换矩阵
+        /// </summary>
+        /// <returns></returns>
+        public static RotationMatrix QuaternionToRotationMatrix(Quaternion q)
+        {
+            RotationMatrix matrix = new RotationMatrix();
+            matrix.m11 = 1 - 2 * (q.y * q.y + q.z * q.z);
+            matrix.m12 = 2 * (q.x * q.y + q.w * q.z);
+            matrix.m13 = 2 * (q.x * q.z - q.w * q.y);
+            matrix.m21 = 2 * (q.x * q.y - q.w * q.z);
+            matrix.m22 = 1 - 2 * (q.x * q.x + q.z * q.z);
+            matrix.m23 = 2 * (q.y * q.z + q.w * q.x);
+            matrix.m31 = 2 * (q.x * q.z + q.w * q.y);
+            matrix.m32 = 2 * (q.y * q.z - q.w * q.x);
+            matrix.m33 = 1 - 2 * (q.x * q.x + q.y * q.y);
+            return matrix;
+        }
         #endregion
     }
 }

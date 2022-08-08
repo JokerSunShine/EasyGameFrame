@@ -193,6 +193,17 @@ namespace _3DMath
 
             euler.y = NormallizePi(euler.y);
         }
+        
+        /// <summary>
+        /// 四元数转换欧拉角
+        /// </summary>
+        /// <param name="q"></param>
+        /// <returns></returns>
+        public static EulerAngle QuaternionToEulerAngle(Quaternion q)
+        {
+            float x = q.x, y = q.y, z = q.z, w = q.w;
+            return new EulerAngle();
+        }
         #endregion
     }
 }

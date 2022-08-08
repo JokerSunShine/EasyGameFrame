@@ -113,6 +113,8 @@ namespace _3DMath
             return Mathf.Sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
         }
         
+        //单位化（标准化）
+        public static Vector3 Normalize(Vector3 v) => v / VectorLength(v);
         //负向量
         public static Vector3 operator -(Vector3 v) => new Vector3(-v.x, -v.y, -v.z);
         

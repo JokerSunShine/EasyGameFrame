@@ -7,7 +7,9 @@ using Newtonsoft.Json.Bson;
 using UnityEngine;
 using Matrix4x4 = UnityEngine.Matrix4x4;
 using Quaternion = UnityEngine.Quaternion;
-using Vector3 = _3DMath.Vector3;
+using Vector3 = UnityEngine.Vector3;
+
+// using Vector3 = _3DMath.Vector3;
 
 public class CSGameManager : MonoBehaviour
 {
@@ -31,12 +33,12 @@ public class CSGameManager : MonoBehaviour
         AOPTest();
         // RotationMatrix mat = new RotationMatrix();
         // mat.Transition(new EulerAngle(30f / 180 * Mathf.PI,0,0));
-        RotationMatrix mat = new RotationMatrix(1,0,0,0,-0.448f,1,0,1,-0.448f);
+        // RotationMatrix mat = new RotationMatrix(1,0,0,0,-0.448f,1,0,1,-0.448f);
         // Matrix3x3 inverseMat = Matrix3x3.Inverse(mat);
         // Vector3 vec = new Vector3(10,20,30);
         // RotationMatrix matrix = RotationMatrix.EulerAngleToRotationMatrix(new EulerAngle(0,90,0));
-        EulerAngle euler1 = EulerAngle.ObjectMatrixToEulerAngle(mat);
-        EulerAngle euler2 = EulerAngle.InertialMatrixToEulerAngle(mat);
+        // EulerAngle euler1 = EulerAngle.ObjectMatrixToEulerAngle(mat);
+        // EulerAngle euler2 = EulerAngle.InertialMatrixToEulerAngle(mat);
         // Vector3 v1 = mat.InertialToObject(vec);
         // Vector3 v2 = mat.ObjectToInertial(vec);
         // Vector3 v = 
@@ -44,7 +46,8 @@ public class CSGameManager : MonoBehaviour
         // Vector3 projectionScale = vec * projectionMat;
         // float det = Matrix3x3.Determinant(mat);
         // Matrix3x3 value = mat * inverseMat;
-        CSDebug.Log(euler1);
+        // Vector3 v = new Vector3();
+        // CSDebug.Log(euler1);
     }
 
     private void RegisterManager()
