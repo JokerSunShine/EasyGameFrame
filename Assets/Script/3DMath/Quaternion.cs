@@ -199,7 +199,7 @@ namespace _3DMath
         /// </summary>
         /// <param name="q1"></param>
         /// <param name="q2"></param>
-        /// <returns></returns>
+        /// <returns>cos角的值</returns>
         public static float Dot(Quaternion q1,Quaternion q2)
         {
             return q1.w * q2.w + q1.x * q2.x + q1.y * q2.y + q1.z * q2.z;
@@ -328,6 +328,64 @@ namespace _3DMath
                 sinH * cosP * cosB - cosH * sinP * sinB,
                 cosH * cosP * sinB - sinH * sinP * cosB,
                 cosH * cosP * cosB + sinH * sinP * sinB
+                );
+        }
+        
+        /// <summary>
+        /// 四元数插值
+        /// </summary>
+        /// <param name="q1"></param>
+        /// <param name="q2"></param>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public static Quaternion Slerp(Quaternion q1,Quaternion q2,float t)
+        {
+            if(t <= 0)
+            {
+                return q1;
+            }
+            if(t >= 1)
+            {
+                return q2;
+            }
+            //得到的是cos角值
+            float cosW = Dot(q1, q2);
+            //四元数中，四元数与其负四元数表示相同得方位旋转,但是会影响点乘结果
+            float q2w = q2.w;
+            float q2x = q2.x;
+            float q2y = q2.y;
+            float q2z = q2.z;
+            if(cosW < 0)
+            {
+                q2w = -q2w;
+                q2x = -q2x;
+                q2y = -q2y;
+                q2z = -q2z;
+                cosW = -cosW;
+            }
+
+            float k0, k1;
+            //如果当前角度接近于0,则不需要通过复杂的计算
+            if(cosW > 0.9999f)
+            {
+                k0 = 1 - t;
+                k1 = t;
+            }
+            else
+            {
+                float sinW = Mathf.Sqrt(1 - cosW * cosW);
+                //弧度
+                float w = Mathf.Atan2(sinW, cosW);
+                float oneOverSinW = 1 / sinW;
+                k0 = Mathf.Sin(1 - t) * w * oneOverSinW;
+                k1 = Mathf.Sin(t * w) * oneOverSinW;
+            }
+
+            return new Quaternion(
+                k0 * q1.x + k1 * q2.x,
+                k0 * q1.y + k1 * q2.y,
+                k0 * q1.z + k1 * q2.z,
+                k0 * q1.w + k1 * q2.w
                 );
         }
         #endregion

@@ -67,7 +67,7 @@ namespace _3DMath
         /// <param name="heading">弧度</param>
         /// <param name="pitch">弧度</param>
         /// <param name="bank">弧度</param>
-        public EulerAngle(float heading,float pitch,float bank):base(pitch,heading,bank)
+        public EulerAngle(float pitch,float heading,float bank):base(pitch,heading,bank)
         {
             
         }
@@ -202,7 +202,22 @@ namespace _3DMath
         public static EulerAngle QuaternionToEulerAngle(Quaternion q)
         {
             float x = q.x, y = q.y, z = q.z, w = q.w;
-            return new EulerAngle();
+            float m32 = -2 * (q.y * q.z - q.w * q.x);
+            EulerAngle euler = new EulerAngle();
+            //检测万向锁
+            if(Mathf.Abs(m32) > 0.999999f)
+            {
+                euler.x = Mathf.Asin(m32);
+                euler.y = Mathf.Atan2( q.w * q.y - q.x * q.z, 0.5f - q.y * q.y - q.z * q.z);
+                euler.z = 0;
+            }
+            else
+            {
+                euler.x = Mathf.Asin(m32);
+                euler.y = Mathf.Atan2( q.w * q.y + q.x * q.z, 0.5f - q.x * q.x - q.y * q.y);
+                euler.z = Mathf.Atan2(q.x * q.y + q.w * q.z, 0.5f - q.x * q.x - q.z * q.z);
+            }
+            return euler;
         }
         #endregion
     }

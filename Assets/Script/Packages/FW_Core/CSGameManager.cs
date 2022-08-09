@@ -6,7 +6,8 @@ using Instance.LogAOP;
 using Newtonsoft.Json.Bson;
 using UnityEngine;
 using Matrix4x4 = UnityEngine.Matrix4x4;
-using Quaternion = UnityEngine.Quaternion;
+using Quaternion = _3DMath.Quaternion;
+// using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
 // using Vector3 = _3DMath.Vector3;
@@ -33,14 +34,14 @@ public class CSGameManager : MonoBehaviour
         AOPTest();
         // RotationMatrix mat = new RotationMatrix();
         // mat.Transition(new EulerAngle(30f / 180 * Mathf.PI,0,0));
-        // RotationMatrix mat = new RotationMatrix(1,0,0,0,-0.448f,1,0,1,-0.448f);
+        // RotationMatrix mat = new RotationMatrix(0.866f,0,-0.5f,0,1,0,0.5f,0,0.866f);
         // Matrix3x3 inverseMat = Matrix3x3.Inverse(mat);
         // Vector3 vec = new Vector3(10,20,30);
-        // RotationMatrix matrix = RotationMatrix.EulerAngleToRotationMatrix(new EulerAngle(0,90,0));
-        // EulerAngle euler1 = EulerAngle.ObjectMatrixToEulerAngle(mat);
-        // EulerAngle euler2 = EulerAngle.InertialMatrixToEulerAngle(mat);
-        // Vector3 v1 = mat.InertialToObject(vec);
-        // Vector3 v2 = mat.ObjectToInertial(vec);
+        // RotationMatrix matrix = RotationMatrix.EulerAngleToRotationMatrix(new EulerAngle(0,30f / 180f * Mathf.PI,0));
+        // EulerAngle euler1 = EulerAngle.ObjectMatrixToEulerAngle(matrix);
+        // EulerAngle euler2 = EulerAngle.InertialMatrixToEulerAngle(matrix);
+        // Vector3 v1 = matrix.InertialToObject(vec);
+        // Vector3 v2 = matrix.ObjectToInertial(vec);
         // Vector3 v = 
         // Matrix3x3 projectionMat = Matrix3x3.SetShear(Matrix3x3.AxisType.x,1,2);
         // Vector3 projectionScale = vec * projectionMat;
@@ -48,6 +49,17 @@ public class CSGameManager : MonoBehaviour
         // Matrix3x3 value = mat * inverseMat;
         // Vector3 v = new Vector3();
         // CSDebug.Log(euler1);
+        //四元数和欧拉角，四元数和矩阵
+        EulerAngle euler = new EulerAngle(10 / 180f * Mathf.PI,20 / 180f * Mathf.PI,30 / 180f * Mathf.PI);
+        RotationMatrix matrix2 = RotationMatrix.EulerAngleToRotationMatrix(euler);
+        Quaternion q = Quaternion.EulerAngleToQuaternion(euler);
+        EulerAngle newEuler = EulerAngle.QuaternionToEulerAngle(q);
+        
+        RotationMatrix matrix = RotationMatrix.EulerAngleToRotationMatrix(euler);
+        Quaternion q1 = Quaternion.RotationMatrixToQuaternion(matrix);
+        RotationMatrix matrix1 = RotationMatrix.QuaternionToRotationMatrix(q1);
+        EulerAngle euler1 = EulerAngle.ObjectMatrixToEulerAngle(matrix);
+        Debug.Log(q1);
     }
 
     private void RegisterManager()
