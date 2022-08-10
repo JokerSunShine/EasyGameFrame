@@ -249,6 +249,20 @@ namespace Graphics
                 max.z += matrix.m33 * aabb.min.z;
             }
         }
+        
+        /// <summary>
+        /// 获取最近点
+        /// </summary>
+        /// <param name="v"></param>
+        /// <returns></returns>
+        public Vector3 GetClosestPoint(Vector3 v)
+        {
+            Vector3 closestPoint = Vector3.zero;
+            closestPoint.x = v.x < min.x ? min.x : v.x > max.x ? max.x : v.x;
+            closestPoint.y = v.y < min.y ? min.y : v.y > max.y ? max.y : v.y;
+            closestPoint.z = v.z < min.z ? min.z : v.z > max.z ? max.z : v.z;
+            return closestPoint;
+        }
         #endregion
     }
 }
