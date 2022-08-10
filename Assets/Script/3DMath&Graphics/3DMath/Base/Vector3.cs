@@ -7,6 +7,7 @@ namespace _3DMath
     {
         #region 数据
         public float x, y, z;
+        public static readonly Vector3 zero = new Vector3(0, 0, 0);
         #endregion
         
         #region 构造
@@ -165,6 +166,41 @@ namespace _3DMath
                 return false;
             }
             return Mathf.Abs(v * v - 1.0f) < 0.0001f;
+        }
+        
+        /// <summary>
+        /// 计算最佳平面法线
+        /// </summary>
+        /// <param name="v">点坐标列表</param>
+        /// <param name="centerPoint">中心点</param>
+        /// <returns>最佳法线</returns>
+        public static Vector3 CalculateBestNormal(Vector3[] v,out Vector3 centerPoint)
+        {
+            int length = v.Length;
+            Vector3 bestNormal = Vector3.zero;
+            centerPoint = Vector3.zero;
+            
+            //三个点几乎成不了平面
+            if(length < 3)
+            {
+                return null;
+            }
+
+            Vector3 oneV = v[length - 1],secondV;
+            
+            for(int i = 0;i < length;i++)
+            {
+                secondV = v[i];
+                bestNormal.x += (oneV.z + secondV.z) * (oneV.y - secondV.y);
+                bestNormal.y += (oneV.x + secondV.x) * (oneV.z - secondV.z);
+                bestNormal.x += (oneV.y + secondV.y) * (oneV.x - secondV.x);
+                oneV = secondV;
+                //计算中心点
+                centerPoint += (secondV / (float) length);
+            }
+
+            bestNormal.Normalize();
+            return bestNormal;
         }
         #endregion
     }

@@ -2,11 +2,11 @@ using _3DMath;
 
 namespace Graphics
 {
-    public class Line
+    public class Sphere
     {
         #region 数据
-        public Vector3 origin;
-        public Vector3 end;
+        public Vector3 center;
+        public float radius;
         #endregion
     }
 }
