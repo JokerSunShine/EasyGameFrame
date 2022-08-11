@@ -60,6 +60,8 @@ public class CSGameManager : MonoBehaviour
         RotationMatrix matrix1 = RotationMatrix.QuaternionToRotationMatrix(q1);
         EulerAngle euler1 = EulerAngle.ObjectMatrixToEulerAngle(matrix);
         Debug.Log(q1);
+        // Input.GetKeyDown(KeyCode.J)
+        // transform.position
     }
 
     private void RegisterManager()

@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using _3DMath;
 
 namespace Graphics
@@ -262,6 +263,156 @@ namespace Graphics
             closestPoint.y = v.y < min.y ? min.y : v.y > max.y ? max.y : v.y;
             closestPoint.z = v.z < min.z ? min.z : v.z > max.z ? max.z : v.z;
             return closestPoint;
+        }
+        
+        /// <summary>
+        /// 与射线相交
+        /// </summary>
+        /// <param name="ray">射线</param>
+        /// <param name="returnNormal">相交点</param>
+        public static float CrossForRay(AABB aabb,Ray ray,Vector3 returnNormal)
+        {
+             //如果未相交则返回这个最大数
+             const float kNoIntersection = 1e30f;
+             //检查点在矩形边界框内的情况，并计算每个面的距离
+             bool inside = true;
+             float xt = 0, xn = 0;
+             if(ray.Origin.x > aabb.min.x)
+             {
+                 xt = aabb.min.x - ray.Origin.x;
+                 if (xt > ray.Delta.x) return kNoIntersection;
+                 xt /= ray.Delta.x;
+                 inside = false;
+                 xn = -1;
+             }
+             else if(ray.Origin.x > aabb.max.x)
+             {
+                 xt = aabb.max.x - ray.Origin.x;
+                 if (xt < ray.Delta.x) return kNoIntersection;
+                 xt /= ray.Delta.x;
+                 inside = false;
+                 xn = 1;
+             }
+             else
+             {
+                 xt = -1;
+             }
+
+             float yt = 0, yn = 0;
+             if(ray.Origin.y < aabb.min.y)
+             {
+                 yt = aabb.min.y - ray.Origin.y;
+                 if (yt > ray.Delta.y) return kNoIntersection;
+                 yt /= ray.Delta.y;
+                 inside = false;
+                 yn = -1;
+             }
+             else if(ray.Origin.y > aabb.max.y)
+             {
+                 yt = aabb.max.y - ray.Origin.y;
+                 if (yt < ray.Delta.y) return kNoIntersection;
+                 yt /= ray.Delta.y;
+                 inside = false;
+                 yn = 1;
+             }
+             else
+             {
+                 yt = -1;
+             }
+                      
+             float zt = 0, zn = 0;
+             if(ray.Origin.z < aabb.min.z)
+             {
+                 zt = aabb.min.z - ray.Origin.z;
+                 if (zt > ray.Delta.z) return kNoIntersection;
+                 zt /= ray.Delta.z;
+                 inside = false;
+                 zn = -1;
+             }
+             else if(ray.Origin.z > aabb.max.z)
+             {
+                 zt = aabb.max.z - ray.Origin.z;
+                 if (zt < ray.Delta.z) return kNoIntersection;
+                 zt /= ray.Delta.z;
+                 inside = false;
+                 zn = 1;
+             }
+             else
+             {
+                 zt = -1;
+             } 
+             
+             //是否在矩形边界框内
+             if(inside)
+             {
+                 if(returnNormal != null)
+                 {
+                     returnNormal = ray.Delta;
+                     returnNormal.Normalize();
+                 }
+
+                 return 0;
+             }
+             
+             //选择最远平面 -- 发生相交的地方
+             int which = 0;
+             float t = xt;
+             if(yt > t)
+             {
+                 which = 1;
+                 t = yt;
+             }
+             if(zt > t)
+             {
+                 which = 2;
+                 t = zt;
+             }
+
+             switch (which)
+             {
+                 case 0: // 和yz平面相交
+                     float y = ray.Origin.y + ray.Delta.y * t;
+                     if (y < aabb.min.y || y > aabb.max.y) return kNoIntersection;
+                     float z = ray.Origin.z + ray.Delta.z * t;
+                     if (z < aabb.min.z || z > aabb.max.z) return kNoIntersection;
+                     
+                     if(returnNormal != null)
+                     {
+                         returnNormal.x = xn;
+                         returnNormal.y = 0;
+                         returnNormal.z = 0;
+                     }
+                     break;
+                 case 1: //和xz平面相交
+                     float x = ray.Origin.x + ray.Delta.x * t;
+                     if (x < aabb.min.x || x > aabb.max.x) return kNoIntersection;
+                     z = ray.Origin.z + ray.Delta.z * t;
+                     if (z < aabb.min.z || z > aabb.max.z) return kNoIntersection;
+                     
+                     if(returnNormal != null)
+                     {
+                         returnNormal.x = 0;
+                         returnNormal.y = yn;
+                         returnNormal.z = 0;
+                     }
+                     break;
+                 case 2: //和xy平面相交
+                     x = ray.Origin.x + ray.Delta.x * t;
+                     if (x < aabb.min.x || x > aabb.max.x) return kNoIntersection;
+                     y = ray.Origin.y + ray.Delta.y * t;
+                     if (y < aabb.min.y || y > aabb.max.y) return kNoIntersection;
+                     
+                     if(returnNormal != null)
+                     {
+                         returnNormal.x = 0;
+                         returnNormal.y = 0;
+                         returnNormal.z = zn;
+                     }
+                     break;
+             }
+            
+             //返回交点参数值
+             return t;
         }
         #endregion
     }
