@@ -1,5 +1,7 @@
 using System.Diagnostics;
 using _3DMath;
+using UnityEngine;
+using Vector3 = _3DMath.Vector3;
 
 namespace Graphics
 {
@@ -266,7 +268,7 @@ namespace Graphics
         }
         
         /// <summary>
-        /// 与射线相交
+        /// 与射线相交（参考图形图像编程精粹）
         /// </summary>
         /// <param name="ray">射线</param>
         /// <param name="returnNormal">相交点</param>
@@ -413,6 +415,153 @@ namespace Graphics
             
              //返回交点参数值
              return t;
+        }
+        
+        /// <summary>
+        /// 静态轴对齐矩形边界框相交检测
+        /// </summary>
+        /// <param name="aabb1"></param>
+        /// <param name="aabb2"></param>
+        /// <param name="crossAABB"></param>
+        /// <returns></returns>
+        public static bool StaticCrossAABBs(AABB aabb1,AABB aabb2,out AABB crossAABB)
+        {
+            crossAABB = new AABB();
+            //判断是否重叠
+            if (aabb1.min.x > aabb1.max.x) return false;
+            if (aabb1.max.x < aabb1.min.x) return false;
+            if (aabb1.min.y > aabb1.max.y) return false;
+            if (aabb1.max.y < aabb1.min.y) return false;
+            if (aabb1.min.z > aabb1.max.z) return false;
+            if (aabb1.max.z < aabb1.min.z) return false;
+            
+            //有重叠,计算重叠部分aabb
+            crossAABB.min.x = Mathf.Max(aabb1.min.x, aabb2.min.x);
+            crossAABB.max.x = Mathf.Min(aabb1.max.x, aabb2.max.x);
+            crossAABB.min.y = Mathf.Max(aabb1.min.x, aabb2.min.x);
+            crossAABB.max.y = Mathf.Min(aabb1.max.x, aabb2.max.x);
+            crossAABB.min.z = Mathf.Max(aabb1.min.x, aabb2.min.x);
+            crossAABB.max.z = Mathf.Min(aabb1.max.x, aabb2.max.x);
+            return true;
+        }
+        
+        /// <summary>
+        /// 动态轴对齐矩形边界框相交检测（参考图形图像编程精粹）
+        /// </summary>
+        /// <param name="stationaryBox"></param>
+        /// <param name="movingBox"></param>
+        /// <param name="d"></param>
+        /// <returns>大于1：未相交</returns>
+        public static float DynamicCrossAABBs(AABB stationaryBox,AABB movingBox,Vector3 d)
+        {
+            const float KNoIntersection = 1e10f;
+
+            float tEnter = 0;
+            float tLeave = 1;
+            
+            //计算每一维上的重叠部分，再将这个重叠部分和前面的重叠部分作相交
+            //如果有一维上重叠部分为0则返回（不会相交）
+            
+            //检查x轴
+            if(d.x == 0)
+            {
+                //Empty or infinite inverval on x
+                if((stationaryBox.min.x >= movingBox.max.x) || (stationaryBox.max.x <= movingBox.min.x))
+                {
+                    //Empty time interval,so no intersection
+                    return KNoIntersection;
+                }
+                //Inifinite time interval - no update necessary
+            }
+            else
+            {
+                //Divide once
+                float oneOverD = 1 / d.x;
+                //Compute time value when they begin and end overlapping
+                float xEnter = (stationaryBox.min.x - movingBox.max.x) * oneOverD;
+                float xLeave = (stationaryBox.max.x - movingBox.min.x) * oneOverD;
+                //Check for interval out of order
+                if(xEnter > xLeave)
+                {
+                    CommonUtility.Swap(xEnter,xLeave);
+                }
+                //Update interval
+                if (xEnter > tEnter) tEnter = xEnter;
+                if (xLeave < tLeave) tLeave = xLeave;
+                //Check if this resulted in empty interval
+                if(tEnter > tLeave)
+                {
+                    return KNoIntersection;
+                }
+            }
+            
+            //检查y轴
+            if(d.y == 0)
+            {
+                //Empty or infinite inverval on y
+                if((stationaryBox.min.y >= movingBox.max.y) || (stationaryBox.max.y <= movingBox.min.y))
+                {
+                    //Empty time interval,so no intersection
+                    return KNoIntersection;
+                }
+                //Inifinite time interval - no update necessary
+            }
+            else
+            {
+                //Divide once
+                float oneOverD = 1 / d.y;
+                //Compute time value when they begin and end overlapping
+                float yEnter = (stationaryBox.min.y - movingBox.max.y) * oneOverD;
+                float yLeave = (stationaryBox.max.y - movingBox.min.y) * oneOverD;
+                //Check for interval out of order
+                if(yEnter > yLeave)
+                {
+                    CommonUtility.Swap(yEnter,yLeave);
+                }
+                //Update interval
+                if (yEnter > tEnter) tEnter = yEnter;
+                if (yLeave < tLeave) tLeave = yLeave;
+                //Check if this resulted in empty interval
+                if(tEnter > tLeave)
+                {
+                    return KNoIntersection;
+                }
+            }
+            
+            //检查z轴
+            if(d.z == 0)
+            {
+                //Empty or infinite inverval on z
+                if((stationaryBox.min.z >= movingBox.max.z) || (stationaryBox.max.z <= movingBox.min.z))
+                {
+                    //Empty time interval,so no intersection
+                    return KNoIntersection;
+                }
+                //Inifinite time interval - no update necessary
+            }
+            else
+            {
+                //Divide once
+                float oneOverD = 1 / d.z;
+                //Compute time value when they begin and end overlapping
+                float zEnter = (stationaryBox.min.z - movingBox.max.z) * oneOverD;
+                float zLeave = (stationaryBox.max.z - movingBox.min.z) * oneOverD;
+                //Check for interval out of order
+                if(zEnter > zLeave)
+                {
+                    CommonUtility.Swap(zEnter,zLeave);
+                }
+                //Update interval
+                if (zEnter > tEnter) tEnter = zEnter;
+                if (zLeave < tLeave) tLeave = zLeave;
+                //Check if this resulted in empty interval
+                if(tEnter > tLeave)
+                {
+                    return KNoIntersection;
+                }
+            }
+            //好了，相交，返回焦点参数值
+            return tEnter;
         }
         #endregion
     }
