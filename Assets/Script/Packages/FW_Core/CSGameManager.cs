@@ -13,6 +13,7 @@ using Quaternion = _3DMath.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 using Common.DataStruct.Queue.SequenceQueue;
 using DataStruct.Queue.DoubleEndQueue.DoubleEndQueue_Array;
+using DataStruct.Queue.DoubleEndQueue.DoubleEndQueue_Chain;
 
 // using Vector3 = _3DMath.Vector3;
 
@@ -37,16 +38,11 @@ public class CSGameManager : MonoBehaviour
         ManagerListAwakeCallBack();
         AOPTest();
         int[] items = new int[4] { 1,2,3,4};
-        DoubleEndQueue_Array<int> queue = new DoubleEndQueue_Array<int>(items);
-        queue.RemoveFirst();
-        queue.AddLast(5);
-        queue.AddLast(6);
-        queue.AddLast(7);
-        queue.RemoveLast();
-        queue.AddFrist(8);
-        queue.AddFrist(9);
-        queue.AddFrist(10);
-        queue.AddFrist(11);
+        DoubleEndQueue_Chain<int> queue = new DoubleEndQueue_Chain<int>(items);
+        queue.FirstDequeue();
+        queue.LastEnqueue(5);
+        queue.LastDequeue();
+        queue.FirstEnqueue(7); 
         Debug.Log(queue);
     }
 
