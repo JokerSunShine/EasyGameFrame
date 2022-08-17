@@ -7,19 +7,6 @@ namespace Common.DataStruct.Queue.SequenceQueue
         #region 数据
 
         private T[] items;
-        private T[] Items
-        {
-            get
-            {
-                if(items == null)
-                {
-                    items = new T[4];
-                }
-
-                return items;
-            }
-        }
-
         private int count;
         public int Count
         {
@@ -61,13 +48,13 @@ namespace Common.DataStruct.Queue.SequenceQueue
         #region 功能
         public void Enqueue(T item)
         {
-            if(Count >= Items.Length)
+            if(Count >= items.Length)
             {
                 Dilatation();
             }
 
             items[tail] = item;
-            tail = (tail + 1) % Items.Length;
+            tail = (tail + 1) % items.Length;
             count++;
         }
         
@@ -78,9 +65,9 @@ namespace Common.DataStruct.Queue.SequenceQueue
                 return default(T);
             }
 
-            T result = Items[head];
-            Items[head] = default(T);
-            head = (head + 1) % Items.Length;
+            T result = items[head];
+            items[head] = default(T);
+            head = (head + 1) % items.Length;
             count--;
             return result;
         }
