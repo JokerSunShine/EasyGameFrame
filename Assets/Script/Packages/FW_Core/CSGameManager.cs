@@ -37,13 +37,6 @@ public class CSGameManager : MonoBehaviour
         RegiseterInterfaceSingleton();
         ManagerListAwakeCallBack();
         AOPTest();
-        int[] items = new int[4] { 1,2,3,4};
-        DoubleEndQueue_Chain<int> queue = new DoubleEndQueue_Chain<int>(items);
-        queue.FirstDequeue();
-        queue.LastEnqueue(5);
-        queue.LastDequeue();
-        queue.FirstEnqueue(7); 
-        Debug.Log(queue);
     }
 
     private void RegisterManager()
