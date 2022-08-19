@@ -52,7 +52,13 @@ namespace DataStruct.HashTable
             {
                 return 0;
             }
-            return 0;
+
+            int hashCode = key.GetHashCode();
+            if(step > 0)
+            {
+                hashCode += step * (hashCode + 1) % (length - 2);
+            }
+            return hashCode % length;
         }
     }
 }
