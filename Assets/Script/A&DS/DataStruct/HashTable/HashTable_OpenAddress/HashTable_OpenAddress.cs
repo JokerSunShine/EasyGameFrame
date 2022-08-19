@@ -41,6 +41,26 @@ namespace DataStruct.HashTable.HashTable_OpenAddress
         }
 
         private HashFuncType hashType;
+        //索引器
+        public TValue this[TKey index]
+        {
+            get
+            {
+                return GetValue(index);
+            }
+            set
+            {
+                if(value == null || value.Equals(default(TValue)))
+                {
+                    TryRemove(index);
+                }
+                else
+                {
+                    TryAdd(index,value);
+                }
+            }
+        }
+
         #endregion
         
         #region 构造
