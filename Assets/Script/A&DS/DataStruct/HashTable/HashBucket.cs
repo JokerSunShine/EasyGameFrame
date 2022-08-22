@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace DataStruct.HashTable
 {
     public class HashBucket<TKey,TValue>
@@ -20,7 +22,7 @@ namespace DataStruct.HashTable
             }
             set
             {
-                KeyHashCode = value == null || value.Equals(default(TKey)) ? 0 : Key.GetHashCode();
+                KeyHashCode = value == null || value.Equals(default(TKey)) ? 0 : value.GetHashCode();
                 key = value;
             }
         }

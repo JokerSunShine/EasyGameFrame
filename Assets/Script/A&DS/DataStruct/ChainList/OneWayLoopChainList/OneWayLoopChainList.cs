@@ -167,6 +167,7 @@ namespace Common.OneWayLoopChainList
         public void Clear()
         {
             head = null;
+            count = 0;
         }
         #endregion
     }

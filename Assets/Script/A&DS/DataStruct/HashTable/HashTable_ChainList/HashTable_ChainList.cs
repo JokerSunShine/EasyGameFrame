@@ -22,7 +22,10 @@ namespace DataStruct.HashTable.HashTable_ChainList
         #endregion
         
         #region 构造
-        public HashTable_ChainList(){}
+        public HashTable_ChainList()
+        {
+            buckets = new BothWayChainList<HashBucket<TKey, TValue>>[4];
+        }
         #endregion
         
         #region 功能
@@ -40,6 +43,8 @@ namespace DataStruct.HashTable.HashTable_ChainList
                 bucketChainList[hashIndex] = new BothWayChainList<HashBucket<TKey, TValue>>();
             }
             bucketChainList[hashIndex].Append(new HashBucket<TKey, TValue>(key,value));
+            maxCahinCount = Math.Max(bucketChainList[hashIndex].Count, maxCahinCount);
+            count++;
         }
         
         public void TryRemove(TKey key)
@@ -50,38 +55,75 @@ namespace DataStruct.HashTable.HashTable_ChainList
             {
                 return;
             }
+
+            int index = 0;
             foreach(HashBucket<TKey,TValue> node in chainList)
             {
                 if(node.KeyIsEqual(key))
                 {
                     node.Delete();
+                    chainList.Delete(index);
+                    maxCahinCount = Math.Max(chainList.Count, maxCahinCount);
+                    count--;
                     return;
                 }
+                index++;
             }
         }
         
         public void Clear()
         {
             Array.Clear(buckets,0,buckets.Length);
+            count = 0;
         }
         
         public bool ContainKey(TKey key)
         {
-            return true;
+            TValue value = GetValue(key);
+            return !value.Equals(default(TValue));
         }
         
         public bool ContainValue(TValue value)
         {
-            return true;
+            foreach(var chainList in buckets)
+            {
+                foreach(HashBucket<TKey, TValue> node in chainList)
+                {
+                    if(node.ValueIsEqual(value))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
         
         public TValue GetValue(TKey key)
         {
+            int hashIndex = HashTableKeyAlgorithm.LinearProbing(key, buckets.Length);
+            BothWayChainList<HashBucket<TKey, TValue>> chainList = buckets[hashIndex];
+            if(chainList == null)
+            {
+                return default(TValue);
+            }
+            foreach(HashBucket<TKey, TValue> node in chainList)
+            {
+                if(node.KeyIsEqual(key))
+                {
+                    return node.Value;
+                }
+            }
+
             return default(TValue);
         }
         
+        /// <summary>
+        /// 变更容器大小，扩容（缩容）
+        /// </summary>
         public void CheckChangeSize()
         {
+            //扩容
             if(maxCahinCount >= MaxChainCount)
             {
                 BothWayChainList<HashBucket<TKey, TValue>>[] newBuckets = new BothWayChainList<HashBucket<TKey, TValue>>[buckets.Length * 2];

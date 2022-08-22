@@ -186,6 +186,7 @@ namespace Common.BothWayLoopChainList
         public void Clear()
         {
             head = null;
+            count = 0;
         }
         #endregion
     }

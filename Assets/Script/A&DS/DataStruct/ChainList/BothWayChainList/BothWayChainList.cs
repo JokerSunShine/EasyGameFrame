@@ -3,8 +3,7 @@ using System.Collections;
 namespace Common.BothWayChainList
 {
     //双向链表
-    public class BothWayChainList<T>:IEnumerable
-    {
+    public class BothWayChainList<T>:IEnumerable {
         #region 数据
         private Node<T> head;
         public Node<T> Head
@@ -169,6 +168,7 @@ namespace Common.BothWayChainList
         public void Clear()
         {
             head = null;
+            count = 0;
         }
         #endregion
         
@@ -176,6 +176,10 @@ namespace Common.BothWayChainList
         public IEnumerator GetEnumerator()
         {
             Node<T> current = Head;
+            if(current.HaveData())
+            {
+                yield return current.Data;
+            }
             while(current.Next != null)
             {
                 yield return current.Next.Data;

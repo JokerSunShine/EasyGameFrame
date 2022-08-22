@@ -133,6 +133,7 @@ namespace DataStruct.HashTable.HashTable_OpenAddress
         public void Clear()
         {
             Array.Clear(buckets,0,buckets.Length);
+            count = 0;
         }
         
         public bool ContainKey(TKey key)
