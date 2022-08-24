@@ -18,6 +18,7 @@ namespace Common.DataStruct.Queue.ChainQueue
         #endregion
         
         #region 构造
+        public ChainQueue(){}
         public ChainQueue(T[] array)
         {
             if(array == null || array.Length == 0)
@@ -54,6 +55,10 @@ namespace Common.DataStruct.Queue.ChainQueue
             }
             T item = head.Item;
             head = head.Next;
+            if(head == null)
+            {
+                tail = null;
+            }
             count--;
             return item;
         }
