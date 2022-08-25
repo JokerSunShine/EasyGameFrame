@@ -44,61 +44,53 @@ namespace DataStruct.Tree.BinaryTree.BinarySearchTree
         /// </summary>
         /// <param name="value"></param>
         /// <param name="node"></param>
-        public void InsertNode(T value,Node<T> node = null)
+        public void InsertNode(T value)
         {
             if(head == null)
             {
                 head = new Node<T>(value);
+                count++;
                 return;
             }
-            if(node == null && head != null)
+
+            Node<T> parentNode = GetInsertNode(value);
+            if(parentNode == null || parentNode.Data.Equals(value))
             {
-                node = head;
+                return;
             }
-            
-            int compareValue = compareFunc(value, node.Data);
+            int compareValue = compareFunc(value, parentNode.Data);
+            Node<T> inserNode = new Node<T>(value);
             Node<T> nextValue = null;
             switch(compareValue)
             {
                 case -1:
-                    nextValue = node.LeftNode;
-                    if(nextValue == null)
-                    {
-                        node.LeftNode = new Node<T>(value);
-                        node.LeftNode.Parent = node;
-                        return;
-                    }
+                    nextValue = parentNode.LeftNode;
+                    parentNode.LeftNode = inserNode;
+                    inserNode.LeftNode = nextValue;
                     break;
                 case 0:
                     return;
                 case 1:
-                    nextValue = node.RightNode;
-                    if(nextValue == null)
-                    {
-                        node.RightNode = new Node<T>(value);
-                        node.RightNode.Parent = node;
-                        return;
-                    }
+                    nextValue = parentNode.RightNode;
+                    parentNode.RightNode = inserNode;
+                    inserNode.RightNode = nextValue;
                     break;
             }
 
-            InsertNode(value, nextValue);
+            inserNode.Parent = parentNode;
+            if(nextValue != null)
+            {
+                nextValue.Parent = inserNode;
+            }
+
+            count++;
         }
         
         /// <summary>
-        /// 删除数据
-        /// </summary>
-        /// <param name="data"></param>
-        public void DeleteNode(T data)
-        {
-            
-        }
-        
-        /// <summary>
-        /// 查找节点
+        /// 获取可以插入的节点
         /// </summary>
         /// <returns></returns>
-        public Node<T> FindNode(T data,Node<T> node = null,int lastCompareState = 0)
+        public Node<T> GetInsertNode(T data,Node<T> node = null)
         {
             if(head == null)
             {
@@ -113,17 +105,176 @@ namespace DataStruct.Tree.BinaryTree.BinarySearchTree
             switch(compareValue)
             {
                 case -1:
-                    curNode = node.LeftNode != null ? FindNode(data, node.LeftNode,compareValue) : lastCompareState == -1 ? node : node.Parent;
+                    curNode = node.LeftNode != null ? GetInsertNode(data, node.LeftNode) : node;
                     break;
                 case 0:
                     curNode = node;
                     break;
                 case 1:
-                    curNode = node.RightNode != null ? FindNode(data, node.RightNode,compareValue) : lastCompareState == 1 ? node : node.Parent;
+                    curNode = node.RightNode != null ? GetInsertNode(data, node.RightNode) : node;
                     break;
             }
 
             return curNode;
+        }
+        
+        /// <summary>
+        /// 删除数据
+        /// </summary>
+        /// <param name="data"></param>
+        public void DeleteNode(T data)
+        {
+            Node<T> node = FindNode(data);
+            if(node == null)
+            {
+                return;
+            }
+
+            int degree = node.Degree;
+            int compareParentValue = -2;
+            if(node.Parent != null)
+            {
+                compareParentValue = compareFunc(data, node.Parent.Data);
+            }
+            if(degree == 0)
+            {
+                //叶子节点直接删除
+                if(compareParentValue == 1)
+                {
+                    node.Parent.RightNode = null;
+                }
+                else if(compareParentValue == -1)
+                {
+                    node.Parent.LeftNode = null;
+                }
+                else if(compareParentValue == -2)
+                {
+                    head = null;
+                }
+            }
+            else if(degree == 1)
+            {
+                //有一个节点，节点的子节点给父节点
+                Node<T> nextNode = node.LeftNode;
+                if(nextNode == null)
+                {
+                    nextNode = node.RightNode;
+                }
+                if(compareParentValue == 1)
+                {
+                    node.Parent.RightNode = nextNode;
+                }
+                else if(compareParentValue == -1)
+                {
+                    node.Parent.LeftNode = nextNode;
+                }
+                else if(compareParentValue == -2)
+                {
+                    head = nextNode;
+                }
+
+                nextNode.Parent = node.Parent;
+            }
+            else if(degree == 2)
+            {
+                //有两个节点，则寻找最佳后继节点代替被删除节点
+                Node<T> descendantNode = GetDescendantNode(node);
+                if(descendantNode == null)
+                {
+                    return;
+                }
+
+                DeleteNode(descendantNode.Data);
+                //父节点替换
+                Node<T> originParentNode = node.Parent;
+                if(originParentNode != null)
+                {
+                    descendantNode.Parent = originParentNode;
+                    if(originParentNode.LeftNode.Data.Equals(node.Data))
+                    {
+                        originParentNode.LeftNode = descendantNode;
+                    }
+                    else
+                    {
+                        originParentNode.RightNode = descendantNode;
+                    }
+                }
+                else
+                {
+                    head = descendantNode;
+                }
+                //左节点替换
+                if(node.LeftNode != null)
+                {
+                    descendantNode.LeftNode = node.LeftNode;
+                    node.LeftNode.Parent = descendantNode;
+                }
+                //右节点替换
+                if(node.RightNode != null)
+                {
+                    descendantNode.RightNode = node.RightNode;
+                    node.RightNode.Parent = descendantNode;
+                }
+            }
+        }
+        
+        /// <summary>
+        /// 寻找节点
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="node"></param>
+        /// <returns></returns>
+        public Node<T> FindNode(T data,Node<T>node = null,bool isFirstFind = true)
+        {
+            if(head == null)
+            {
+                return null;
+            }
+            if(isFirstFind)
+            {
+                node = head;
+            }
+            if(node == null)
+            {
+                return null;
+            }
+
+            int compareValue = compareFunc(data, node.Data);
+            Node<T> curNode = null;
+            switch(compareValue)
+            {
+                case -1:
+                    curNode = FindNode(data, node.LeftNode,false);
+                    break;
+                case 0:
+                    curNode = node;
+                    break;
+                case 1:
+                    curNode = FindNode(data, node.RightNode,false);
+                    break;
+            }
+
+            return curNode;
+        }
+        
+        /// <summary>
+        /// 获取后继节点（该节点必然有右子树）
+        /// </summary>
+        /// <returns></returns>
+        public Node<T> GetDescendantNode(Node<T> node)
+        {
+            if(node == null || node.RightNode == null)
+            {
+                return null;
+            }
+
+            Node<T> descendantNode = node.RightNode;
+            while(descendantNode.LeftNode != null)
+            {
+                descendantNode = descendantNode.LeftNode;
+            }
+
+            return descendantNode;
         }
         #endregion
     }

@@ -18,6 +18,27 @@ namespace DataStruct.Tree.BinaryTree
             get => parent;
             set => parent = value;
         }
+        
+        /// <summary>
+        /// 度
+        /// </summary>
+        public int Degree
+        {
+            get
+            {
+                int degree = 0;
+                if(LeftNode != null)
+                {
+                    degree++;
+                }
+                if(rightNode != null)
+                {
+                    degree++;
+                }
+
+                return degree;
+            }
+        }
         #endregion
         
         #region 构造
