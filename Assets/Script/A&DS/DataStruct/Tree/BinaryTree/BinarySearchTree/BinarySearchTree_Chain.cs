@@ -66,6 +66,7 @@ namespace DataStruct.Tree.BinaryTree.BinarySearchTree
                 case -1:
                     nextValue = parentNode.LeftNode;
                     parentNode.LeftNode = inserNode;
+                    inserNode.pointType = Node<T>.ParentPointType.Left;
                     inserNode.LeftNode = nextValue;
                     break;
                 case 0:
@@ -73,6 +74,7 @@ namespace DataStruct.Tree.BinaryTree.BinarySearchTree
                 case 1:
                     nextValue = parentNode.RightNode;
                     parentNode.RightNode = inserNode;
+                    inserNode.pointType = Node<T>.ParentPointType.Right;
                     inserNode.RightNode = nextValue;
                     break;
             }
@@ -122,7 +124,7 @@ namespace DataStruct.Tree.BinaryTree.BinarySearchTree
         /// 删除数据
         /// </summary>
         /// <param name="data"></param>
-        public void DeleteNode(T data)
+        public void DeleteNode(T data,bool changeCount = true)
         {
             Node<T> node = FindNode(data);
             if(node == null)
@@ -132,6 +134,10 @@ namespace DataStruct.Tree.BinaryTree.BinarySearchTree
 
             int degree = node.Degree;
             int compareParentValue = -2;
+            if(changeCount)
+            {
+                count--;
+            }
             if(node.Parent != null)
             {
                 compareParentValue = compareFunc(data, node.Parent.Data);
@@ -163,10 +169,12 @@ namespace DataStruct.Tree.BinaryTree.BinarySearchTree
                 if(compareParentValue == 1)
                 {
                     node.Parent.RightNode = nextNode;
+                    nextNode.pointType = Node<T>.ParentPointType.Right;
                 }
                 else if(compareParentValue == -1)
                 {
                     node.Parent.LeftNode = nextNode;
+                    nextNode.pointType = Node<T>.ParentPointType.Left;
                 }
                 else if(compareParentValue == -2)
                 {
@@ -184,7 +192,7 @@ namespace DataStruct.Tree.BinaryTree.BinarySearchTree
                     return;
                 }
 
-                DeleteNode(descendantNode.Data);
+                DeleteNode(descendantNode.Data,false);
                 //父节点替换
                 Node<T> originParentNode = node.Parent;
                 if(originParentNode != null)
@@ -201,6 +209,7 @@ namespace DataStruct.Tree.BinaryTree.BinarySearchTree
                 }
                 else
                 {
+                    descendantNode.Parent = null;
                     head = descendantNode;
                 }
                 //左节点替换

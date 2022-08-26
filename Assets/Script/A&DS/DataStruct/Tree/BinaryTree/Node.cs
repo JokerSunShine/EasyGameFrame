@@ -1,7 +1,21 @@
+using System;
+
 namespace DataStruct.Tree.BinaryTree
 {
     public class Node<T>
     {
+        #region 枚举
+        /// <summary>
+        /// 父类节点类型
+        /// </summary>
+        public enum ParentPointType
+        {
+            None,
+            Left,
+            Right,
+        }
+        #endregion
+        
         #region 构造
         private T data;
         public T Data
@@ -9,15 +23,36 @@ namespace DataStruct.Tree.BinaryTree
             get => data;
         }
         private Node<T> leftNode;
-        public Node<T> LeftNode { get => leftNode; set => leftNode = value; }
+        public Node<T> LeftNode
+        {
+            get => leftNode;
+            set
+            {
+                leftNode = value;
+                NoticeDataChange();
+            }
+        }
+
         private Node<T> rightNode;
-        public Node<T> RightNode { get => rightNode; set => rightNode = value; }
+        public Node<T> RightNode
+        {
+            get => rightNode;
+            set
+            {
+                rightNode = value;
+                NoticeDataChange();
+            }
+        }
+
         private Node<T> parent;
         public Node<T> Parent
         {
             get => parent;
             set => parent = value;
         }
+        
+        //父类节点类型
+        public ParentPointType pointType = ParentPointType.None;
         
         /// <summary>
         /// 度
@@ -37,6 +72,43 @@ namespace DataStruct.Tree.BinaryTree
                 }
 
                 return degree;
+            }
+        }
+        
+        //子树发生变动
+        public bool ChildTreeChange = true;
+        private int depth;
+        //节点最大深度
+        public int Depth
+        {
+            get
+            {
+                if(ChildTreeChange)
+                {
+                    int leftDepth = LeftNode == null ? 0 : LeftNode.Depth + 1;
+                    int rightDepth = RightNode == null ? 0 : RightNode.Depth + 1;
+                    depth = Math.Max(leftDepth, rightDepth);
+                }
+
+                return depth;
+            }
+        }
+
+        private int balanceFactor;
+        /// <summary>
+        /// 平衡因子
+        /// </summary>
+        public int BalanceFactor{
+            get
+            {
+                if(ChildTreeChange)
+                {
+                    int leftDepth = LeftNode != null ? LeftNode.Depth : 0;
+                    int rightDepth = RightNode != null ? RightNode.Depth * -1 : 0;
+                    balanceFactor = Math.Abs(leftDepth + rightDepth);
+                }
+
+                return balanceFactor;
             }
         }
         #endregion
@@ -63,6 +135,17 @@ namespace DataStruct.Tree.BinaryTree
         public bool IsEqual(T data)
         {
             return this.data.Equals(data);
+        }
+        #endregion
+        
+        #region 数据触发变动
+        public void NoticeDataChange()
+        {
+            ChildTreeChange = true;
+            if(Parent != null)
+            {
+                Parent.NoticeDataChange();
+            }
         }
         #endregion
     }
