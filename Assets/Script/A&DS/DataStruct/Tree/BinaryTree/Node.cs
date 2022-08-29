@@ -17,6 +17,12 @@ namespace DataStruct.Tree.BinaryTree
         #endregion
         
         #region 构造
+        private ChainBinaryTreeAbstract<T> tree;
+        public ChainBinaryTreeAbstract<T> Tree
+        {
+            get => tree;
+        }
+        
         private T data;
         public T Data
         {
@@ -52,7 +58,20 @@ namespace DataStruct.Tree.BinaryTree
         }
         
         //父类节点类型
-        public ParentPointType pointType = ParentPointType.None;
+        private ParentPointType pointType = ParentPointType.None;
+        public ParentPointType PointType
+        {
+            get
+            {
+                if(ChildTreeChange && tree != null && tree.CompareFunc != null)
+                {
+                    int compareValue = Parent.Tree.CompareFunc(Data, Parent.Data);
+                    pointType = compareValue > 0 ? ParentPointType.Right :
+                        compareValue < 0 ? ParentPointType.Left : ParentPointType.None;
+                }
+                return pointType;
+            }
+        }
         
         /// <summary>
         /// 度
@@ -105,7 +124,7 @@ namespace DataStruct.Tree.BinaryTree
                 {
                     int leftDepth = LeftNode != null ? LeftNode.Depth : 0;
                     int rightDepth = RightNode != null ? RightNode.Depth * -1 : 0;
-                    balanceFactor = Math.Abs(leftDepth + rightDepth);
+                    balanceFactor = leftDepth + rightDepth;
                 }
 
                 return balanceFactor;
@@ -122,12 +141,13 @@ namespace DataStruct.Tree.BinaryTree
             parent = null;
         }
         
-        public Node(T data,Node<T> leftNode = null,Node<T> rightNode = null,Node<T> parent = null)
+        public Node(T data,ChainBinaryTreeAbstract<T> tree = null,Node<T> leftNode = null,Node<T> rightNode = null,Node<T> parent = null)
         {
             this.data = data;
             this.leftNode = leftNode;
             this.rightNode = rightNode;
             this.parent = parent;
+            this.tree = tree;
         }
         #endregion
         

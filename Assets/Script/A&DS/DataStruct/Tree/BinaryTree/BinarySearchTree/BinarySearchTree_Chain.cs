@@ -5,7 +5,7 @@ namespace DataStruct.Tree.BinaryTree.BinarySearchTree
     public class BinarySearchTree_Chain<T>:ChainBinaryTreeAbstract<T>
     {
         #region 数据
-        private Node<T> head;
+        protected Node<T> head;
         public override Node<T> Head { get => head;}
 
         private int count;
@@ -13,8 +13,9 @@ namespace DataStruct.Tree.BinaryTree.BinarySearchTree
         {
             get => count;
         }
-        
-        Func<T,T,int> compareFunc;
+
+        private Func<T, T, int> compareFunc;
+        public override Func<T,T,int> CompareFunc { get => compareFunc; }
         #endregion
         
         #region 构造
@@ -44,37 +45,35 @@ namespace DataStruct.Tree.BinaryTree.BinarySearchTree
         /// </summary>
         /// <param name="value"></param>
         /// <param name="node"></param>
-        public void InsertNode(T value)
+        public virtual Node<T> InsertNode(T value)
         {
             if(head == null)
             {
-                head = new Node<T>(value);
+                head = new Node<T>(value,this);
                 count++;
-                return;
+                return head;
             }
 
             Node<T> parentNode = GetInsertNode(value);
             if(parentNode == null || parentNode.Data.Equals(value))
             {
-                return;
+                return null;
             }
             int compareValue = compareFunc(value, parentNode.Data);
-            Node<T> inserNode = new Node<T>(value);
+            Node<T> inserNode = new Node<T>(value,this);
             Node<T> nextValue = null;
             switch(compareValue)
             {
                 case -1:
                     nextValue = parentNode.LeftNode;
                     parentNode.LeftNode = inserNode;
-                    inserNode.pointType = Node<T>.ParentPointType.Left;
                     inserNode.LeftNode = nextValue;
                     break;
                 case 0:
-                    return;
+                    return null;
                 case 1:
                     nextValue = parentNode.RightNode;
                     parentNode.RightNode = inserNode;
-                    inserNode.pointType = Node<T>.ParentPointType.Right;
                     inserNode.RightNode = nextValue;
                     break;
             }
@@ -86,6 +85,7 @@ namespace DataStruct.Tree.BinaryTree.BinarySearchTree
             }
 
             count++;
+            return inserNode;
         }
         
         /// <summary>
@@ -124,12 +124,12 @@ namespace DataStruct.Tree.BinaryTree.BinarySearchTree
         /// 删除数据
         /// </summary>
         /// <param name="data"></param>
-        public void DeleteNode(T data,bool changeCount = true)
+        public virtual Node<T> DeleteNode(T data,bool changeCount = true)
         {
             Node<T> node = FindNode(data);
             if(node == null)
             {
-                return;
+                return null;
             }
 
             int degree = node.Degree;
@@ -169,12 +169,10 @@ namespace DataStruct.Tree.BinaryTree.BinarySearchTree
                 if(compareParentValue == 1)
                 {
                     node.Parent.RightNode = nextNode;
-                    nextNode.pointType = Node<T>.ParentPointType.Right;
                 }
                 else if(compareParentValue == -1)
                 {
                     node.Parent.LeftNode = nextNode;
-                    nextNode.pointType = Node<T>.ParentPointType.Left;
                 }
                 else if(compareParentValue == -2)
                 {
@@ -189,7 +187,7 @@ namespace DataStruct.Tree.BinaryTree.BinarySearchTree
                 Node<T> descendantNode = GetDescendantNode(node);
                 if(descendantNode == null)
                 {
-                    return;
+                    return null;
                 }
 
                 DeleteNode(descendantNode.Data,false);
@@ -225,6 +223,8 @@ namespace DataStruct.Tree.BinaryTree.BinarySearchTree
                     node.RightNode.Parent = descendantNode;
                 }
             }
+
+            return node;
         }
         
         /// <summary>
