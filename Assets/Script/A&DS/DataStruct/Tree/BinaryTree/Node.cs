@@ -56,15 +56,17 @@ namespace DataStruct.Tree.BinaryTree
             get => parent;
             set => parent = value;
         }
-        
+
+        private bool PointTypeChange = true;
         //父类节点类型
         private ParentPointType pointType = ParentPointType.None;
         public ParentPointType PointType
         {
             get
             {
-                if(ChildTreeChange && tree != null && tree.CompareFunc != null)
+                if(PointTypeChange && tree != null && tree.CompareFunc != null)
                 {
+                    PointTypeChange = false;
                     int compareValue = Parent.Tree.CompareFunc(Data, Parent.Data);
                     pointType = compareValue > 0 ? ParentPointType.Right :
                         compareValue < 0 ? ParentPointType.Left : ParentPointType.None;
@@ -95,15 +97,16 @@ namespace DataStruct.Tree.BinaryTree
         }
         
         //子树发生变动
-        public bool ChildTreeChange = true;
+        public bool DepthChange = true;
         private int depth;
         //节点最大深度
         public int Depth
         {
             get
             {
-                if(ChildTreeChange)
+                if(DepthChange)
                 {
+                    DepthChange = false;
                     int leftDepth = LeftNode == null ? 0 : LeftNode.Depth + 1;
                     int rightDepth = RightNode == null ? 0 : RightNode.Depth + 1;
                     depth = Math.Max(leftDepth, rightDepth);
@@ -112,7 +115,8 @@ namespace DataStruct.Tree.BinaryTree
                 return depth;
             }
         }
-
+        #region 用于平衡二叉
+        private bool BalanceFactorChange = true;
         private int balanceFactor;
         /// <summary>
         /// 平衡因子
@@ -120,8 +124,9 @@ namespace DataStruct.Tree.BinaryTree
         public int BalanceFactor{
             get
             {
-                if(ChildTreeChange)
+                if(BalanceFactorChange)
                 {
+                    BalanceFactorChange = false;
                     int leftDepth = LeftNode != null ? LeftNode.Depth : 0;
                     int rightDepth = RightNode != null ? RightNode.Depth * -1 : 0;
                     balanceFactor = leftDepth + rightDepth;
@@ -130,6 +135,12 @@ namespace DataStruct.Tree.BinaryTree
                 return balanceFactor;
             }
         }
+        #endregion
+        
+        #region 用于红黑树
+        //红：false，黑：true
+        public bool color;
+        #endregion
         #endregion
         
         #region 构造
@@ -149,6 +160,16 @@ namespace DataStruct.Tree.BinaryTree
             this.parent = parent;
             this.tree = tree;
         }
+        
+        public Node(bool color,Node<T> parent = null,ParentPointType pointType = ParentPointType.None)
+        {
+            data = default(T);
+            leftNode = null;
+            rightNode = null;
+            this.Parent = parent;
+            this.color = color;
+            this.pointType = pointType;
+        }
         #endregion
         
         #region 功能
@@ -161,7 +182,9 @@ namespace DataStruct.Tree.BinaryTree
         #region 数据触发变动
         public void NoticeDataChange()
         {
-            ChildTreeChange = true;
+            PointTypeChange = true;
+            BalanceFactorChange = true;
+            DepthChange = true;
             if(Parent != null)
             {
                 Parent.NoticeDataChange();

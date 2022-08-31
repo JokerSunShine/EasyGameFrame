@@ -96,7 +96,7 @@ namespace DataStruct.Tree.BinaryTree.AVLTree
             }
             else
             {
-                node.Parent.LeftNode = rightNode;
+                node.Parent.RightNode = rightNode;
             }
             node.RightNode = rightLeftNode;
             if(rightLeftNode != null)
@@ -128,7 +128,7 @@ namespace DataStruct.Tree.BinaryTree.AVLTree
             }
             else
             {
-                node.Parent.RightNode = leftNode;
+                node.Parent.LeftNode = leftNode;
             }
             node.LeftNode = leftRightNode;
             if(leftRightNode != null)

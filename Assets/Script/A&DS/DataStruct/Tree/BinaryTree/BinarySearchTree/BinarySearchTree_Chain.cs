@@ -8,7 +8,7 @@ namespace DataStruct.Tree.BinaryTree.BinarySearchTree
         protected Node<T> head;
         public override Node<T> Head { get => head;}
 
-        private int count;
+        protected int count;
         public override int Count
         {
             get => count;
@@ -46,6 +46,11 @@ namespace DataStruct.Tree.BinaryTree.BinarySearchTree
         /// <param name="value"></param>
         /// <param name="node"></param>
         public virtual Node<T> InsertNode(T value)
+        {
+            return TryInsertNode(value);
+        }
+        
+        protected Node<T> TryInsertNode(T value)
         {
             if(head == null)
             {
@@ -126,7 +131,21 @@ namespace DataStruct.Tree.BinaryTree.BinarySearchTree
         /// <param name="data"></param>
         public virtual Node<T> DeleteNode(T data,bool changeCount = true)
         {
+            Node<T> descendantNode;
+            return TryDeleteNode(data,out descendantNode);
+        }
+        
+        /// <summary>
+        /// 移除节点
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="changeCount">递归用数据</param>
+        /// <param name="descendantNode">移除节点的继承节点</param>
+        /// <returns>移除的节点</returns>
+        protected Node<T> TryDeleteNode(T data,out Node<T> descendantNode,bool changeCount = true)
+        {
             Node<T> node = FindNode(data);
+            descendantNode = null;
             if(node == null)
             {
                 return null;
@@ -179,48 +198,50 @@ namespace DataStruct.Tree.BinaryTree.BinarySearchTree
                     head = nextNode;
                 }
 
+                descendantNode = nextNode;
                 nextNode.Parent = node.Parent;
             }
             else if(degree == 2)
             {
                 //有两个节点，则寻找最佳后继节点代替被删除节点
-                Node<T> descendantNode = GetDescendantNode(node);
-                if(descendantNode == null)
+                Node<T> curDescendantNode = GetDescendantNode(node);
+                if(curDescendantNode == null)
                 {
                     return null;
                 }
 
-                DeleteNode(descendantNode.Data,false);
+                TryDeleteNode(curDescendantNode.Data,out descendantNode,false);
+                descendantNode = curDescendantNode;
                 //父节点替换
                 Node<T> originParentNode = node.Parent;
                 if(originParentNode != null)
                 {
-                    descendantNode.Parent = originParentNode;
+                    curDescendantNode.Parent = originParentNode;
                     if(originParentNode.LeftNode.Data.Equals(node.Data))
                     {
-                        originParentNode.LeftNode = descendantNode;
+                        originParentNode.LeftNode = curDescendantNode;
                     }
                     else
                     {
-                        originParentNode.RightNode = descendantNode;
+                        originParentNode.RightNode = curDescendantNode;
                     }
                 }
                 else
                 {
-                    descendantNode.Parent = null;
-                    head = descendantNode;
+                    curDescendantNode.Parent = null;
+                    head = curDescendantNode;
                 }
                 //左节点替换
                 if(node.LeftNode != null)
                 {
-                    descendantNode.LeftNode = node.LeftNode;
-                    node.LeftNode.Parent = descendantNode;
+                    curDescendantNode.LeftNode = node.LeftNode;
+                    node.LeftNode.Parent = curDescendantNode;
                 }
                 //右节点替换
                 if(node.RightNode != null)
                 {
-                    descendantNode.RightNode = node.RightNode;
-                    node.RightNode.Parent = descendantNode;
+                    curDescendantNode.RightNode = node.RightNode;
+                    node.RightNode.Parent = curDescendantNode;
                 }
             }
 
