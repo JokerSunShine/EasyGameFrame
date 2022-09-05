@@ -9,7 +9,7 @@ namespace DataStruct.Tree.BTree.BTree
         /// <summary>
         /// 根节点
         /// </summary>
-        private BtreeNode<T> Root { get; set; }
+        public BtreeNode<T> Root { get; set; }
         /// <summary>
         /// 阶
         /// </summary>
@@ -18,6 +18,20 @@ namespace DataStruct.Tree.BTree.BTree
         /// 对比方法
         /// </summary>
         private Func<T, T, int> compareFunc;
+
+        private int middleIndex;
+        private int MiddleIndex
+        {
+            get
+            {
+                if(order <= 0)
+                {
+                    middleIndex = (order + 1) / 2;
+                }
+
+                return middleIndex;
+            }
+        }
         #endregion
         
         #region 构造
@@ -26,11 +40,18 @@ namespace DataStruct.Tree.BTree.BTree
             if(BTreeCheck(order,compareFunc) == false)
             {
                 throw new Exception("只支持三阶以上B树！");
-                return;
             }
             this.order = order;
             this.compareFunc = compareFunc;
-            Root = new BtreeNode<T>(order,true,compareFunc);
+            Root = new BtreeNode<T>(order,true,compareFunc,this);
+        }
+        
+        public BTree(int order,Func<T,T,int> compareFunc,T[] dataList):this(order,compareFunc)
+        {
+            foreach(T data in dataList)
+            {
+                Insert(data);
+            }
         }
         
         public bool BTreeCheck(int order,Func<T,T,int> compareFunc)
@@ -75,14 +96,32 @@ namespace DataStruct.Tree.BTree.BTree
         #region 插入
         public void Insert(T data)
         {
+            RootMaxSplit();
+            Root.BTreeInserNodeNotFull(data);
+            RootMaxSplit();
+        }
+        
+        private void RootMaxSplit()
+        {
             if(Root.IsMaxCount())
             {
-                BtreeNode<T> newRoot = new BtreeNode<T>(order,false,compareFunc);
+                BtreeNode<T> newRoot = new BtreeNode<T>(order,false,compareFunc,this);
                 newRoot.childs[0] = Root;
                 Root = newRoot;
                 Root.SplitChild(0);
+            }  
+        }
+        #endregion
+        
+        #region 删除
+        public void Delete(T data)
+        {
+            if(Root == null)
+            {
+                return;
             }
-            Root.BTreeInserNodeNotFull(data);
+            Root.DeleteData(data);
+            RootMaxSplit();
         }
         #endregion
     }
