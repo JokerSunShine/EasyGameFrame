@@ -11,10 +11,6 @@ namespace Common.OneWayChainList
         {
             get
             {
-                if(head == null)
-                {
-                    head = new Node<T>();
-                }
                 return head;
             }
         }
@@ -86,7 +82,7 @@ namespace Common.OneWayChainList
 
             Node<T> node = Head;
             int index = 0;
-            while(node.HaveNextData() && index < i)
+            while(node != null && node.HaveNextData() && index < i)
             {
                 node = node.Next;
                 index++;
@@ -115,6 +111,11 @@ namespace Common.OneWayChainList
         #region 功能
         public void Append(T item)
         {
+            if(Head == null)
+            {
+                head = new Node<T>(item);
+                return;
+            }
             Node<T> node = Head;
             while(node.HaveNextData())
             {
