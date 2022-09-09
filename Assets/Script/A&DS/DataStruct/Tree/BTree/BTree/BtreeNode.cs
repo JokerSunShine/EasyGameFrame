@@ -156,17 +156,20 @@ namespace DataStruct.Tree.BTree.BTree
         }
         #endregion
 
+        #region 获取
         public override BTreeNodeBase<T> GetNewTreeNoe(int order,bool isLeaf,Func<T,T,int> compareFunc,BTreeBase<T> tree,int count = 0)
         {
             return new BtreeNode<T>(order,isLeaf,compareFunc,tree,count);
         }
+        #endregion
+
         
         #region 删除
         public override void DeleteData(T data)
         {
             int i = 0;
             //中间节点位置
-            int t = (order + 1) / 2;
+            int t = MiddleIndex;
             //获取对应的节点位置
             while(i < count && compareFunc(data,Values[i]) > 0)
             {

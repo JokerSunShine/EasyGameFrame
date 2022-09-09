@@ -1,22 +1,26 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using _3DMath;
-using Common.BothWayChainList;
+using Common.OneWayChainList;
+// using Common.BothWayChainList;
 using Common.SequenceList;
 using Instance.LogAOP;
 using Newtonsoft.Json.Bson;
 using UnityEngine;
-using Matrix4x4 = UnityEngine.Matrix4x4;
-using Quaternion = _3DMath.Quaternion;
-// using Quaternion = UnityEngine.Quaternion;
-using Vector3 = UnityEngine.Vector3;
-using Common.DataStruct.Queue.SequenceQueue;
-using DataStruct.HashTable.HashTable_ChainList;
-using DataStruct.HashTable.HashTable_OpenAddress;
-using DataStruct.Queue.DoubleEndQueue.DoubleEndQueue_Array;
-using DataStruct.Queue.DoubleEndQueue.DoubleEndQueue_Chain;
+using DataStruct.Tree.BinaryTree;
+using DataStruct.Tree.BinaryTree.AVLTree;
+using DataStruct.Tree.BinaryTree.BinarySearchTree;
+using DataStruct.Tree.BinaryTree.FullBinaryTree;
+using DataStruct.Tree.BinaryTree.PerfectBinaryTree;
+using DataStruct.Tree.BinaryTree.RedBlackTree;
+using DataStruct.Tree.BTree.BTree;
+using TreeEditor;
+using UnityEditor.Experimental.GraphView;
+using DataStruct.Tree.BTree.Base;
 
 // using Vector3 = _3DMath.Vector3;
 
@@ -40,6 +44,29 @@ public class CSGameManager : MonoBehaviour
         RegiseterInterfaceSingleton();
         ManagerListAwakeCallBack();
         AOPTest();
+        int[] array = new[] {1,2,3,4,5,6,7,8};
+        BTreeBase<int> bst = new BTree<int>(3,IntCompare,array);
+        bst.Delete(6);
+        bst.Delete(7);
+        OneWayChainList<int> traversaList = new OneWayChainList<int>();
+        bst.Traversal(ref traversaList);
+        Debug.Log(bst);
+    }
+    
+    private int IntCompare(int num1,int num2)
+    {
+        if(num1 > num2)
+        {
+            return 1;
+        }
+        else if(num1 < num2)
+        {
+            return -1;
+        }
+        else
+        {
+            return 0;
+        }
     }
 
     private void RegisterManager()

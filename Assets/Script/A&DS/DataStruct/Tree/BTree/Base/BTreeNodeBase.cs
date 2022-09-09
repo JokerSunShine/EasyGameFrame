@@ -59,7 +59,23 @@ namespace DataStruct.Tree.BTree.Base
         //父节点下节点编号(最后一个是最后元素的右节点，其他都是元素的左节点)
         public int parentChildIndex;
         //归属的树
-        private BTreeBase<T> tree;
+        protected BTreeBase<T> tree;
+        private int middleIndex;
+        /// <summary>
+        /// 中间节点
+        /// </summary>
+        protected int MiddleIndex
+        {
+            get
+            {
+                if(order <= 0)
+                {
+                    middleIndex = (order + 1) / 2;
+                }
+
+                return middleIndex;
+            }
+        }
         #endregion
         
         #region 构造
@@ -80,7 +96,7 @@ namespace DataStruct.Tree.BTree.Base
         /// 当前节点分割指定的子节点
         /// </summary>
         /// <param name="i">分割的子节点下标</param>
-        public void SplitChild(int i)
+        public virtual void SplitChild(int i)
         {
             if(childs == null || i >= childs.Length)
             {
@@ -205,7 +221,7 @@ namespace DataStruct.Tree.BTree.Base
         #endregion
         
         #region 节点合并
-                /// <summary>
+        /// <summary>
         /// 合并节点
         /// </summary>
         /// <param name="i">节点的索引</param>
@@ -277,6 +293,21 @@ namespace DataStruct.Tree.BTree.Base
                     nowNode.parentNode.childs[nowNode.parentChildIndex] = leftNode;
                 }
             }
+        }
+        #endregion
+        
+        #region 获取
+        /// <summary>
+        /// 获取最大值
+        /// </summary>
+        /// <returns></returns>
+        public T GetMaxValue()
+        {
+            if(count - 1 >= Values.Length)
+            {
+                return default(T);
+            }
+            return Values[count - 1];
         }
         #endregion
 

@@ -6,6 +6,10 @@ namespace DataStruct.Tree.BTree.BPlusTree
 {
     public class BPlusTreeNode<T>:BTreeNodeBase<T>
     {
+        #region 数据
+        public BPlusTreeNode<T> nextNode;
+        #endregion
+        
         #region 构造
         public BPlusTreeNode(int order,bool isLeaf,Func<T,T,int> compareFunc,BTreeBase<T> tree,int count = 0):base(order,isLeaf,compareFunc,tree,count)
         {
@@ -44,33 +48,197 @@ namespace DataStruct.Tree.BTree.BPlusTree
         #region 遍历
         public override void Traversal(ref OneWayChainList<T> traversaList, Action<T> action = null)
         {
-            
+            if(isLeaf)
+            {
+                foreach(T data in Values)
+                {
+                    traversaList.Append(data);
+                    if (action != null)
+                        action(data);
+                }
+                if(nextNode != null)
+                {
+                    nextNode.Traversal(ref traversaList,action);
+                }
+            }
+            else
+            {
+                BPlusTreeNode<T> leftNode = GetLeftNode();
+                if(leftNode != null)
+                    leftNode.Traversal(ref traversaList,action);
+            }
+        }
+        
+        private BPlusTreeNode<T> GetLeftNode()
+        {
+            if(isLeaf)
+            {
+                return this;
+            }
+            if(childs.Length <= 0)
+            {
+                return null;
+            }
+            return ((BPlusTreeNode<T>) childs[0]).GetLeftNode();
         }
         #endregion
 
         #region 插入
         public override void InserData(T data)
         {
-            throw new NotImplementedException();
+            int i = count - 1;
+            
+            if(isLeaf)
+            {
+                while(i >= 0 && compareFunc(Values[i],data) > 0)
+                {
+                    Values[i + 1] = Values[i];
+                    i--;
+                }
+
+                Values[i + 1] = data;
+                count++;
+                //刷新父节点索引
+                if(i == count - 1)
+                {
+                    RefreshParentMaxValue();
+                }
+            }
+            else
+            {
+                while(i >= 0 && compareFunc(Values[i],data) > 0)
+                {
+                    i--;
+                }
+
+                int nextNodeIndex = i == count - 1 ? i : ++i;
+                if(childs[nextNodeIndex].IsMaxCount())
+                {
+                    SplitChild(i);
+                    if(compareFunc(data,Values[nextNodeIndex]) > 0)
+                    {
+                        nextNodeIndex++;
+                    }
+                }
+                childs[nextNodeIndex].InserData(data);
+                if(parentNode != null)
+                {
+                    if(IsMaxCount())
+                    {
+                        SplitChild(parentChildIndex);
+                    }
+                }
+            }
+        }
+        
+        /// <summary>
+        /// 刷新父类节点最大值
+        /// </summary>
+        private void RefreshParentMaxValue()
+        {
+            if(parentNode == null)
+            {
+                return;
+            }
+
+            T maxValue = Values[count - 1];
+            if(compareFunc(parentNode.Values[parentChildIndex],maxValue) != 0)
+            {
+                parentNode.Values[parentChildIndex] = maxValue;
+                ((BPlusTreeNode<T>)parentNode).RefreshParentMaxValue();
+            }
+        }
+        
+        /// <summary>
+        /// 当前节点分割指定的子节点
+        /// </summary>
+        /// <param name="i">分割的子节点下标</param>
+        public override void SplitChild(int i)
+        {
+            if(childs == null || i >= childs.Length)
+            {
+                return;
+            }
+
+            BPlusTreeNode<T> childNode = (BPlusTreeNode<T>)childs[i];
+            childNode.parentNode = this;
+            childNode.parentChildIndex = i;
+            if(childNode.IsMaxCount() == false)
+            {
+                return;
+            }
+            //分割的数据长度
+            int splitLength = (int)((order + 1) * 0.5f) - 1;
+            //构建一个新的分割节点
+            BPlusTreeNode<T> newSplitTreeNode = new BPlusTreeNode<T>(order,childNode.isLeaf,childNode.compareFunc,tree,splitLength);
+            //连接到下一个节点
+            childNode.nextNode = newSplitTreeNode;
+            //将分割内容分给新的节点
+            for(int j = 0;j < splitLength;j++)
+            {
+                newSplitTreeNode.Values[j] = childNode.Values[j + childNode.MinCount + 1];
+            }
+            //如果分割的节点不是叶子节点，则拷贝y后的孩子到新的分割节点
+            if(childNode.isLeaf == false)
+            {
+                for(int j = 0;j <= splitLength;j++)
+                {
+                    newSplitTreeNode.childs[j] = childNode.childs[j + splitLength + 1];
+                }
+            }
+            //设置父节点
+            newSplitTreeNode.parentNode = this;
+            newSplitTreeNode.parentChildIndex = i + 1;
+            //原节点缩小
+            childNode.count = splitLength + 1;
+            //当前节点让出位置给新加入的节点
+            for(int j = count;j > i;j--)
+            {
+                childs[j + 1] = childs[j];
+            }
+            childs[i + 1] = newSplitTreeNode;
+            //根节点加入分裂节点的其中的一个节点
+            childNode.RefreshParentMaxValue();
+            newSplitTreeNode.RefreshParentMaxValue();
+            count = childs.Length;
         }
         #endregion
         
         #region 删除
         public override void DeleteData(T data)
         {
-            throw new NotImplementedException();
+            int i = 0;
+            //获取对应的节点位置
+            while(i < count && compareFunc(data,Values[i]) > 0)
+            {
+                i++;
+            }
+            if(isLeaf)
+            {
+                
+            }
+            else
+            {
+                BPlusTreeNode<T> childNode = (BPlusTreeNode<T>)childs[i];
+                if(childNode.isLeaf)
+                {
+                    
+                }
+                else
+                    childs[i].DeleteData(data);
+            }
         }
         #endregion
 
         #region 查询
         public override bool IsMinCount()
         {
-            throw new NotImplementedException();
+            return count == MinCount;
         }
         
         public override bool IsMaxCount()
         {
-            throw new NotImplementedException();
+            return count == MaxCount;
         }
         #endregion
 
