@@ -149,7 +149,7 @@ namespace DataStruct.Tree.BTree.Base
         /// 左子节点转移一个数据到右子节点
         /// </summary>
         /// <param name="i">节点的索引</param>
-        public void BTreeLeftToRightChild(int i)
+        public void BTreeLeftToRightChild(int i,bool useLeftData = false)
         {
             BTreeNodeBase<T> nowNode = this,leftNode = null,rightNode = null;
             if(i <= 0 || i >= count)
@@ -165,7 +165,12 @@ namespace DataStruct.Tree.BTree.Base
             {
                 rightNode.Values[j] = rightNode.Values[j - 1];
             }
-            rightNode.Values[0] = nowNode.Values[i];
+
+            if (useLeftData)
+                rightNode.Values[0] = leftNode.Values[leftNode.count - 1];
+            else
+                rightNode.Values[0] = nowNode.Values[i];
+            
             //父节点送给右节点的数据由左节点来替补
             nowNode.Values[i] = leftNode.Values[leftNode.count - 1];
             if(!rightNode.isLeaf)
@@ -186,7 +191,7 @@ namespace DataStruct.Tree.BTree.Base
         /// 右子节点转移一个数据到左子节点
         /// </summary>
         /// <param name="i">节点的索引</param>
-        public void BTreeRightToLeftChild(int i)
+        public void BTreeRightToLeftChild(int i,bool useRightData = false)
         {
             BTreeNodeBase<T> nowNode = this,leftNode = null,rightNode = null;
             if(i <= 0 || i >= count)
@@ -202,7 +207,11 @@ namespace DataStruct.Tree.BTree.Base
             {
                 leftNode.Values[j] = leftNode.Values[j - 1];
             }
-            leftNode.Values[0] = nowNode.Values[i];
+
+            if (useRightData)
+                leftNode.Values[0] = nowNode.Values[i];
+            else
+                leftNode.Values[0] = rightNode.Values[rightNode.count - 1];
             //父节点送给左节点的数据由右节点来替补
             nowNode.Values[i] = rightNode.Values[rightNode.count - 1];
             if(!leftNode.isLeaf)
@@ -263,7 +272,7 @@ namespace DataStruct.Tree.BTree.Base
                 }
 
                 BTreeNodeBase<T> node = null;
-                for(int j = 0;j < leftNode.count + 1;j++)
+                for(int j = 0;j < leftNode.count + 1;j++) 
                 {
                     node = leftNode.childs[j];
                     node.parentNode = leftNode;

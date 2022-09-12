@@ -194,13 +194,14 @@ namespace DataStruct.Tree.BTree.BPlusTree
             //当前节点让出位置给新加入的节点
             for(int j = count;j > i;j--)
             {
+                count++;
                 childs[j + 1] = childs[j];
             }
+            count++;
             childs[i + 1] = newSplitTreeNode;
             //根节点加入分裂节点的其中的一个节点
             childNode.RefreshParentMaxValue();
             newSplitTreeNode.RefreshParentMaxValue();
-            count = childs.Length;
         }
         #endregion
         
@@ -215,14 +216,55 @@ namespace DataStruct.Tree.BTree.BPlusTree
             }
             if(isLeaf)
             {
-                
+                 if(Values[i].Equals(data))
+                 {
+                     for(int j = 0;j < count - 1;j++)
+                     {
+                         Values[j] = Values[j + 1];
+                     }
+                 }
+
+                 count--;
             }
             else
             {
                 BPlusTreeNode<T> childNode = (BPlusTreeNode<T>)childs[i];
                 if(childNode.isLeaf)
                 {
-                    
+              
+                    BPlusTreeNode<T> childRightnode = null,childLeftNode = null;
+                    if(i < count)
+                    {
+                        childRightnode = (BPlusTreeNode<T>) childs[i + 1];
+                    }
+                    if(i > 0)
+                    {
+                        childLeftNode = (BPlusTreeNode<T>) childs[i - 1];
+                    }
+                    if(childNode.count <= MiddleIndex - 1)
+                    {
+                        if(childLeftNode != null && childLeftNode.count > MiddleIndex - 1)
+                        {
+                            BTreeLeftToRightChild(i - 1);
+                        }
+                        else if(childRightnode != null && childRightnode.count > MiddleIndex - 1)
+                        {
+                            BTreeRightToLeftChild(i);
+                        }
+                        else if(i > 0)
+                        {
+                            BTreeNodeMerge(i - 1);
+                            if(childLeftNode != null)
+                                childLeftNode.nextNode = childRightnode;
+                        }
+                        else
+                        {
+                            BTreeNodeMerge(i);
+                            if (childRightnode != null)
+                                nextNode = childRightnode.nextNode;
+                        }
+                        RefreshParentMaxValue();
+                    }
                 }
                 else
                     childs[i].DeleteData(data);
