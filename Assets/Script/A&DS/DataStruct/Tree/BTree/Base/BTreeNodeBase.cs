@@ -68,7 +68,7 @@ namespace DataStruct.Tree.BTree.Base
         {
             get
             {
-                if(order <= 0)
+                if(order > 0)
                 {
                     middleIndex = (order + 1) / 2;
                 }
@@ -152,7 +152,7 @@ namespace DataStruct.Tree.BTree.Base
         public void BTreeLeftToRightChild(int i,bool useLeftData = false)
         {
             BTreeNodeBase<T> nowNode = this,leftNode = null,rightNode = null;
-            if(i <= 0 || i >= count)
+            if(i < 0 || i >= count)
             {
                 //没有左节点或没有右节点
                 return;
@@ -194,7 +194,7 @@ namespace DataStruct.Tree.BTree.Base
         public void BTreeRightToLeftChild(int i,bool useRightData = false)
         {
             BTreeNodeBase<T> nowNode = this,leftNode = null,rightNode = null;
-            if(i <= 0 || i >= count)
+            if(i < 0 || i >= count)
             {
                 //没有左节点或没有右节点
                 return;
@@ -203,26 +203,31 @@ namespace DataStruct.Tree.BTree.Base
             rightNode = nowNode.childs[i + 1];
             //左节点增加数据,父节点数据转移到左节点
             leftNode.count++;
-            for(int j = leftNode.count;j > 0;j--)
+            for(int j = 0;j < leftNode.count - 1;j++)
             {
-                leftNode.Values[j] = leftNode.Values[j - 1];
+                leftNode.Values[j] = leftNode.Values[j + 1];
             }
 
             if (useRightData)
-                leftNode.Values[0] = nowNode.Values[i];
+                leftNode.Values[leftNode.count - 1] = rightNode.Values[0];
             else
-                leftNode.Values[0] = rightNode.Values[rightNode.count - 1];
+                leftNode.Values[leftNode.count - 1] = nowNode.Values[0];
             //父节点送给左节点的数据由右节点来替补
-            nowNode.Values[i] = rightNode.Values[rightNode.count - 1];
+            nowNode.Values[i] = rightNode.Values[0];
             if(!leftNode.isLeaf)
             {
                 //如果不是叶子节点，那么右节点的子节点要给左节点的子节点
-                for(int j = leftNode.childs.Length + 1;j > 0;j--)
+                for(int j = 0;j < leftNode.childs.Length - 1;j++)
                 {
-                    leftNode.childs[j] = leftNode.childs[j - 1];
+                    leftNode.childs[j] = leftNode.childs[j + 1];
                 }
 
-                leftNode.childs[0] = rightNode.childs[rightNode.count];
+                leftNode.childs[leftNode.count - 1] = rightNode.childs[0];
+            }
+            
+            for(int j = 0;j < count - 1;j++)
+            {
+                rightNode.Values[j] = rightNode.Values[j + 1];
             }
 
             rightNode.count--;

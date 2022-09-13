@@ -49,8 +49,8 @@ public class CSGameManager : MonoBehaviour
         AOPTest();
         int[] array = new[] {1,2,3,4,5,6,7,8};
         BTreeBase<int> bst = new BPlusTree<int>(3,IntCompare,array);
+        bst.Delete(5);
         bst.Delete(6);
-        bst.Delete(7);
         OneWayChainList<int> traversaList = new OneWayChainList<int>();
         bst.Traversal(ref traversaList);
         Debug.Log(bst);

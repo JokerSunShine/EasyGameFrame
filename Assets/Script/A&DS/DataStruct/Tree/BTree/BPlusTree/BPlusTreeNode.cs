@@ -50,11 +50,11 @@ namespace DataStruct.Tree.BTree.BPlusTree
         {
             if(isLeaf)
             {
-                foreach(T data in Values)
+                for(int i = 0;i < count;i++)
                 {
-                    traversaList.Append(data);
+                    traversaList.Append(Values[i]);
                     if (action != null)
-                        action(data);
+                        action(Values[i]);
                 }
                 if(nextNode != null)
                 {
@@ -99,10 +99,7 @@ namespace DataStruct.Tree.BTree.BPlusTree
                 Values[i + 1] = data;
                 count++;
                 //刷新父节点索引
-                if(i == count - 1)
-                {
-                    RefreshParentMaxValue();
-                }
+                RefreshParentMaxValue();
             }
             else
             {
@@ -192,9 +189,8 @@ namespace DataStruct.Tree.BTree.BPlusTree
             //原节点缩小
             childNode.count = splitLength + 1;
             //当前节点让出位置给新加入的节点
-            for(int j = count;j > i;j--)
+            for(int j = count - 1;j > i;j--)
             {
-                count++;
                 childs[j + 1] = childs[j];
             }
             count++;
@@ -218,13 +214,16 @@ namespace DataStruct.Tree.BTree.BPlusTree
             {
                  if(Values[i].Equals(data))
                  {
-                     for(int j = 0;j < count - 1;j++)
+                     for(int j = i;j < count - 1;j++)
                      {
                          Values[j] = Values[j + 1];
                      }
                  }
-
                  count--;
+                 if(i == count)
+                 {
+                     RefreshParentMaxValue();
+                 }
             }
             else
             {
@@ -245,11 +244,11 @@ namespace DataStruct.Tree.BTree.BPlusTree
                     {
                         if(childLeftNode != null && childLeftNode.count > MiddleIndex - 1)
                         {
-                            BTreeLeftToRightChild(i - 1);
+                            BTreeLeftToRightChild(i - 1,true);
                         }
                         else if(childRightnode != null && childRightnode.count > MiddleIndex - 1)
                         {
-                            BTreeRightToLeftChild(i);
+                            BTreeRightToLeftChild(i,true);
                         }
                         else if(i > 0)
                         {
@@ -266,8 +265,7 @@ namespace DataStruct.Tree.BTree.BPlusTree
                         RefreshParentMaxValue();
                     }
                 }
-                else
-                    childs[i].DeleteData(data);
+                childNode.DeleteData(data);
             }
         }
         #endregion

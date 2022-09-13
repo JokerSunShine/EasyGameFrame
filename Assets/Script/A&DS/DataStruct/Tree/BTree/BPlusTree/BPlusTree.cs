@@ -36,6 +36,7 @@ namespace DataStruct.Tree.BTree.BPlusTree
                 BPlusTreeNode<T> newRoot = new BPlusTreeNode<T>(order,false,compareFunc,this);
                 newRoot.childs[0] = Root;
                 Root = newRoot;
+                Root.count++;
                 Root.SplitChild(0);
             }  
         }
