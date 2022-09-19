@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: VirusCircle
-  m_Shader: {fileID: 4800000, guid: dc2f4c70b803f914ab81e93cd6ac36b4, type: 3}
+  m_Shader: {fileID: 4800000, guid: ac66453baf05aba4d83c75928b29d9ab, type: 3}
   m_ShaderKeywords: _NORMALMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: c0f2ca1adeed94a4b952dc9c58f43327, type: 3}
+        m_Texture: {fileID: 2800000, guid: 19df5a32fd0d68b43bee6ca980c8ddce, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -61,7 +61,7 @@ Material:
     - _Cetner_Y: 0.5
     - _CircleWidth1: 1
     - _CircleWidth2: 1
-    - _ColorMask: 15
+    - _ColorMask: 9.28
     - _Contrast: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -80,15 +80,15 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Stencil: 0
-    - _StencilComp: 8
+    - _Stencil: 0.49
+    - _StencilComp: 6.56
     - _StencilOp: 0
     - _StencilReadMask: 255
     - _StencilWriteMask: 255
     - _ToneIntensity: 0
     - _UVSec: 0
     - _UseUIAlphaClip: 0
-    - _Width: 0.32
+    - _Width: 0.27
     - _ZWrite: 1
     m_Colors:
     - _CenterPos: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
