@@ -1,11 +1,11 @@
 using System;
 using DataStruct.Tree.BinaryTree;
 
-namespace Script.DataStruct.Tree.Heap.MinHeap
+namespace DataStruct.Tree.Heap.MaxHeap
 {
-    public class MinHeap<T>:ArrayBinaryTreeAbstract<T>
+    public class MaxHeap<T>:ArrayBinaryTreeAbstract<T>
     {
-        #region 数据
+         #region 数据
         private T[] heap;
         public override T[] NodeArray
         {
@@ -28,7 +28,7 @@ namespace Script.DataStruct.Tree.Heap.MinHeap
         #endregion
         
         #region 构造
-        public MinHeap(Func<T,T,int> compareFunc,T[] array)
+        public MaxHeap(Func<T,T,int> compareFunc,T[] array)
         {
             heap = new T[4];
             this.compareFunc = compareFunc;
@@ -52,7 +52,7 @@ namespace Script.DataStruct.Tree.Heap.MinHeap
             while(nowIndex > 1)
             {
                 parentIndex = nowIndex / 2 - 1;
-                if(compareFunc(NodeArray[nowIndex - 1],NodeArray[parentIndex]) >= 0)
+                if(compareFunc(NodeArray[nowIndex - 1],NodeArray[parentIndex]) <= 0)
                 {
                     break;
                 }
@@ -86,13 +86,13 @@ namespace Script.DataStruct.Tree.Heap.MinHeap
                 nextChildIndex = nowIndex * 2;
                 arrayNextChildIndex = nextChildIndex - 1;
 
-                if (nextChildIndex <= count && compareFunc(NodeArray[arrayNextChildIndex + 1], NodeArray[arrayNextChildIndex]) < 0)
+                if (nextChildIndex <= count && compareFunc(NodeArray[arrayNextChildIndex + 1], NodeArray[arrayNextChildIndex]) > 0)
                 {
                     nextChildIndex++;
                     arrayNextChildIndex++;
                 }
                 
-                if(compareFunc(NodeArray[arrayNowIndex],NodeArray[arrayNextChildIndex]) < 0)
+                if(compareFunc(NodeArray[arrayNowIndex],NodeArray[arrayNextChildIndex]) > 0)
                 {
                     return removeData;
                 }
