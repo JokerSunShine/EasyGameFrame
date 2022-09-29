@@ -1,4 +1,4 @@
-namespace DataStruct.Tree.Heap.BinomialNode
+namespace DataStruct.Tree.Heap.BinomialHeap
 {
     public class Node<T>
     {

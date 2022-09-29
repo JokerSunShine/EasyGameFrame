@@ -1,7 +1,8 @@
 using System;
 
-namespace DataStruct.Tree.Heap.BinomialNode
+namespace DataStruct.Tree.Heap.BinomialHeap
 {
+    //二项堆
     public class BinomialHeap<T>
     {
         #region 数据

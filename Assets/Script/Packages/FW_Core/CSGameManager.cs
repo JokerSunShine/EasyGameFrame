@@ -28,7 +28,7 @@ using UnityEngine;
 // using Vector3 = _3DMath.Vector3;
 using Script.DataStruct.Tree.Heap.MinHeap;
 using DataStruct.Tree.Heap.MaxHeap;
-using DataStruct.Tree.Heap.BinomialNode;
+using DataStruct.Tree.Heap.BinomialHeap;
 
 public class CSGameManager : MonoBehaviour
 {
