@@ -13,6 +13,10 @@ namespace DataStruct.Tree.Heap.BinomialNode
         public BinomialHeap(Func<T,T,int> compareFunc,T[] array)
         {
             this.compareFunc = compareFunc;
+            foreach(var data in array)
+            {
+                Insert(data);
+            }
         }
         #endregion
         
@@ -23,15 +27,9 @@ namespace DataStruct.Tree.Heap.BinomialNode
         /// <returns></returns>
         public T FindMin()
         {
-            if(root == null)
+            Node<T> minNode = FindMinNode(root,compareFunc);
+            if(minNode == null)
                 return default(T);
-            
-            Node<T> minNode = root;
-            while(minNode != null && minNode.next != null && compareFunc(minNode.data,minNode.next.data) > 0)
-            {
-                minNode = minNode.next;
-            }
-
             return minNode.data;
         }
         
@@ -47,17 +45,24 @@ namespace DataStruct.Tree.Heap.BinomialNode
             {
                 return null;
             }
-            if(compareFunc(root.data,data) == 0)
+
+            Node<T> parent = root,child = null;
+            while(parent != null)
             {
-                return root;
-            }
-            while(root.next != null)
-            {
-                return Search(root.next, data);
-            }
-            while(root.child != null)
-            {
-                return Search(root.child, data);
+                if(compareFunc(parent.data,data) == 0)
+                {
+                    return parent;
+                }
+                else
+                {
+                    child = Search(parent.child, data);
+                    if(child != null)
+                    {
+                        return child;
+                    }
+
+                    parent = parent.next;
+                }
             }
 
             return null;
@@ -70,7 +75,8 @@ namespace DataStruct.Tree.Heap.BinomialNode
         /// <returns></returns>
         public bool Contains(T data)
         {
-            return Search(root, data) != null;
+            Node<T> node = Search(root, data);
+            return node != null;
         }
         
         /// <summary>
@@ -136,6 +142,84 @@ namespace DataStruct.Tree.Heap.BinomialNode
             root = Union(root, Reverse(deleteNode.child), compareFunc);
             return root;
         }
+        
+        /// <summary>
+        /// 减少关键字的值
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="data"></param>
+        public void DecreaseValue(Node<T> node,T data)
+        {
+            if(compareFunc(node.data,data) <= 0 || Contains(data))
+            {
+                return;
+            }
+
+            node.data = data;
+            Node<T> curNode = node;
+            while(curNode.parent != null && compareFunc(curNode.data,curNode.parent.data) < 0)
+            {
+                T curData = curNode.parent.data;
+                curNode.parent.data = curNode.data;
+                curNode.data = curData;
+
+                curNode = curNode.parent;
+            }
+        }
+        
+        /// <summary>
+        /// 增加关键字的值
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="data"></param>
+        public void IncreaseValue(Node<T> node,T data)
+        {
+            if(compareFunc(node.data,data) >= 0 || Contains(data))
+            {
+                return;
+            }
+
+            node.data = data;
+            Node<T> curNode = node,minNode = FindMinNode(node,compareFunc);
+            while(minNode != null && compareFunc(minNode.data,curNode.data) < 0)
+            {
+                T curData = minNode.data;
+                minNode.data = curNode.data;
+                curNode.data = curData;
+
+                curNode = minNode;
+                minNode = FindMinNode(curNode, compareFunc);
+            }
+        }
+        
+        /// <summary>
+        /// 数据更新
+        /// </summary>
+        /// <param name="oldData"></param>
+        /// <param name="newData"></param>
+        public void UpdateData(T oldData,T newData)
+        {
+            Node<T> node = Search(root, oldData);
+            if (node != null)
+                UpdateDataByNode(node, newData);
+        }
+        
+        /// <summary>
+        /// 数据更新
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="newData"></param>
+        public void UpdateDataByNode(Node<T> node,T newData)
+        {
+            if (node == null)
+                return;
+
+            int compareResult = compareFunc(node.data, newData);
+            if(compareResult < 0)
+                IncreaseValue(node,newData);
+            else if(compareResult > 0)
+                DecreaseValue(node,newData);
+        }
         #endregion
         
         #region 静态功能
@@ -147,7 +231,7 @@ namespace DataStruct.Tree.Heap.BinomialNode
         public static void Link(Node<T> childTree,Node<T> rootTree)
         {
             childTree.parent = rootTree;
-            childTree.child = rootTree.child;
+            childTree.next = rootTree.child;
             rootTree.child = childTree;
             rootTree.degree++;
         }
@@ -158,18 +242,18 @@ namespace DataStruct.Tree.Heap.BinomialNode
         /// <param name="tree1"></param>
         /// <param name="tree2"></param>
         /// <returns></returns>
-        public static Node<T> Merge(Node<T> tree1,Node<T> tree2,Func<T,T,int> compareFunc)
+        public static Node<T> Merge(Node<T> tree1,Node<T> tree2)
         {
             if (tree1 == null) return tree2;
             if (tree2 == null) return tree1;
 
-            Node<T> tree1Node = tree1, tree2Node = tree2, addNode = null, root = null;
+            Node<T> tree1Node = tree1, tree2Node = tree2, addNode = null, root = null, nowNode = null;
             
             while(tree1Node != null || tree2Node != null)
             {
                 if(tree1Node != null && tree2Node != null)
                 {
-                    if(compareFunc(tree1Node.data,tree2Node.data) > 0)
+                    if(tree1Node.degree > tree2Node.degree)
                     {
                         addNode = tree2Node;
                         tree2Node = tree2Node.next;
@@ -201,8 +285,9 @@ namespace DataStruct.Tree.Heap.BinomialNode
                 }
                 else
                 {
-                    root.next = addNode;
+                    nowNode.next = addNode;
                 }
+                nowNode = addNode;
             }
 
             return root;
@@ -217,14 +302,14 @@ namespace DataStruct.Tree.Heap.BinomialNode
         /// <returns></returns>
         public Node<T> Union(Node<T> tree1,Node<T> tree2,Func<T,T,int> compareFunc)
         {
-            Node<T> root = Merge(tree1, tree2, compareFunc);
+            Node<T> root = Merge(tree1, tree2);
             
             if(root == null)
             {
                 return null;
             }
             
-            Node<T> curNode = root,preNode = null;
+            Node<T> curNode = root,preNode = null,nextNode = null;
             while(curNode.next != null)
             {
                 if((curNode.degree != curNode.next.degree) || (curNode.next.next != null && curNode.next.degree == curNode.next.next.degree))
@@ -234,8 +319,9 @@ namespace DataStruct.Tree.Heap.BinomialNode
                 }
                 else if(compareFunc(curNode.data,curNode.next.data) <= 0)
                 {
+                    nextNode = curNode.next;
                     curNode.next = curNode.next.next;
-                    Link(curNode.next,curNode);
+                    Link(nextNode,curNode);
                 }
                 else
                 {
@@ -247,14 +333,21 @@ namespace DataStruct.Tree.Heap.BinomialNode
                     {
                         preNode.next = curNode.next;
                     }
+
+                    nextNode = curNode.next;
                     Link(curNode,curNode.next);
-                    curNode = curNode.next;
+                    curNode = nextNode;
                 }
             }
 
             return root;
         }
         
+        /// <summary>
+        /// 反转节点与兄弟节点
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
         public Node<T> Reverse(Node<T> node)
         {
             if(node == null)
@@ -262,14 +355,36 @@ namespace DataStruct.Tree.Heap.BinomialNode
                 return null;
             }
             
-            Node<T> curNode = node,root = null;
-            while(curNode.next != null)
+            Node<T> NewNode = null,NowNode = node,ParentNode = null;
+            while(NowNode != null)
             {
-                root = node.next;
-                curNode = curNode.next;
+                ParentNode = NowNode.next;
+                NowNode.next = NewNode;
+                NewNode = NowNode;
+                NowNode = ParentNode;
+            }
+            
+            return NewNode;
+        }
+        
+        /// <summary>
+        /// 获取最小节点
+        /// </summary>
+        /// <param name="parentNode"></param>
+        /// <param name="compareFunc"></param>
+        /// <returns></returns>
+        public static Node<T> FindMinNode(Node<T> parentNode,Func<T,T,int> compareFunc)
+        {
+            if(parentNode == null)
+                return null;
+            
+            Node<T> minNode = parentNode.child;
+            while(minNode != null && minNode.next != null && compareFunc(minNode.data,minNode.next.data) > 0)
+            {
+                minNode = minNode.next;
             }
 
-            return root;
+            return minNode;
         }
         #endregion
     }

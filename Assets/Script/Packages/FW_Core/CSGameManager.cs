@@ -26,6 +26,9 @@ using UnityEngine;
 // using DataStruct.Tree.BTree.Base;
 
 // using Vector3 = _3DMath.Vector3;
+using Script.DataStruct.Tree.Heap.MinHeap;
+using DataStruct.Tree.Heap.MaxHeap;
+using DataStruct.Tree.Heap.BinomialNode;
 
 public class CSGameManager : MonoBehaviour
 {
@@ -47,12 +50,9 @@ public class CSGameManager : MonoBehaviour
         RegiseterInterfaceSingleton();
         ManagerListAwakeCallBack();
         AOPTest();
-        int[] array = new[] {1,2,3,4,5,6,7,8};
-        BTreeBase<int> bst = new BPlusTree<int>(3,IntCompare,array);
-        bst.Delete(5);
-        bst.Delete(6);
-        OneWayChainList<int> traversaList = new OneWayChainList<int>();
-        bst.Traversal(ref traversaList);
+        int[] array = new[] {100,56,87,14,6,32,48,21};
+        BinomialHeap<int> bst = new BinomialHeap<int>(IntCompare,array);
+        bst.UpdateData(100,5);
         Debug.Log(bst);
     }
     
