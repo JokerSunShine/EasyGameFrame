@@ -223,7 +223,7 @@ namespace DataStruct.Tree.Heap.BinomialHeap
         }
         #endregion
         
-        #region 静态功能
+        #region 通用功能
         /// <summary>
         /// 二项树连接
         /// </summary>
