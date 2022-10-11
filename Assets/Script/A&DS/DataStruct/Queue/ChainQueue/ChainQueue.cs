@@ -70,5 +70,18 @@ namespace Common.DataStruct.Queue.ChainQueue
             return Count == 0 || head == null;
         }
         #endregion
+        
+        #region 静态功能
+        //转移数据，加数组会被清空
+        public static ChainQueue<T> operator+(ChainQueue<T> queue1,ChainQueue<T> queue2)
+        {
+            while(!queue2.IsEmpty())
+            {
+                queue1.Enqueue(queue2.Dequeue());
+            }
+
+            return queue1;
+        }
+        #endregion
     }
 }

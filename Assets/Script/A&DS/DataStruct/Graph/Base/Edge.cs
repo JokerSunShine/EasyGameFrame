@@ -1,4 +1,4 @@
-namespace DataStruct.Graph.MatrixGraph
+namespace DataStruct.Graph.Base
 {
     public class Edge
     {
