@@ -14,7 +14,7 @@ namespace DataStruct.Graph.Base
         //图类型
         protected GraphType type;
         //节点数量，边数量
-        protected int vertexNum, edgeNum;
+        public int vertexNum, edgeNum;
         //顶点列表
         protected NodeAbstract<T>[] vertexs;
         public virtual NodeAbstract<T>[] Vertexs

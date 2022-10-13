@@ -10,7 +10,7 @@ namespace DataStruct.Graph.MatrixGraph
     {
         #region 数据
         //边矩阵（顶点对应的弧和弧的权重）
-        private int[,] edgeMatrix;
+        public int[,] edgeMatrix;
         #endregion
         
         #region 构造
