@@ -1,13 +1,20 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using DataStruct.Graph.Base;
+using DataStruct.Graph.EGGraph;
 using DataStruct.Graph.MatrixGraph;
 
 namespace Algorithm.MiniSpanTree.MiniSpanTree
 {
     public class MiniSpanTree<T>
     {
+        #region 数据
         private const int MAXINT = 214783647;
+        #endregion
         
-        /// <summary>
+        #region 普利姆算法
+         /// <summary>
         /// 普利姆算法
         /// </summary>
         /// <param name="graph"></param>
@@ -77,5 +84,72 @@ namespace Algorithm.MiniSpanTree.MiniSpanTree
 
             return minIndex;
         }
+        #endregion
+       
+        #region 克鲁斯卡尔算法
+        /// <summary>
+        /// 克鲁斯卡尔算法
+        /// </summary>
+        /// <param name="graph"></param>
+        public static Edge[] Kruskal(EGGraph<T> graph)
+        {
+            //顶点标记
+            int[] signs = new int[graph.vertexNum];
+            for(int i = 0;i < graph.vertexNum;i++)
+            {
+                signs[i] = i;
+            }
+            
+            Edge[] minTree = new Edge[graph.vertexNum - 1];
+            IComparer<Edge> edgeCompare = new EdgeCompare();
+            Array.Sort(graph.edges,edgeCompare);
+
+            int treeIndex = 0, start, end;
+            for(int i = 0;i < graph.edgeNum;i++)
+            {
+                start = graph.edges[i].start;
+                end = graph.edges[i].end;
+                //如果顶点位置存在切顶点的标记不同，说明不在一个集合内，不会产生回路
+                if(signs[start] != signs[end])
+                {
+                    //记录边，作为最小生成树的组成部分
+                    minTree[treeIndex++] = graph.edges[i];
+                    //将新加入生成树的顶点标记券更改为一样的
+                    int endSign = signs[end];
+                    for(int k = 0;k < graph.vertexNum;k++)
+                    {
+                        if(signs[k] == endSign)
+                        {
+                            signs[k] = signs[start];
+                        }
+                    }
+                }
+                
+                //如果选择的边数量和顶点相差1，证明最小生成树以生成，退出循环
+                if(treeIndex >= graph.vertexNum - 1)
+                {
+                    break;
+                }
+            }
+
+            return minTree;
+        }
+
+        public class EdgeCompare:IComparer<Edge>
+        {
+            public int Compare(Edge x,Edge y)
+            {
+                if(x == null)
+                {
+                    return 1;
+                }
+                else if(y == null)
+                {
+                    return -1;
+                }
+                return x.len - y.len;
+            }
+        }
+        #endregion
     }
 }

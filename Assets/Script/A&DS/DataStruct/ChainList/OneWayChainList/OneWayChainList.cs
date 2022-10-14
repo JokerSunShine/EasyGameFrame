@@ -1,9 +1,10 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Common.OneWayChainList
 {
     //单链表
-    public class OneWayChainList<T>
+    public class OneWayChainList<T>:IEnumerable
     {
         #region 数据
         private Node<T> head;
@@ -218,6 +219,17 @@ namespace Common.OneWayChainList
         public void Clear()
         {
             head = null;
+        }
+        #endregion
+        
+        #region 迭代器
+        public IEnumerator GetEnumerator()
+        {
+            int i = 0;
+            while(i < Count)
+            {
+                yield return GetNodeValue(i++);
+            }
         }
         #endregion
     }

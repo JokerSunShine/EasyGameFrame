@@ -5,6 +5,7 @@ using DataStruct.Graph.Base;
 
 namespace DataStruct.Graph.ALGraph
 {
+    //邻接表
     public class ALGraph<T>:GraphAbstract<T>
     {
         #region 构造
