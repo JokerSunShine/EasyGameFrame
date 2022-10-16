@@ -12,7 +12,7 @@ namespace Algorithm.ShortPath
             /// <summary>
             /// 寻路点
             /// </summary>
-            public ChainQueue<T> pathNodes;
+            public ChainQueue<int> pathNodes;
             /// <summary>
             /// 标记状态
             /// </summary>
@@ -26,7 +26,7 @@ namespace Algorithm.ShortPath
             #region 构造
             public DJSNode(bool state,int weight)
             {
-                pathNodes = new ChainQueue<T>();
+                pathNodes = new ChainQueue<int>();
                 this.state = state;
                 this.weight = weight;
             }
@@ -65,10 +65,22 @@ namespace Algorithm.ShortPath
                     if(pathNodeArray[k].state == false && (minDjsNode == null || pathNodeArray[k].weight < minDjsNode.weight))
                     {
                         minDjsNode = pathNodeArray[k];
-                        
+                        searchNode = k;
                     }
                 }
-
+                
+                if(minDjsNode != null)
+                {
+                    minDjsNode.state = true;    
+                    for(int j = 0;j < graph.vertexNum;j++)
+                    {
+                        if(pathNodeArray[j].state == false && minDjsNode.weight + graph.edgeMatrix[searchNode,j] < pathNodeArray[j].weight)
+                        {
+                            pathNodeArray[j].weight = minDjsNode.weight + graph.edgeMatrix[searchNode, j];
+                            // pathNodeArray[j].pathNodes =  ;
+                        }
+                    }
+                }
             }
 
             return pathNodeArray;
