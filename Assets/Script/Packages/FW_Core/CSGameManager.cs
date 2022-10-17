@@ -57,22 +57,19 @@ public class CSGameManager : MonoBehaviour
         RegiseterInterfaceSingleton();
         ManagerListAwakeCallBack();
         AOPTest();
-        GraphAbstract<string> graph = new MatrixGraph<string>(GraphType.UndirectedGraph);
-        for(int i = 1;i < 8;i++)
+        GraphAbstract<string> graph = new MatrixGraph<string>(GraphType.DirectedGraph);
+        for(int i = 1;i < 5;i++)
         {
             graph.AddNode("V" + i);
         }
-        graph.GraphAddEdge(0,1,2);
-        graph.GraphAddEdge(0,2,6);
-        graph.GraphAddEdge(1,3,5);
-        graph.GraphAddEdge(2,3,8);
-        graph.GraphAddEdge(3,5,15);
-        graph.GraphAddEdge(3,4,10);
-        graph.GraphAddEdge(4,5,6);
-        graph.GraphAddEdge(4,6,2);
-        graph.GraphAddEdge(5,6,6);
+        graph.GraphAddEdge(0,1,3);
+        graph.GraphAddEdge(0,3,5);
+        graph.GraphAddEdge(1,0,2);
+        graph.GraphAddEdge(1,3,4);
+        graph.GraphAddEdge(2,1,1);
+        graph.GraphAddEdge(3,2,2);
     
-        ShortPath<string>.DJSNode[] pathNode = ShortPath<string>.Dijkstra_ShortPath(graph as MatrixGraph<string>,0);
+        ShortPath<string>.FloydNode[,] pathNode = ShortPath<string>.Floyd_ShortPath(graph as MatrixGraph<string>);
         // ChainQueue<NodeAbstract<string>> nodeQueue = graph.GraphDFS(0);
         // ChainQueue<NodeAbstract<string>> nodeQueue2 = graph.GraphBFS(0);
         Debug.Log(pathNode);

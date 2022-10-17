@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _3DMath;
 using DataStruct.Graph.Base;
 using DataStruct.Graph.EGGraph;
 using DataStruct.Graph.MatrixGraph;
@@ -9,10 +10,6 @@ namespace Algorithm.MiniSpanTree.MiniSpanTree
 {
     public class MiniSpanTree<T>
     {
-        #region 数据
-        private const int MAXINT = 214783647;
-        #endregion
-        
         #region 普利姆算法
          /// <summary>
         /// 普利姆算法
@@ -29,7 +26,7 @@ namespace Algorithm.MiniSpanTree.MiniSpanTree
             int[] weights = new int[graph.vertexNum],points = new int[graph.vertexNum];
             for(int i = 0;i < graph.vertexNum;i++)
             {
-                weights[i] = MAXINT;
+                weights[i] = MathUtility.MaxValue;
                 points[i] = -1;
             }
 
@@ -72,7 +69,7 @@ namespace Algorithm.MiniSpanTree.MiniSpanTree
         /// <returns></returns>
         private static int GetMinKey(int[] weights,NodeAbstract<T>[] vertexs)
         {
-            int min = MAXINT, minIndex = 0;
+            int min = MathUtility.MaxValue, minIndex = 0;
             for(int i = 0;i < weights.Length;i++)
             {
                 if(vertexs[i].isVisit == false && weights[i] < min)

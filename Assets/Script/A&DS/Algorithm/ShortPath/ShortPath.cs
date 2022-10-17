@@ -1,3 +1,4 @@
+using _3DMath;
 using Common.DataStruct.Queue.ChainQueue;
 using DataStruct.Graph.MatrixGraph;
 
@@ -32,7 +33,7 @@ namespace Algorithm.ShortPath
             {
                 pathNodes = new ChainQueue<int>();
                 this.state = state;
-                this.weight = weight <= 0 ? 214783647 : weight;
+                this.weight = weight <= 0 ? MathUtility.MaxValue : weight;
                 this.nodeIndex = nodeIndex;
                 if(weight > 0)
                 {
@@ -97,6 +98,94 @@ namespace Algorithm.ShortPath
         #endregion
         
         #region 弗洛伊德算法
+        public class FloydNode
+        {
+            #region 数据
+            /// <summary>
+            /// 路点
+            /// </summary>
+            public ChainQueue<int> pathNodes;
+            /// <summary>
+            /// 权重
+            /// </summary>
+            public int weight;
+            #endregion
+            
+            #region 构造
+            public FloydNode(int rowIndex,int colIndex,int weight)
+            {
+                pathNodes = new ChainQueue<int>().Enqueue(rowIndex).Enqueue(colIndex);
+                if (rowIndex != colIndex && weight == 0)
+                    this.weight = MathUtility.MaxValue;
+                else
+                    this.weight = weight;
+            }
+            #endregion
+        }
+        
+        /// <summary>
+        /// 弗洛伊德算法（基于邻接矩阵）
+        /// </summary>
+        /// <param name="graph"></param>
+        /// <returns></returns>
+        public static FloydNode[,] Floyd_ShortPath(MatrixGraph<T> graph)
+        {
+            int vertexNum = graph.vertexNum;
+            FloydNode[,] floydNodes = TransformFloyNodeMatrix(graph.edgeMatrix,vertexNum);
+            for(int centerIndex = 0;centerIndex < vertexNum;centerIndex++)
+            {
+                for(int enterIndex = 0;enterIndex < vertexNum;enterIndex++)
+                {
+                    if(enterIndex == centerIndex)
+                    {
+                        continue;
+                    }
+                    for(int outIndex = 0;outIndex < vertexNum;outIndex++)
+                    {
+                        if(outIndex == centerIndex || outIndex == enterIndex)
+                        {
+                            continue;
+                        }
+                        //围绕中心点周转的权重
+                        int turnOverWeight = floydNodes[enterIndex, centerIndex].weight +
+                                       floydNodes[centerIndex, outIndex].weight;
+                        //无穷值不用记录
+                        if(turnOverWeight >= MathUtility.MaxValue)
+                        {
+                            continue;
+                        }
+                        //周转权重小于原直达权重，则表示有最短路径
+                        if(turnOverWeight < floydNodes[enterIndex,outIndex].weight)
+                        {
+                            //原路径或权重进行更新
+                            floydNodes[enterIndex, outIndex].weight = turnOverWeight;
+                            floydNodes[enterIndex,outIndex].pathNodes = new ChainQueue<int>(floydNodes[enterIndex,centerIndex].pathNodes).Enqueue(outIndex);
+                        }
+                    }
+                }
+            }
+
+            return floydNodes;
+        }
+        
+        public static FloydNode[,] TransformFloyNodeMatrix(int[,] edgeMatrix,int vertexNum)
+        {
+            if(edgeMatrix == null)
+            {
+                return null;
+            }
+            
+            FloydNode[,] floydNodes = new FloydNode[vertexNum,vertexNum];
+            for(int i = 0;i < vertexNum;i++)
+            {
+                for(int j = 0;j < vertexNum;j++)
+                {
+                    floydNodes[i,j] = new FloydNode(i,j,edgeMatrix[i,j]);
+                }
+            }
+
+            return floydNodes;
+        }
         #endregion
     }
 }
