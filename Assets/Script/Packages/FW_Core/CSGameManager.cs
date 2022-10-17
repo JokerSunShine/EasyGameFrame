@@ -5,9 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using _3DMath;
+using Algorithm.MiniSpanTree.MiniSpanTree;
+using Common.DataStruct.Queue.ChainQueue;
 using Common.OneWayChainList;
 // using Common.BothWayChainList;
 using Common.SequenceList;
+using DataStruct.Graph.ALGraph;
+using DataStruct.Graph.Base;
+using DataStruct.Graph.EGGraph;
+using DataStruct.Graph.MatrixGraph;
 using DataStruct.Tree.BTree.Base;
 using DataStruct.Tree.BTree.BPlusTree;
 using DataStruct.Tree.BTree.BTree;
@@ -26,6 +32,7 @@ using UnityEngine;
 // using DataStruct.Tree.BTree.Base;
 
 // using Vector3 = _3DMath.Vector3;
+using Algorithm.ShortPath;
 using Script.DataStruct.Tree.Heap.MinHeap;
 using DataStruct.Tree.Heap.MaxHeap;
 using DataStruct.Tree.Heap.BinomialHeap;
@@ -50,10 +57,25 @@ public class CSGameManager : MonoBehaviour
         RegiseterInterfaceSingleton();
         ManagerListAwakeCallBack();
         AOPTest();
-        int[] array = new[] {100,56,87,14,6,32,48,21};
-        BinomialHeap<int> bst = new BinomialHeap<int>(IntCompare,array);
-        bst.UpdateData(100,5);
-        Debug.Log(bst);
+        GraphAbstract<string> graph = new MatrixGraph<string>(GraphType.UndirectedGraph);
+        for(int i = 1;i < 8;i++)
+        {
+            graph.AddNode("V" + i);
+        }
+        graph.GraphAddEdge(0,1,2);
+        graph.GraphAddEdge(0,2,6);
+        graph.GraphAddEdge(1,3,5);
+        graph.GraphAddEdge(2,3,8);
+        graph.GraphAddEdge(3,5,15);
+        graph.GraphAddEdge(3,4,10);
+        graph.GraphAddEdge(4,5,6);
+        graph.GraphAddEdge(4,6,2);
+        graph.GraphAddEdge(5,6,6);
+    
+        ShortPath<string>.DJSNode[] pathNode = ShortPath<string>.Dijkstra_ShortPath(graph as MatrixGraph<string>,0);
+        // ChainQueue<NodeAbstract<string>> nodeQueue = graph.GraphDFS(0);
+        // ChainQueue<NodeAbstract<string>> nodeQueue2 = graph.GraphBFS(0);
+        Debug.Log(pathNode);
     }
     
     private int IntCompare(int num1,int num2)
@@ -61,7 +83,7 @@ public class CSGameManager : MonoBehaviour
         if(num1 > num2)
         {
             return 1;
-        }
+        } 
         else if(num1 < num2)
         {
             return -1;

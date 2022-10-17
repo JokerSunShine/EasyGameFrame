@@ -30,10 +30,23 @@ namespace Common.DataStruct.Queue.ChainQueue
                 Enqueue(item);
             }
         }
+        
+        public ChainQueue(ChainQueue<T> queue)
+        {
+            Node<T> nowNode = queue.head;
+            if(queue.Count > 0)
+            {
+                while(nowNode != null)
+                {
+                    Enqueue(nowNode.Item);  
+                    nowNode = nowNode.Next;
+                }
+            }
+        }
         #endregion
         
         #region 功能
-        public void Enqueue(T item)
+        public ChainQueue<T> Enqueue(T item)
         {
             if(tail == null)
             {
@@ -45,6 +58,7 @@ namespace Common.DataStruct.Queue.ChainQueue
                 tail = tail.Next;
             }
             count++;
+            return this;
         }
         
         public T Dequeue()
@@ -61,6 +75,29 @@ namespace Common.DataStruct.Queue.ChainQueue
             }
             count--;
             return item;
+        }
+        
+        /// <summary>
+        /// 将所有链式队列数据合并到一个新的队列中
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public static ChainQueue<T> CreateNewQueueByQueue(params ChainQueue<T>[] list)
+        {
+            if(list.Length <= 0)
+            {
+                return null;
+            }
+            ChainQueue<T> newQueue = new ChainQueue<T>();
+            foreach(ChainQueue<T> queue in list)
+            {
+                if(queue != null)
+                {
+                    newQueue += queue;
+                }
+            }
+
+            return newQueue;
         }
         #endregion
         
