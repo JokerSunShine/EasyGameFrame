@@ -5,8 +5,17 @@ namespace DataStruct.Graph.Base
     public abstract class NodeAbstract<T>
     {
         #region 数据
+        /// <summary>
+        /// 节点元数据
+        /// </summary>
         public T data;
+        /// <summary>
+        /// 权重
+        /// </summary>
         public int len;
+        /// <summary>
+        /// 访问状态
+        /// </summary>
         public bool isVisit;
         #endregion
         
