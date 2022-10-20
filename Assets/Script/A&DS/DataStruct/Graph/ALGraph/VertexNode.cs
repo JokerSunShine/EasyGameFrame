@@ -9,6 +9,14 @@ namespace DataStruct.Graph.ALGraph
         #region 数据
         public EdgeNode first_edge;
         public int count;
+        //最早开始时间
+        public int earliestStartTime;
+        //最早结束时间
+        public int lastestStartTime;
+        //是否是关键路径
+        public bool isCriticalPath;
+        //入度数量
+        public int inDegreeNum;
         #endregion
         
         #region 构造
@@ -64,6 +72,14 @@ namespace DataStruct.Graph.ALGraph
             }
 
             count--;
+        }
+        
+        /// <summary>
+        /// 刷新关键路径状态
+        /// </summary>
+        public void RefreshCriticalPathState()
+        {
+            isCriticalPath = earliestStartTime - lastestStartTime == 0;
         }
         #endregion
         

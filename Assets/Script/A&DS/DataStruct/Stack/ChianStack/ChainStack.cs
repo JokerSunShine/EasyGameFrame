@@ -1,3 +1,7 @@
+using System.Runtime.CompilerServices;
+using Common.DataStruct.Queue.ChainQueue;
+using Common.OneWayChainList;
+
 namespace Common.DataStruct.Stack.ChianStack
 {
     public class ChainStack<T>
@@ -24,6 +28,11 @@ namespace Common.DataStruct.Stack.ChianStack
             {
                 Push(item);
             }
+        }
+        
+        public ChainStack(OneWayChainList<T> list)
+        {
+            TransformOnWayChainList(list);
         }
         #endregion
         
@@ -62,6 +71,33 @@ namespace Common.DataStruct.Stack.ChianStack
             Top = Top.Next;
             Count--;
             return node.Data;
+        }
+        
+        public void Clear()
+        {
+            Top = null;
+        }
+        #endregion
+        
+        #region 转化
+        public ChainStack<T> TransformStack(ChainQueue<T> queue)
+        {
+            while(queue.IsEmpty() == false)
+            {
+                Push(queue.Dequeue());
+            }
+
+            return this;
+        }
+        
+        public ChainStack<T> TransformOnWayChainList(OneWayChainList<T> oneWayChainList)
+        {
+            foreach(T data in oneWayChainList)
+            {
+                Push(data);
+            }
+
+            return this;
         }
         #endregion
     }

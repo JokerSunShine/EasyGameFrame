@@ -212,6 +212,15 @@ namespace DataStruct.Graph.ALGraph
         {
             return new VertexNode<T>(data);
         }
+        
+        public VertexNode<T> GetNode(int index)
+        {
+            if(index < 0 || index >= vertexNum)
+            {
+                return null;
+            }
+            return Vertexs[index] as VertexNode<T>;
+        }
         #endregion
     }
 }
