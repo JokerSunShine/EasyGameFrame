@@ -1,9 +1,10 @@
 using System;
 using DataStruct.Tree.BinaryTree;
+using DataStruct.Tree.Heap;
 
 namespace Script.DataStruct.Tree.Heap.MinHeap
 {
-    public class MinHeap<T>:ArrayBinaryTreeAbstract<T>
+    public class MinHeap<T>:ArrayBinaryTreeAbstract<T>,IHeap<T>
     {
         #region 数据
         private T[] heap;

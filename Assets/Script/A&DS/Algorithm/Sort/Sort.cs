@@ -3,6 +3,12 @@ using System.Linq;
 using Common.DataStruct.Queue.ChainQueue;
 using Common.OneWayChainList;
 using DataStruct.Graph.MatrixGraph;
+using DataStruct.HashTable;
+using DataStruct.HashTable.HashTable_ChainList;
+using DataStruct.Tree.Heap;
+using DataStruct.Tree.Heap.MaxHeap;
+using Packages.FW_Common.Other;
+using Script.DataStruct.Tree.Heap.MinHeap;
 using UnityEngine;
 
 namespace Algorithm.Sort
@@ -18,9 +24,7 @@ namespace Algorithm.Sort
                 {
                     if(compareFunc(array[j],array[i]) > 0)
                     {
-                        T temp = array[j];
-                        array[j] = array[i];
-                        array[i] = temp;
+                        Swap(array, i, j);
                     }
                 }
             }
@@ -42,9 +46,7 @@ namespace Algorithm.Sort
                 }
                 if(min != i)
                 {
-                    T minValue = array[min];
-                    array[min] = array[i];
-                    array[i] = minValue;
+                    Swap(array, min, i);
                 }
             }
         }
@@ -141,10 +143,272 @@ namespace Algorithm.Sort
         #endregion
         
         #region 堆排序
-        // public static T[] HeapSort(T[] array,Func<T,T,int> compareFunc)
-        // {
-        //     
-        // }
+        /// <summary>
+        /// 小顶堆数据结构排序
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="compareFunc"></param>
+        /// <returns></returns>
+        public static T[] HeapSortByMinHeap(T[] array,Func<T,T,int> compareFunc)
+        {
+            IHeap<T> heap = new MinHeap<T>(compareFunc,array);
+            int length = heap.Count;
+            for(int i = 0;i < length;i++)
+            {
+                array[i] = heap.RemoveByIndex(0);
+            }
+
+            return array;
+        }
+        
+        /// <summary>
+        /// 大顶堆数据结构排序
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="compareFunc"></param>
+        /// <returns></returns>
+        public static T[] HeapSortByMaxHeap(T[] array,Func<T,T,int> compareFunc)
+        {
+            IHeap<T> heap = new MaxHeap<T>(compareFunc,array);
+            int length = heap.Count;
+            for(int i = length - 1;i >= 0;i--)
+            {
+                array[i] = heap.RemoveByIndex(0);
+            }
+
+            return array;
+        }
+        
+        /// <summary>
+        /// 原数组大顶堆排序
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="compareFunc"></param>
+        /// <returns></returns>
+        public static T[] HeapSort(T[] array,Func<T,T,int> compareFunc)
+        {
+            int length = array.Length;
+            BuildMaxHeap(array,length,compareFunc);
+            for(int i = length - 1;i >= 0;i--)
+            {
+                Swap(array,0,i);
+                length--;
+                Heapify(array,0,length,compareFunc);
+            }
+
+            return array;
+        }
+        
+        private static void BuildMaxHeap(T[] array,int length,Func<T,T,int> compareFunc)
+        {
+            //从无儿子节点的父节点从下往上递归排序大顶堆
+            int NoChildNodeIndex = (int) Math.Floor(length * 0.5f);
+            //大顶堆最大子元素置顶
+            for(int i = NoChildNodeIndex;i >= 0;i--)
+            {
+                Heapify(array,i,length,compareFunc);
+            }
+        }
+        
+        private static void Heapify(T[] array,int i,int length,Func<T,T,int> compareFunc)
+        {
+            //左叶子
+            int left = 2 * i + 1;
+            //右叶子
+            int right = 2 * i + 2;
+            //父节点
+            int largest = i;
+            //构建大顶堆
+            //左叶子大，父节点标记为左叶子
+            if(left < length && compareFunc(array[left],array[largest]) > 0)
+            {
+                largest = left;
+            }
+            //右叶子大，父节点标记为右叶子
+            if(right < length && compareFunc(array[right],array[largest]) > 0)
+            {
+                largest = right;
+            }
+            //说明有子节点比父节点大，需要替换
+            if(largest != i)
+            {
+                //替换节点和父节点进行替换
+                Swap(array,i,largest);
+                //替换后的父节点继续向下递归
+                Heapify(array,largest,length,compareFunc);
+            }
+        }
+        #endregion
+        
+        #region 快速排序
+        public static T[] QuickSort(T[] array,Func<T,T,int> compareFunc,int left = -1,int right = -1)
+        {
+            if(left == -1 && right == -1)
+            {
+                left = 0;
+                right = array.Length - 1;
+            }
+            if(left < right)
+            {
+                int partitionIndex = Partition(array, left, right, compareFunc);
+                QuickSort(array,compareFunc, left, partitionIndex - 1);
+                QuickSort(array,compareFunc, partitionIndex + 1,right);
+            }
+
+            return array;
+        }
+        
+        private static int Partition(T[] array,int left,int right,Func<T,T,int> compareFunc)
+        {
+            int pivot = left;
+            //用于指向pivot数据应该插入的位置
+            int index = pivot + 1;
+            for(int i = index;i <= right;i++)
+            {
+                //中间对比节点，比对比几点数据小的放左边，大的放右边
+                if(compareFunc(array[i],array[pivot]) < 0)
+                {
+                    Swap(array,i,index);
+                    index++;
+                }
+            }
+            
+            Swap(array,pivot,index - 1);
+            return index - 1;
+        }
+        #endregion
+        
+        #region 计数排序（只能针对数值进行排序）
+        /// <summary>
+        /// 计数排序（只能针对数值进行排序）
+        /// </summary>
+        /// <param name="array"></param>
+        /// <returns></returns>
+        public static int[] CountingSort(int[] array)
+        {
+            int maxValue = CommonUtility_Num.GetMaxNum(array);
+            int bucketLength = maxValue + 1;
+            //计数列表
+            int[] bucket = new int[bucketLength];
+            foreach(int value in array)
+            {
+                bucket[value]++;
+            }
+
+            int sortIndex = 0;
+            for(int i = 0;i < bucketLength;i++)
+            {
+                while(bucket[i] > 0)
+                {
+                    //计数对象重新排入
+                    array[sortIndex++] = i;
+                    bucket[i]--;
+                }
+            }
+
+            return array;
+        }
+        
+        private static int GetMaxValue(int[] array)
+        {
+            int maxValue = array[0];
+            foreach(int data in array)
+            {
+                if(data > maxValue)
+                {
+                    maxValue = data;
+                }
+            }
+            return maxValue;
+        }
+        #endregion
+        
+        #region 基数排序（只能针对数值进行排序）
+        public static int[] RadixSort(int[] array)
+        {
+            int maxDigit = GetMaxDigit(array);
+            return radixSort(array, maxDigit);
+
+        }
+        
+        private static int GetMaxDigit(int[] array)
+        {
+            int maxNum = CommonUtility_Num.GetMaxNum(array);
+            return CommonUtility_Num.GetMaxDigit(maxNum);
+        }
+        
+        private static int[] radixSort(int[] array,int maxDigit)
+        {
+            int mod = 10,dev = 1;
+            const int bucketSize = 10;
+            //根据最大基数进行循环
+            for(int i = 0;i < maxDigit;i++,dev *=10,mod *= 10)
+            {
+                //初始化桶
+                int[][] counter = new int[bucketSize][];
+                //根据当前位数进行桶存放
+                for(int j = 0;j < array.Length;j++)
+                {
+                    int bucketIndex = array[j] % mod / dev;
+                    counter[bucketIndex] = Commonutility_Array.ArrayAppend(counter[bucketIndex], array[j]);
+                }
+
+                int pos = 0;
+                //分好的数据重新排到序列中
+                foreach(int[] bucket in counter)
+                {
+                    if(bucket == null)
+                    {
+                        continue;
+                    }
+                    foreach(int value in bucket)
+                    {
+                        array[pos++] = value;
+                    }
+                }
+            }
+
+            return array;
+        }
+        #endregion
+        
+        #region 桶排序（只能针对数值进行排序）
+        public T[] BucketSort(T[] array,Func<T,T,int> compareFunc)
+        {
+            if(array.Length <= 0)
+            {
+                return array;
+            }
+
+            //初始化桶
+            int bucketCount = (int)(array.Length * 0.5f);
+            HashTable_ChainList<int,OneWayChainList<T>> buckets = new HashTable_ChainList<int, OneWayChainList<T>>();
+            
+            for(int i = 0;i < array.Length;i++)
+            {
+                int index = HashTableKeyAlgorithm.LinearProbing(array[i], bucketCount);
+                if(buckets[index] != null)
+                {
+                    buckets[index] = new OneWayChainList<T>();
+                }
+                buckets[index].Append(array[i]);
+            }
+            
+            // foreach(var data in buckets)
+            // {
+            //     
+            // }
+            return array;
+        }
+        #endregion
+        
+        #region 通用
+        private static void Swap(T[] array,int i,int j)
+        {
+            T temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
         #endregion
     }
 }

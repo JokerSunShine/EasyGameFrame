@@ -3,7 +3,7 @@ using DataStruct.Tree.BinaryTree;
 
 namespace DataStruct.Tree.Heap.MaxHeap
 {
-    public class MaxHeap<T>:ArrayBinaryTreeAbstract<T>
+    public class MaxHeap<T>:ArrayBinaryTreeAbstract<T>,IHeap<T>
     {
          #region 数据
         private T[] heap;

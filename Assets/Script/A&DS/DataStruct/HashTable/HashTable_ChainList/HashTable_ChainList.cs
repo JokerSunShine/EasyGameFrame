@@ -19,6 +19,25 @@ namespace DataStruct.HashTable.HashTable_ChainList
         }
         //实时记录的当前最长的链表长度
         private int maxCahinCount;
+        //索引器
+        public TValue this[TKey index]
+        {
+            get
+            {
+                return GetValue(index);
+            }
+            set
+            {
+                if(value == null || value.Equals(default(TValue)))
+                {
+                    TryRemove(index);
+                }
+                else
+                {
+                    TryAdd(index,value);
+                }
+            }
+        }
         #endregion
         
         #region 构造
