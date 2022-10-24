@@ -373,32 +373,56 @@ namespace Algorithm.Sort
         #endregion
         
         #region 桶排序（只能针对数值进行排序）
-        public T[] BucketSort(T[] array,Func<T,T,int> compareFunc)
+        public static int[] BucketSort(int[] array)
         {
             if(array.Length <= 0)
             {
                 return array;
             }
-
-            //初始化桶
-            int bucketCount = (int)(array.Length * 0.5f);
-            HashTable_ChainList<int,OneWayChainList<T>> buckets = new HashTable_ChainList<int, OneWayChainList<T>>();
             
+            int bucketSize = (int)(array.Length * 0.5f),minValue = array[0],maxValue = array[0];
+            foreach(int value in array)
+            {
+                if(value < minValue)
+                {
+                    minValue = value;
+                }
+                else if(value > maxValue)
+                {
+                    maxValue = value;
+                }
+            }
+            //初始化桶
+            int bucketCount = (int) Math.Floor((float) (maxValue - minValue) / bucketSize) + 1;
+            int[][] buckets = new int[bucketCount][];
+            
+            //数据分桶处理(由于粪桶是根据数据从小到大分桶，泛型没有大小之分)
             for(int i = 0;i < array.Length;i++)
             {
-                int index = HashTableKeyAlgorithm.LinearProbing(array[i], bucketCount);
-                if(buckets[index] != null)
-                {
-                    buckets[index] = new OneWayChainList<T>();
-                }
-                buckets[index].Append(array[i]);
+                int index = (int) Math.Floor((float) (array[i] - minValue) / bucketSize);
+                buckets[index] = Commonutility_Array.ArrayAppend(buckets[index], array[i]);
             }
             
-            // foreach(var data in buckets)
-            // {
-            //     
-            // }
+            int arrayIndex = 0;
+            //桶内堆排，并讲数据规划到元数据
+            foreach(int[] bucket in buckets)
+            {
+                if(bucket == null || bucket.Length <= 0)
+                {
+                    continue;
+                }
+                Sort<int>.InsertSort(array,CompareFunc);
+                foreach(int value in bucket)
+                {
+                    array[arrayIndex++] = value;
+                }
+            }
             return array;
+        }
+        
+        private static int CompareFunc(int i,int j)
+        {
+            return i - j;
         }
         #endregion
         
