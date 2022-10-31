@@ -167,5 +167,73 @@ namespace Algorithm.StringMatch
             return suffixLengthArray;
         }
         #endregion
+        
+        #region KMP算法
+        public static int KMPMatch(string s,string patten)
+        {
+            int i = 0, j = 0, index;
+            int[] nextArray = GetNextArray(patten);
+            
+            while(i < s.Length && j < patten.Length)
+            {
+                if(j == -1 || s[i] == patten[j])
+                {
+                    i++;
+                    j++;
+                }
+                else
+                {
+                    j = nextArray[j];
+                }
+            }
+
+            if (j >= patten.Length)
+            {
+                index = i - patten.Length;
+            }
+            else
+            {
+                index = -1;
+            }
+
+            return index;
+        }
+        
+        /// <summary>
+        /// 获取匹配失败位移表
+        /// </summary>
+        /// <param name="patten"></param>
+        /// <returns></returns>
+        private static int[] GetNextArray(string patten)
+        {
+            int j = 0, k = -1;
+            int[] nextTbl = new int[patten.Length];
+
+            nextTbl[0] = -1;
+            
+            while(j < patten.Length - 1)
+            {
+                if (k == -1 || patten[k] == patten[j])
+                {
+                    j++;
+                    k++;
+                    if (patten[k] != patten[j])
+                    {
+                        nextTbl[j] = k;
+                    }
+                    else
+                    {
+                        nextTbl[j] = nextTbl[k];
+                    }
+                }
+                else
+                {
+                    k = nextTbl[k];
+                }
+            }
+
+            return nextTbl;
+        }
+        #endregion
     }
 }
