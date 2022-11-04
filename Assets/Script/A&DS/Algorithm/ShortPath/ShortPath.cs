@@ -1,5 +1,6 @@
 using _3DMath;
 using Common.DataStruct.Queue.ChainQueue;
+using DataStruct.Graph.ALGraph;
 using DataStruct.Graph.MatrixGraph;
 
 namespace Algorithm.ShortPath
@@ -186,6 +187,28 @@ namespace Algorithm.ShortPath
 
             return floydNodes;
         }
+        #endregion
+        
+        #region A*搜索
+        #region 邻接表搜索
+        /// <summary>
+        /// A*寻路_邻接表
+        /// </summary>
+        /// <param name="graph"></param>
+        /// <param name="startIndex"></param>
+        /// <param name="endIndex"></param>
+        /// <returns></returns>
+        // public static int[] AStarFindPath(ALGraph<T> graph,int startIndex,int endIndex)
+        // {
+        //     
+        // }
+        //
+        // public static int
+        #endregion
+        
+        #region 邻接矩阵搜索
+        
+        #endregion
         #endregion
     }
 }

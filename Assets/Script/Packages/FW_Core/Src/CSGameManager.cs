@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using _3DMath;
+using Algorithm.GraphArithmetic;
 using Algorithm.MiniSpanTree.MiniSpanTree;
 using Common.DataStruct.Queue.ChainQueue;
 using Common.OneWayChainList;
@@ -33,6 +34,8 @@ using UnityEngine;
 
 // using Vector3 = _3DMath.Vector3;
 using Algorithm.ShortPath;
+using Algorithm.Sort;
+using Algorithm.StringMatch;
 using Script.DataStruct.Tree.Heap.MinHeap;
 using DataStruct.Tree.Heap.MaxHeap;
 using DataStruct.Tree.Heap.BinomialHeap;
@@ -57,22 +60,14 @@ public class CSGameManager : MonoBehaviour
         RegiseterInterfaceSingleton();
         ManagerListAwakeCallBack();
         AOPTest();
-        GraphAbstract<string> graph = new MatrixGraph<string>(GraphType.DirectedGraph);
-        for(int i = 1;i < 5;i++)
-        {
-            graph.AddNode("V" + i);
-        }
-        graph.GraphAddEdge(0,1,3);
-        graph.GraphAddEdge(0,3,5);
-        graph.GraphAddEdge(1,0,2);
-        graph.GraphAddEdge(1,3,4);
-        graph.GraphAddEdge(2,1,1);
-        graph.GraphAddEdge(3,2,2);
+        int index = StringMatch.KMPMatch("aaacaaabcacadaaaaaab", "aaab");
+        Debug.Log(index);
+        Dictionary<int,int> dic = new Dictionary<int,int>();
+    }
     
-        ShortPath<string>.FloydNode[,] pathNode = ShortPath<string>.Floyd_ShortPath(graph as MatrixGraph<string>);
-        // ChainQueue<NodeAbstract<string>> nodeQueue = graph.GraphDFS(0);
-        // ChainQueue<NodeAbstract<string>> nodeQueue2 = graph.GraphBFS(0);
-        Debug.Log(pathNode);
+    public int CompareFunc(int i,int j)
+    {
+        return i - j;
     }
     
     private int IntCompare(int num1,int num2)
@@ -90,7 +85,7 @@ public class CSGameManager : MonoBehaviour
             return 0;
         }
     }
-
+  
     private void RegisterManager()
     {
         managerDic["CSPlatformManagerObject"] = new CSPlatformManagerObject(this);
