@@ -111,11 +111,11 @@ public class CSGameManager : MonoBehaviour
     /// </summary>
     private void AOPTest()
     {
-        AOPTest a = new AOPTest();
-        a.TestMethod(1,2);
-        int c = 3,d = 4;
-        Instance.LogAOP.AOPTest.Before(ref c,ref d);
-        Instance.LogAOP.AOPTest.After(5);
+        // AOPTest a = new AOPTest();
+        // a.TestMethod(1,2);
+        // int c = 3,d = 4;
+        // Instance.LogAOP.AOPTest.Before(ref c,ref d);
+        // Instance.LogAOP.AOPTest.After(5);
     }
 
     private void InitOther()

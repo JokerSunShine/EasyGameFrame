@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8927686458428444893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 284ce14df13760a4d99d227e46df1c19, type: 3}
+  m_Name: EffectCommonFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+--- !u!114 &-4927587195656717425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 673f0c6042207ab47bf0c3efb8e556a6, type: 3}
+  m_Name: DistortionRenderMaskFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  Setting:
+    Event: 250
+    LayerMask:
+      serializedVersion: 2
+      m_Bits: 256
+    Material: {fileID: 2100000, guid: 4569ccdcba2911642ad234043f34eb50, type: 2}
+--- !u!114 &-387518663388436781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06d183cf904d4e94c85f71c82d5a575a, type: 3}
+  m_Name: HUDRendererFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de640fe3d0db1804a85f9fc8f5cadab6, type: 3}
+  m_Name: ForwardRenderer
+  m_EditorClassIdentifier: 
+  m_RendererFeatures: []
+  m_RendererFeatureMap: 
+  postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
+  shaders:
+    blitPS: {fileID: 4800000, guid: c17132b1f77d20942aa75f8429c0f8bc, type: 3}
+    copyDepthPS: {fileID: 4800000, guid: d6dae50ee9e1bfa4db75f19f99355220, type: 3}
+    screenSpaceShadowPS: {fileID: 4800000, guid: 0f854b35a0cf61a429bd5dcfea30eddd,
+      type: 3}
+    samplingPS: {fileID: 4800000, guid: 04c410c9937594faa893a11dceb85f7e, type: 3}
+    fallbackErrorPS: {fileID: 4800000, guid: e6e9a19c3678ded42a3bc431ebef7dbd, type: 3}
+  m_OpaqueLayerMask:
+    serializedVersion: 2
+    m_Bits: 3895
+  m_TransparentLayerMask:
+    serializedVersion: 2
+    m_Bits: 3895
+  m_DefaultStencilState:
+    overrideStencilState: 0
+    stencilReference: 0
+    stencilCompareFunction: 8
+    passOperation: 0
+    failOperation: 0
+    zFailOperation: 0
+  m_ShadowTransparentReceive: 0
+--- !u!114 &1447839822389907079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d2ea75695ce1704bb3bd553ae9f4960, type: 3}
+  m_Name: EffectXiFengCiFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+--- !u!114 &3309563253724369333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8a70b4a285576e4b9c7270f3443da03, type: 3}
+  m_Name: NewGrassFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+--- !u!114 &3816738659986728464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d712d47467519d428820b70bfe5c6af, type: 3}
+  m_Name: PiLiXuanFengEffectFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+--- !u!114 &4584011626471997304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a938fbbb42a3ee4439fae6ce3c3d7f9b, type: 3}
+  m_Name: DistortionFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    Event: 550
+    AirDistortionMaterial: {fileID: 2100000, guid: d2d40094cdd6a8b4a923f32597ceafb8,
+      type: 2}
+    DistortTimeFactor: 0.05
+    DistortStrength: 0.1
+    NoiseTex: {fileID: 2800000, guid: dd1dfc8483bee9c43b770b99f92d6871, type: 3}
+--- !u!114 &4918805863289980216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1fe166e07f3fd541a379322b7a40140, type: 3}
+  m_Name: RoleHeadFeature
+  m_EditorClassIdentifier: 
+  m_Active: 0

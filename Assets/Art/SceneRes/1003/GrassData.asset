@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d5fa3bea8f16244d8abc343f3957b42, type: 3}
+  m_Name: GrassData
+  m_EditorClassIdentifier: 
+  mapSize: {x: 256, y: 256}
+  blockSize: {x: 16, y: 16}
+  YScale: 1
+  heightMapConfig: {fileID: 11400000, guid: e1560d60517efb14f8594bf34579d530, type: 2}
+  meshConfigs:
+  - level: 1
+    mesh: {fileID: 4300000, guid: 0d0f7204f56dbb54dba16a3bb6a98d60, type: 2}
+  - level: 2
+    mesh: {fileID: 4300000, guid: 93cce12778099e645a674ba3fbfc613a, type: 2}
+  - level: 3
+    mesh: {fileID: 4300000, guid: b5ab05ae9db644940bc0a2cac07c152d, type: 2}
+  UVoffset:
+  - 0.1
+  - 0.2
+  - 0.3
+  - 0.4
+  - 0.5
+  - 0.6
+  - 0.7
+  - 0.8
+  - 0.9
+  - 0
+  passConfigs:
+  - mat: {fileID: 2100000, guid: 06b985f77b9d86c40ae09f90c8a43832, type: 2}
+    passMap: {fileID: 2800000, guid: 28911fe5882a5eb4db34804092b45b9c, type: 3}
+  widthPool:
+  - width: 8
+    weight: 10

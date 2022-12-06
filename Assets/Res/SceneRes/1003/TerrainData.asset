@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafeb4498fc8b5345ab229b8d788224f, type: 3}
+  m_Name: TerrainData
+  m_EditorClassIdentifier: 
+  mapSize: {x: 256, y: 256}
+  bloackSize: {x: 48, y: 48}
+  viewSize: {x: 32, y: 32}
+  mat: {fileID: 2100000, guid: f6a2b11b2da9e8c42bfe3e312a5703a4, type: 2}
+  mainTex_STs:
+  - {x: 128, y: 128, z: 0, w: 0}
+  - {x: 64, y: 64, z: 0, w: 0}
+  - {x: 128, y: 128, z: 0, w: 0}
+  - {x: 128, y: 128, z: 0, w: 0}
+  - {x: 128, y: 128, z: 0, w: 0}
+  - {x: 128, y: 128, z: 0, w: 0}
+  - {x: 128, y: 128, z: 0, w: 0}
+  - {x: 128, y: 128, z: 0, w: 0}
+  - {x: 64, y: 64, z: 0, w: 0}
+  - {x: 128, y: 128, z: 0, w: 0}
+  - {x: 128, y: 128, z: 0, w: 0}
+  - {x: 128, y: 128, z: 0, w: 0}
+  - {x: 128, y: 128, z: 0, w: 0}
+  - {x: 128, y: 128, z: 0, w: 0}
+  - {x: 128, y: 128, z: 0, w: 0}
+  heightMapData: {fileID: 11400000, guid: e1560d60517efb14f8594bf34579d530, type: 2}
+  lightMap: {fileID: 2800000, guid: 67dfdc053405a764f9eda1753d0524ce, type: 3}
