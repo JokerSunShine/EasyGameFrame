@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEditor;
+using UnityEngine;
 
 public partial class EditorUtil {
     public static bool EditorIsPlaying()
     {
         return EditorApplication.isPlaying == true || EditorApplication.isPaused == true || EditorApplication.isPlayingOrWillChangePlaymode == true;
     }
-
+    
     #region 宏
     /// <summary>
     /// 设置宏
@@ -46,6 +48,34 @@ public partial class EditorUtil {
         string macroStr = PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup);
         List<string> defineMacroList = new List<string>(macroStr.Split(';'));
         return defineMacroList.Contains(macro);
+    }
+    #endregion
+    
+    #region 屏幕点击
+
+    private static bool mouseDown = false;
+    public static void AddSpliterLineEvent(Rect rect,MouseCursor mouseCursor,Action<Vector3> mounseDownCallBack = null,Action<Vector3> mouseUpCallBack = null)
+    {
+        EditorGUIUtility.AddCursorRect(rect, mouseCursor);
+        if(Event.current.type == EventType.MouseDown && rect.Contains(Event.current.mousePosition))
+        {
+            mouseDown = true;
+        }
+        if(mouseDown)
+        {
+            if(mounseDownCallBack != null)
+            {
+                mounseDownCallBack(Event.current.mousePosition);
+            }
+        }
+        if(Event.current.type == EventType.MouseUp && rect.Contains(Event.current.mousePosition))
+        {
+            mouseDown = false;
+            if(mouseUpCallBack != null)
+            {
+                mouseUpCallBack(Event.current.mousePosition);
+            }
+        }
     }
     #endregion
 }
