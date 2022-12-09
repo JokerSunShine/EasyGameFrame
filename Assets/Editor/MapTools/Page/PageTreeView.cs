@@ -27,8 +27,8 @@ namespace MapTools.Page
                 return;
             }
 
-            int firstId = menus[0].priority;
-            SelectionChanged(new List<int>(firstId));
+            int firstId = menus[0].id;
+            SelectionChanged(new List<int>(){firstId});
         }
         #endregion
         
@@ -44,6 +44,7 @@ namespace MapTools.Page
             }
             return root;
         }
+        
 
         protected override void SelectionChanged(IList<int> selectedIds)
         {

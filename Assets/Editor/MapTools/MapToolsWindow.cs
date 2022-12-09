@@ -15,6 +15,8 @@ namespace MapTools
         #region 数据
         private static Rect windowRect = new Rect(0,0,1000,700);
         private Rect treeViewRect = new Rect(0,0,150,700);
+        private Rect splitLineRect = new Rect(150,0,1,700);
+        private Rect splitEventLineRect = new Rect(145,0,10,700);
         private static List<PageTreeViewItem> pageTreeViewItemList = new List<PageTreeViewItem>();
         private TreeViewState treeViewState;
         private PageTreeView treeView;
@@ -31,6 +33,7 @@ namespace MapTools
         
         public void InitMenus()
         {
+            PageTreeViewItem.ID = 0;
             pageTreeViewItemList.Clear();
 
             Assembly assembly = Assembly.GetExecutingAssembly();
@@ -45,6 +48,7 @@ namespace MapTools
             }
             pageTreeViewItemList.Sort(MenusSort);
             treeView = new PageTreeView(new TreeViewState(), pageTreeViewItemList,this);
+            treeView.RefreshFirstPage();
         }
         
         public int MenusSort(PageTreeViewItem pageTreeViewItemA,PageTreeViewItem pageTreeViewItemB)
@@ -64,7 +68,7 @@ namespace MapTools
             treeView.OnGUI(treeViewRect);
             if(selectPage != null && selectPage.tool != null)
             {
-                selectPage.OnGUI();
+                selectPage.OnGUI(treeViewRect);
             }
 
             DrawSpliterLine();
@@ -75,13 +79,15 @@ namespace MapTools
             AddSpliterLineEvent();
             Color col = GUI.color;
             GUI.color = new Color(0.3f, 0.3f, 0.3f);
-            GUI.DrawTexture(new Rect(treeViewRect.width, 0, 1, this.position.height), EditorGUIUtility.whiteTexture);
+            splitLineRect.Set(treeViewRect.width, treeViewRect.y, splitLineRect.width, splitLineRect.height);
+            GUI.DrawTexture(splitLineRect, EditorGUIUtility.whiteTexture);
             GUI.color = col;
         }
 
         private void AddSpliterLineEvent()
         {
-            EditorUtil.AddSpliterLineEvent(new Rect(treeViewRect.width, 0, 5, this.position.height),MouseCursor.ResizeHorizontal,TreeViewMouseDown);
+            splitEventLineRect.Set(treeViewRect.width - 5, treeViewRect.y, splitEventLineRect.width, splitEventLineRect.height);
+            EditorUtil.AddSpliterLineEvent(splitEventLineRect,MouseCursor.ResizeHorizontal,TreeViewMouseDown);
         }
         
         private void TreeViewMouseDown(Vector3 vec)

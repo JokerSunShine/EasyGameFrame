@@ -86,4 +86,56 @@ public class CommonLoadPath {
             return serverXmlPath;
         }
     }
+
+    public static string artResourcePath;
+    public static string ArtResourcePath
+    {
+        get
+        {
+            if(string.IsNullOrEmpty(artResourcePath))
+            {
+                artResourcePath = Application.dataPath + "/Art";
+            }
+            return artResourcePath;
+        }
+    }
+    
+    public static string artScenePath;
+    public static string ArtScenePath
+    {
+        get
+        {
+            if(string.IsNullOrEmpty(artScenePath))
+            {
+                artScenePath = ArtResourcePath + "/Scene";
+            }
+            return artScenePath;
+        }
+    }
+    
+    public static string clientResourcePath;
+    public static string ClientResourcePath
+    {
+        get
+        {
+            if(string.IsNullOrEmpty(clientResourcePath))
+            {
+                clientResourcePath = Application.dataPath + "/Res";
+            }
+            return clientResourcePath;
+        }
+    }
+    
+    public static string cilentScenePath;
+    public static string CilentScenePath
+    {
+        get
+        {
+            if(string.IsNullOrEmpty(cilentScenePath))
+            {
+                cilentScenePath = ClientResourcePath + "/Scene";
+            }
+            return cilentScenePath;
+        }
+    }
 }

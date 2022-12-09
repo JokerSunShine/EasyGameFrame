@@ -16,6 +16,10 @@ namespace MapTools.Page
                 Id++;
                 return Id;
             }
+            set
+            {
+                Id = value;
+            }
         }
         #endregion
         
@@ -49,14 +53,14 @@ namespace MapTools.Page
                 tool = ScriptableObject.CreateInstance(curClass) as MapToolBase;
                 tool.Init();
             }
-            tool.OnSelect();
+            tool.OnRefresh();
         }
         
-        public void OnGUI()
+        public void OnGUI(Rect rect)
         {
             if(tool != null)
             {
-                tool.OnDrawGUI();
+                tool.OnDrawGUI(rect);
             }
         }
         
