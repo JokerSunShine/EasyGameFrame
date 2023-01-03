@@ -42,7 +42,7 @@ namespace MapTools.Base
         #region GUI
         public void OnDrawGUI(Rect rect)
         {
-            ToolShowRect.Set(rect.width + 10,rect.y,1000 - rect.width,rect.height);
+            ToolShowRect.Set(rect.width + 10,rect.y + 10,1000 - rect.width,rect.height);
             GUILayout.BeginArea(ToolShowRect);
             GUILayout.BeginVertical();
             {

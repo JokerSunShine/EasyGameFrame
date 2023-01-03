@@ -23,6 +23,17 @@ public class CommonLoadPath {
             return loadRootPath;
         }
     }
+    
+    private static string loadOriginRootPath;
+    public static string LoadOriginRootPath {
+        get {
+            if (string.IsNullOrEmpty(loadOriginRootPath))
+            {
+                loadOriginRootPath = (Application.dataPath.Substring(0, Application.dataPath.Length - 7));
+            }
+            return loadOriginRootPath;
+        }
+    }
 
     private static string createLuaGrammarTipPath;
     public static string CreateLuaGrammarTipPath {

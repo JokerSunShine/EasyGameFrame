@@ -13,7 +13,7 @@ namespace MapTools
     public class MapToolsWindow : EditorWindow,IPageSelect
     {
         #region 数据
-        private static Rect windowRect = new Rect(0,0,1000,700);
+        private static Rect windowRect = new Rect(0,0,700,700);
         private Rect treeViewRect = new Rect(0,0,150,700);
         private Rect splitLineRect = new Rect(150,0,1,700);
         private Rect splitEventLineRect = new Rect(145,0,10,700);
@@ -27,7 +27,7 @@ namespace MapTools
         [MenuItem("Tools/MapTool",priority = 2)]
         public static void Init()
         {
-            MapToolsWindow window = GetWindowWithRect<MapToolsWindow>(windowRect,false,"MapTools");
+            MapToolsWindow window = GetWindowWithRect<MapToolsWindow>(windowRect,false ,"MapTools");
             window.InitMenus();
         }
         

@@ -126,7 +126,6 @@
 		{
 			UNITY_SETUP_INSTANCE_ID(i);
 
-			
 			//#ifdef HOLLOWON
 				//clip(0.99 - SAMPLE_TEXTURE2D(_HollowMap, sampler_ControlTex, i.uv.xy).r);
 			//#endif
