@@ -1,4 +1,6 @@
-﻿namespace Script.Algorithm.BagAlgorithm.BagPolicy
+﻿using System.Collections.Generic;
+
+namespace Script.Algorithm.BagAlgorithm.BagPolicy
 {
     public interface IBagPolicy
     {

@@ -21,7 +21,7 @@ namespace Script.Algorithm.BagAlgorithm
     public class BagAlgorithm
     {
         #region 数据
-        private IBagPolicy bagPolicy = new SingleItemBagPolicy();
+        private IBagPolicy bagPolicy = new CompleteItemBagPolicy();
         public IBagPolicy BagPolicy
         {
             set
@@ -76,19 +76,34 @@ namespace Script.Algorithm.BagAlgorithm
             
             GetMaxValue(maxItemIndex - 1,nextBagCapacity,insertBagItem);
             return bagValueTable[maxItemIndex, bagCapacity];
-
         }
         
-        public int GetMaxValue(int maxItemIndex, int bagCapacity,BagItem[] bagItem,out List<BagItem> insertBagItem)
+        public int GetMaxValueByCompleteBag(int maxItemIndex,int bagCapacity,List<BagItem> insertBagItem)
         {
-            insertBagItem = new List<BagItem>();
-            if(bagPolicy != null)
+            if(insertBagItem == null)
             {
-                this.bagItem = bagItem;
-                bagValueTable = bagPolicy.CreateBagValueTable(bagItem, bagCapacity);
+                insertBagItem = new List<BagItem>();
             }
+            if(bagValueTable == null || bagValueTable.Length <= 0 || bagItem == null ||
+               maxItemIndex < 1 || maxItemIndex >= bagValueTable.Length || 
+               bagCapacity < 0 || bagCapacity >= bagValueTable.LongLength)
+            {
+                return 0;
+            }
+
+            int nextBagCapacity = bagCapacity;
+            int nextItemIndex = maxItemIndex;
+            if (bagValueTable[maxItemIndex, bagCapacity] > bagValueTable[maxItemIndex - 1, bagCapacity])
+            {
+                BagItem item = bagItem[maxItemIndex - 1];
+                insertBagItem.Add(item);
+                nextBagCapacity = bagCapacity - item.weight;
+            }
+            else
+                nextItemIndex = nextItemIndex - 1;
             
-            return GetMaxValue(maxItemIndex,bagCapacity,insertBagItem);
+            GetMaxValue(nextItemIndex,nextBagCapacity,insertBagItem);
+            return bagValueTable[maxItemIndex, bagCapacity];
         }
         #endregion
 
