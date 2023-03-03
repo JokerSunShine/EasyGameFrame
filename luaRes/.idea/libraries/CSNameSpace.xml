@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="CSNameSpace" type="Lua">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../LuaGrammarTips/CSNameSpace.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

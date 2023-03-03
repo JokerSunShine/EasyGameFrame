@@ -1,0 +1,1 @@
+require 'luaRes.LuaCore.LuaClass.Base.LuaClass'

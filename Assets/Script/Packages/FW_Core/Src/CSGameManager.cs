@@ -39,9 +39,11 @@ using Algorithm.StringMatch;
 using Script.DataStruct.Tree.Heap.MinHeap;
 using DataStruct.Tree.Heap.MaxHeap;
 using DataStruct.Tree.Heap.BinomialHeap;
+using Script.Algorithm.BagAlgorithm;
 
 public class CSGameManager : MonoBehaviour
 {
+    public CSGameManager instance;
     public Dictionary<string,ManagerObject> managerDic = new Dictionary<string,ManagerObject>();
     public bool OpenLog = true;
     /// <summary>
@@ -60,9 +62,17 @@ public class CSGameManager : MonoBehaviour
         RegiseterInterfaceSingleton();
         ManagerListAwakeCallBack();
         AOPTest();
-        int index = StringMatch.KMPMatch("aaacaaabcacadaaaaaab", "aaab");
-        Debug.Log(index);
-        Dictionary<int,int> dic = new Dictionary<int,int>();
+        BagItem[] bagItems = new BagItem[5]
+        {
+            new BagItem(1, 2, 3),
+            new BagItem(2, 6, 5),
+            new BagItem(3, 5, 10),
+            new BagItem(4, 4, 7),
+            new BagItem(5, 5, 11),
+        };
+        BagAlgorithm bagAlgorithm = new BagAlgorithm(bagItems,10);
+        List<BagItem> insertBagItems = new List<BagItem>();
+        int value = bagAlgorithm.GetMaxValueByCompleteBag(5, 10, insertBagItems);
     }
     
     public int CompareFunc(int i,int j)
@@ -88,6 +98,7 @@ public class CSGameManager : MonoBehaviour
   
     private void RegisterManager()
     {
+        instance = this;
         managerDic["CSPlatformManagerObject"] = new CSPlatformManagerObject(this);
         managerDic["XluaMgr"] = new XluaMgr(this);
         managerDic["CSNetWorkManager"] = new CSNetWorkManager(this);
