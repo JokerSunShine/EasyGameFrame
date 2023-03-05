@@ -1,0 +1,1 @@
+require 'luaRes.Common.Lua.base'

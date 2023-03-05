@@ -19,7 +19,6 @@ using DataStruct.Tree.BTree.Base;
 using DataStruct.Tree.BTree.BPlusTree;
 using DataStruct.Tree.BTree.BTree;
 using Instance.LogAOP;
-using Newtonsoft.Json.Bson;
 using UnityEngine;
 // using DataStruct.Tree.BinaryTree;
 // using DataStruct.Tree.BinaryTree.AVLTree;
@@ -43,7 +42,7 @@ using Script.Algorithm.BagAlgorithm;
 
 public class CSGameManager : MonoBehaviour
 {
-    public CSGameManager instance;
+    public static CSGameManager instance;
     public Dictionary<string,ManagerObject> managerDic = new Dictionary<string,ManagerObject>();
     public bool OpenLog = true;
     /// <summary>
@@ -57,6 +56,7 @@ public class CSGameManager : MonoBehaviour
     #region 初始化
     private void Awake()
     {
+        instance = this;
         InitOther();
         RegisterManager();
         RegiseterInterfaceSingleton();
@@ -98,7 +98,6 @@ public class CSGameManager : MonoBehaviour
   
     private void RegisterManager()
     {
-        instance = this;
         managerDic["CSPlatformManagerObject"] = new CSPlatformManagerObject(this);
         managerDic["XluaMgr"] = new XluaMgr(this);
         managerDic["CSNetWorkManager"] = new CSNetWorkManager(this);
