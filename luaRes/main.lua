@@ -9,13 +9,16 @@ require 'luaRes.UnityEngine.UnityEngineLoad'
 require 'luaRes.LuaCore.LuaCoreLoad'
 --**********GameMgr****************
 GameMgr = require 'luaRes.GameMgr'
+--**********Common****************
+require 'luaRes.Common.CommonLoad'
 
 ---初始化lua
 ---在C#中调用,初始化lua
 function Init(gameManager)
     print("初始化进入" .. tostring(gameManager))
     Utility.RegisterUtilities()
-    local gameMgr = GameMgr.new("创建副本")
-    local test = gameMgr.test
-    gameMgr.test = "测试2"
+    local gameMgr = GameMgr:New("创建副本")
+    local gameMgr2 = GameMgr:New("测试",gameMgr)
+    gameMgr2.test2 = 10
+    log(gameMgr2.test2)
 end
