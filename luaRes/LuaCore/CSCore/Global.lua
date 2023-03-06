@@ -1,9 +1,4 @@
 --一些C#常用管理类或工具类
-
-CSUnity = CS.UnityEngine;
-
--- _G.UIID = GetModel("LuaCore/UI/UIID")
-
 Global = {}
 --初始化全局对象
 function Global.OnInit()
