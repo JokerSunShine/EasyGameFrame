@@ -16,9 +16,19 @@ namespace Script.Packages.FW_Resource.Task
         }
         #endregion
         
+        protected override void LoadSync()
+        {
+            
+        }
+        
         protected override IEnumerator LoadAsync()
         {
             yield return null;
+        }
+
+        public override void Disconnect()
+        {
+            
         }
     }
 }

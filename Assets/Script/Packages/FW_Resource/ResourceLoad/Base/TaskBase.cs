@@ -123,13 +123,36 @@ namespace Script.Packages.FW_Resource.Base
         }
         #endregion
         
+        #region 计数
+        private int refCount = 1;
+        public virtual void Retain()
+        {
+            ++refCount;
+        }
+        #endregion
+        
         #region 删除
+        public virtual void Release()
+        {
+            if(refCount <= 0)
+            {
+                Debug.LogErrorFormat("task：{0}已经被删除 ",path);
+                return;
+            }
+            if(--refCount == 0)
+            {
+                Destroy();
+            }
+        }
+        
         public virtual void Destroy()
         {
             res = null;
             callBack = null;
             StopLoad();
         }
+
+        public abstract void Disconnect();
         #endregion
     }
 }
