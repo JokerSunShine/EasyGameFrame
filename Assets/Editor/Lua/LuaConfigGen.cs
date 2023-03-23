@@ -4,6 +4,6 @@ public static class LuaConfigGen
 {
     [LuaCallCSharp]
     public static System.Type[] LuaCallCSharp = {
-        typeof(CSGameManager),
+        typeof(Main),
     };
 }

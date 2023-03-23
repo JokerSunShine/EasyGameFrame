@@ -1,11 +1,17 @@
 using System;
 using System.Text;
+using Script.Packages.FW_Resource.ResourceLoad;
 using UnityEngine;
 
 namespace Script.Packages.FW_Core.Src
 {
-    public class AbstractResource : ScriptableObject,IMonohaviour
+    public abstract class AbstractResource : ScriptableObject,IMonohaviour
     {
+        public abstract ResConfig ResConfig
+        {
+            get;
+            set;
+        }
         public virtual void Awake(){}
         
         public virtual void Start(){}

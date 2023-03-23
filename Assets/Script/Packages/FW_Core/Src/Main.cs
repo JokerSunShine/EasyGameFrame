@@ -39,12 +39,16 @@ using Script.DataStruct.Tree.Heap.MinHeap;
 using DataStruct.Tree.Heap.MaxHeap;
 using DataStruct.Tree.Heap.BinomialHeap;
 using Script.Algorithm.BagAlgorithm;
+using Script.Packages.FW_Core.Src;
+using Script.Packages.FW_Resource.ResourceLoad;
+using Script.Packages.FW_Resource.Task;
 
-public class CSGameManager : MonoBehaviour
+public class Main : MonoBehaviour
 {
-    public static CSGameManager instance;
+    public static Main instance;
     public Dictionary<string,ManagerObject> managerDic = new Dictionary<string,ManagerObject>();
     public bool OpenLog = true;
+    public AbstractResource resource;
     /// <summary>
     /// 刷新频率
     /// </summary>

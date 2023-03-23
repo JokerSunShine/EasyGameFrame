@@ -8,8 +8,8 @@ public class CSPlatformManagerObject : ManagerObject,I_CSPlatformManager {
         }
     }
 
-    private CSGameManager gameManager;
-    public CSGameManager GameManager {
+    private Main gameManager;
+    public Main GameManager {
         get {
             return gameManager;
         }
@@ -73,7 +73,7 @@ public class CSPlatformManagerObject : ManagerObject,I_CSPlatformManager {
     #endregion
 
     #region 构造函数
-    public CSPlatformManagerObject(CSGameManager gameManager) {
+    public CSPlatformManagerObject(Main gameManager) {
         this.gameManager = gameManager;
         instance = this;
     }

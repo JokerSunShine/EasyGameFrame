@@ -1,5 +1,5 @@
 local Debug = CS.UnityEngine.Debug
-local logEnable = CS.CSGameManager.instance.OpenLog
+local logEnable = CS.Main.instance.OpenLog
 
 local function timestr()
     local time = Time.realtimeSinceStartup

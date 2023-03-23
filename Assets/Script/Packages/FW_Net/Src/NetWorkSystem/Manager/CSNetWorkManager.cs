@@ -22,7 +22,7 @@ public class CSNetWorkManager : ManagerObject
         }
     }
     
-    private CSGameManager gameManager;
+    private Main gameManager;
 
     /// <summary>
     /// 客户端
@@ -82,7 +82,7 @@ public class CSNetWorkManager : ManagerObject
     #endregion
 
     #region 构造函数
-    public CSNetWorkManager(CSGameManager gameManager) {
+    public CSNetWorkManager(Main gameManager) {
         instance = this;
         this.gameManager = gameManager;
     }

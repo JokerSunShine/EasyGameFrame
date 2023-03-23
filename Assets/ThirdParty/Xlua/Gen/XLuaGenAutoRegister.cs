@@ -43,7 +43,7 @@ namespace XLua.CSObjectWrap
             translator.DelayWrapLoader(typeof(Tutorial.DerivedClass.TestEnumInner), TutorialDerivedClassTestEnumInnerWrap.__Register);
         
         
-            translator.DelayWrapLoader(typeof(CSGameManager), CSGameManagerWrap.__Register);
+            translator.DelayWrapLoader(typeof(Main), MainWrap.__Register);
         
         
         

@@ -92,7 +92,7 @@ namespace Script.Packages.FW_Resource.Base
         {
             StopLoad();
             if (async)
-                CSGameManager.instance.StartCoroutine(DoLoadAsync());
+                Main.instance.StartCoroutine(DoLoadAsync());
             else
                 LoadSync();
         }
@@ -117,14 +117,14 @@ namespace Script.Packages.FW_Resource.Base
         {
             if(coroutine != null)
             {
-                CSGameManager.instance.StopCoroutine(coroutine);
+                Main.instance.StopCoroutine(coroutine);
                 coroutine = null;
             }
         }
         #endregion
         
         #region 计数
-        private int refCount = 1;
+        protected int refCount = 1;
         public virtual void Retain()
         {
             ++refCount;

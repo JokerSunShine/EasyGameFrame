@@ -27,7 +27,7 @@ public class XluaMgr:ManagerObject
         }
     }
     public LuaEnv luaEnv;
-    private CSGameManager gameManager;
+    private Main gameManager;
     private float lastLuaGcTime = 0;
     private float LuaGcInterval = 3;
 
@@ -49,7 +49,7 @@ public class XluaMgr:ManagerObject
     #endregion
 
     #region 构造函数
-    public XluaMgr(CSGameManager gameManager)
+    public XluaMgr(Main gameManager)
     {
         this.gameManager = gameManager;
         instance = this;
