@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Script.Packages.FW_Core.Src;
 using Script.Packages.FW_Resource.Base;
 using Script.Packages.FW_Resource.ResourceLoad;
 using UnityEditor;
@@ -20,6 +21,8 @@ namespace Script.Packages.FW_Resource.Task
                 return res as Object;
             }
         }
+
+        public float cacheTime = -1;
         #endregion
         
         #region 静态接口
@@ -84,6 +87,14 @@ namespace Script.Packages.FW_Resource.Task
 
             var gameObject = asset as GameObject;
             SetDone(asset);
+        }
+        
+        public void SetCache(float cacheTime = ResourceManager.ASSET_CACHE_DEFAULT_TIME)
+        {
+            if(this.cacheTime < cacheTime)
+            {
+                this.cacheTime = cacheTime;
+            }
         }
         #endregion
         
