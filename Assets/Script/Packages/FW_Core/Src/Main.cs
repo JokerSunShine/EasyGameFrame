@@ -42,6 +42,9 @@ using Script.Algorithm.BagAlgorithm;
 using Script.Packages.FW_Core.Src;
 using Script.Packages.FW_Resource.ResourceLoad;
 using Script.Packages.FW_Resource.Task;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Toggle = UnityEngine.UIElements.Toggle;
 
 public class Main : MonoBehaviour
 {

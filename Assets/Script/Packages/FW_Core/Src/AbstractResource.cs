@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using Script.Packages.FW_Resource.Base;
 using Script.Packages.FW_Resource.ResourceLoad;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ namespace Script.Packages.FW_Core.Src
             get;
             set;
         }
+        #region 生命周期
         public virtual void Awake(){}
         
         public virtual void Start(){}
@@ -28,6 +30,9 @@ namespace Script.Packages.FW_Core.Src
         
         public virtual void IsEditorMode(){}
         
+        public virtual void Destroy(){}
+        #endregion
+
         #region File
         public virtual bool FileExists(string path)
         {
@@ -55,6 +60,42 @@ namespace Script.Packages.FW_Core.Src
         #endregion
         
         #region Bundle
+        #endregion
+        
+        #region Asset
+        public virtual RequestAsset LoadAsset(string path,Type type)
+        {
+            return null;
+        }
+
+        public virtual RequestAsset LoadAssetAsync(string path,Type type)
+        {
+            return null;
+        }
+        #endregion
+        
+        #region Instatiate
+        public virtual GameObject Instantiate(string path,Transform parent = null,bool worldPositionStays = true)
+        {
+            return null;
+        }
+
+        public virtual GameObject Instantiate(string path,Vector3 position,Quaternion quaternion,Transform parent = null,bool worldPositionStays = true)
+        {
+            return null;
+        }
+
+        public virtual RequestInstantiete Intantiate(string path,Transform parent = null,bool worldPositionStays = true)
+        {
+            return null;
+        }
+
+        public virtual RequestInstantiete Intantiate(string path,Vector3 position,Quaternion quaternion,Transform parent = null,bool worldPositionStays = true)
+        {
+            return null;
+        }
+        
+        public virtual void Recycle(){}
         #endregion
     }
 }

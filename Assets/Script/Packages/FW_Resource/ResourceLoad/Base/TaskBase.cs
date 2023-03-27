@@ -124,7 +124,7 @@ namespace Script.Packages.FW_Resource.Base
         #endregion
         
         #region 计数
-        protected int refCount = 1;
+        public int refCount = 1;
         public virtual void Retain()
         {
             ++refCount;

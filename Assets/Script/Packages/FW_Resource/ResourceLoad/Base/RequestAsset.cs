@@ -3,10 +3,10 @@ using Object = UnityEngine.Object;
 
 namespace Script.Packages.FW_Resource.Base
 {
-    public class RequestAsset
+    public class RequestAsset:IDisposable
     {
         #region 数据
-        private TaskBase task;
+        public TaskBase task;
         private Action mCallBack;
         #endregion
         
