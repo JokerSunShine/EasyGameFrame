@@ -95,7 +95,7 @@ namespace Script.Packages.FW_Core.Src
             return null;
         }
         
-        public virtual void Recycle(){}
+        public virtual void Recycle(GameObject gameObject){}
         #endregion
     }
 }

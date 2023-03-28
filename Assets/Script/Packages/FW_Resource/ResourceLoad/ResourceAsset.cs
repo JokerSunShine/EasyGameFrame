@@ -110,7 +110,32 @@ namespace Script.Packages.FW_Resource.ResourceLoad
         #endregion
         
         #region Instatiate
-        
+        public override GameObject Instantiate(string path, Transform parent = null, bool worldPositionStays = true)
+        {
+            return InstantiateManager.Instantiate(path, parent, worldPositionStays);
+        }
+
+        public override GameObject Instantiate(string path, Vector3 position, Quaternion quaternion, Transform parent = null,
+            bool worldPositionStays = true)
+        {
+            return InstantiateManager.Instantiate(path, position,quaternion,parent,worldPositionStays);
+        }
+
+        public override RequestInstantiete Intantiate(string path, Transform parent = null, bool worldPositionStays = true)
+        {
+           return InstantiateManager.InstantiateAsync(path, parent, worldPositionStays);
+        }
+
+        public override RequestInstantiete Intantiate(string path, Vector3 position, Quaternion quaternion, Transform parent = null,
+            bool worldPositionStays = true)
+        {
+            return InstantiateManager.InstantiateAsync(path, position,quaternion,parent,worldPositionStays);
+        }
+
+        public override void Recycle(GameObject gameObject)
+        {
+            InstantiateManager.Recycle(gameObject);
+        }
         #endregion
     }
     #endregion
