@@ -85,12 +85,12 @@ namespace Script.Packages.FW_Core.Src
             return null;
         }
 
-        public virtual RequestInstantiete Intantiate(string path,Transform parent = null,bool worldPositionStays = true)
+        public virtual RequestInstantiete InstantiateAsync(string path,Transform parent = null,bool worldPositionStays = true)
         {
             return null;
         }
 
-        public virtual RequestInstantiete Intantiate(string path,Vector3 position,Quaternion quaternion,Transform parent = null,bool worldPositionStays = true)
+        public virtual RequestInstantiete InstantiateAsync(string path,Vector3 position,Quaternion quaternion,Transform parent = null,bool worldPositionStays = true)
         {
             return null;
         }

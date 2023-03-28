@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Framework;
 using Script.Packages.FW_Core.Src;
 using Script.Packages.FW_Resource.Base;
 using Script.Packages.FW_Resource.ResourceLoad;
@@ -29,6 +30,7 @@ namespace Script.Packages.FW_Resource.Task
         public static AssetTask CreateAsset(string path,Type type)
         {
             AssetTask asset = new AssetTask();
+            asset.Init(path,type);
             return asset;
         }
         #endregion
@@ -82,6 +84,7 @@ namespace Script.Packages.FW_Resource.Task
             if(asset == null)
             {
                 CSDebug.LogError(ResourceErrors.ASSET_NOT_EXIT);
+                SetError(ResourceErrors.ASSET_NOT_EXIT);
                 return;
             }
 

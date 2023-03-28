@@ -121,12 +121,12 @@ namespace Script.Packages.FW_Resource.ResourceLoad
             return InstantiateManager.Instantiate(path, position,quaternion,parent,worldPositionStays);
         }
 
-        public override RequestInstantiete Intantiate(string path, Transform parent = null, bool worldPositionStays = true)
+        public override RequestInstantiete InstantiateAsync(string path, Transform parent = null, bool worldPositionStays = true)
         {
            return InstantiateManager.InstantiateAsync(path, parent, worldPositionStays);
         }
 
-        public override RequestInstantiete Intantiate(string path, Vector3 position, Quaternion quaternion, Transform parent = null,
+        public override RequestInstantiete InstantiateAsync(string path, Vector3 position, Quaternion quaternion, Transform parent = null,
             bool worldPositionStays = true)
         {
             return InstantiateManager.InstantiateAsync(path, position,quaternion,parent,worldPositionStays);

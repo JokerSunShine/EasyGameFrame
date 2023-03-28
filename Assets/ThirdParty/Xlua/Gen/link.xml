@@ -11,6 +11,7 @@
 		<type fullname="DynamicTerrain.DynamicTerrain" preserve="all"/>
 		<type fullname="Tutorial.DerivedClass+TestEnumInner" preserve="all"/>
 		<type fullname="Main" preserve="all"/>
+		<type fullname="Framework.ResourceManager" preserve="all"/>
 		
 	</assembly>
 

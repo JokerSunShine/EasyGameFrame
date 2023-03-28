@@ -21,4 +21,5 @@ function Init(gameManager)
     local gameMgr2 = GameMgr:New("测试",gameMgr)
     gameMgr2.test2 = 10
     log(gameMgr2.test2)
+    CS.Framework.ResourceManager.Instantiate("Effect/Scene/huo.prefab",nil,false)
 end

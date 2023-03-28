@@ -28,7 +28,7 @@ namespace Script.Packages.FW_Resource.Base
             if(isError)
                 return;
             var assetTask = task as AssetTask;
-            gameobject = Object.Instantiate(assetTask.asset as GameObject);
+            gameobject = Object.Instantiate(assetTask.asset as GameObject,parent);
             gameobject.name = assetTask.asset.name;
             DisposeOnDestroy.Add(gameobject,this);
         }

@@ -46,6 +46,9 @@ namespace XLua.CSObjectWrap
             translator.DelayWrapLoader(typeof(Main), MainWrap.__Register);
         
         
+            translator.DelayWrapLoader(typeof(Framework.ResourceManager), FrameworkResourceManagerWrap.__Register);
+        
+        
         
         }
         

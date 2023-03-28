@@ -1,7 +1,8 @@
 using System;
 using Script.Packages.FW_Resource.Base;
+using UnityEngine;
 
-namespace Script.Packages.FW_Core.Src
+namespace Framework
 {
     public class ResourceManager
     {
@@ -22,7 +23,27 @@ namespace Script.Packages.FW_Core.Src
         #endregion
         
         #region Instantiate
+        public static GameObject Instantiate(string path, Transform parent = null, bool worldPositionStays = true)
+        {
+            return Main.instance.resource.Instantiate(path, parent, worldPositionStays);
+        }
         
+        public static GameObject Instantiate(string path, Vector3 position, Quaternion quaternion, Transform parent = null,
+            bool worldPositionStays = true)
+        {
+            return Main.instance.resource.Instantiate(path, position,quaternion, parent);
+        }
+        
+        public static RequestInstantiete InstantiateAsync(string path, Transform parent = null, bool worldPositionStays = true)
+        {
+            return Main.instance.resource.InstantiateAsync(path, parent, worldPositionStays);
+        }
+        
+        public static RequestInstantiete InstantiateAsync(string path, Vector3 position, Quaternion quaternion, Transform parent = null,
+            bool worldPositionStays = true)
+        {  
+            return Main.instance.resource.InstantiateAsync(path, position,quaternion, parent);
+        }
         #endregion
     }
 }
