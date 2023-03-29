@@ -63,12 +63,12 @@ namespace Script.Packages.FW_Core.Src
         #endregion
         
         #region Asset
-        public virtual RequestAsset LoadAsset(string path,Type type)
+        public virtual AssetRequest LoadAsset(string path,Type type)
         {
             return null;
         }
 
-        public virtual RequestAsset LoadAssetAsync(string path,Type type)
+        public virtual AssetRequest LoadAssetAsync(string path,Type type)
         {
             return null;
         }
@@ -85,12 +85,12 @@ namespace Script.Packages.FW_Core.Src
             return null;
         }
 
-        public virtual RequestInstantiete InstantiateAsync(string path,Transform parent = null,bool worldPositionStays = true)
+        public virtual InstantieteRequest InstantiateAsync(string path,Transform parent = null,bool worldPositionStays = true)
         {
             return null;
         }
 
-        public virtual RequestInstantiete InstantiateAsync(string path,Vector3 position,Quaternion quaternion,Transform parent = null,bool worldPositionStays = true)
+        public virtual InstantieteRequest InstantiateAsync(string path,Vector3 position,Quaternion quaternion,Transform parent = null,bool worldPositionStays = true)
         {
             return null;
         }

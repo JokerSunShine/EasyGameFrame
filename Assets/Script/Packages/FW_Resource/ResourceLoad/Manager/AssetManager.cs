@@ -38,7 +38,7 @@ namespace Script.Packages.FW_Resource.Manager
         #endregion
         
         #region 加载
-        public static RequestAsset Load(string path,Type type,bool async)
+        public static AssetRequest Load(string path,Type type,bool async)
         {
             AssetTask task = FindTask(path, type);
             if(task == null)
@@ -56,7 +56,7 @@ namespace Script.Packages.FW_Resource.Manager
                 }
             }
             
-            return new RequestAsset(task);
+            return new AssetRequest(task);
         }
         #endregion
         

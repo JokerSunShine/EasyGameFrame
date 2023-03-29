@@ -43,7 +43,7 @@ namespace Script.Packages.FW_Resource.Manager
             if (gameObject)
                 return gameObject;
             var assetRequest = ResourceManager.LoadAsset(path, typeof(GameObject));
-            var request = new RequestInstantiete(assetRequest);
+            var request = new InstantieteRequest(assetRequest);
             assetRequest.Dispose();
             request.Instantiate(parent,worldPositionStays);
             return request.gameobject;
@@ -55,7 +55,7 @@ namespace Script.Packages.FW_Resource.Manager
             if (gameObject)
                 return gameObject;
             var assetRequest = ResourceManager.LoadAsset(path, typeof(GameObject));
-            var request = new RequestInstantiete(assetRequest);
+            var request = new InstantieteRequest(assetRequest);
             assetRequest.Dispose();
             request.Instantiate(position,quaternion,parent);
             return request.gameobject;
@@ -63,40 +63,40 @@ namespace Script.Packages.FW_Resource.Manager
         #endregion
         
         #region IntantiateAsync
-        public static RequestInstantiete InstantiateAsync(string path,Transform parent = null,bool worldPositionStays = true)
+        public static InstantieteRequest InstantiateAsync(string path,Transform parent = null,bool worldPositionStays = true)
         {
             var gameObject = GetCacheGameObject(path, parent, worldPositionStays);
             if (gameObject)
                 return FindRequest(gameObject);
             var assetRequest = ResourceManager.LoadAssetAsync(path, typeof(GameObject));
-            var request = new RequestInstantiete(assetRequest);
+            var request = new InstantieteRequest(assetRequest);
             Main.instance.StartCoroutine(DoInstantiateAsync(assetRequest, request, parent, worldPositionStays));
             return request;
         }
         
-        public static RequestInstantiete InstantiateAsync(string path,Vector3 position,Quaternion quaternion,Transform parent = null,bool worldPositionStays = true)
+        public static InstantieteRequest InstantiateAsync(string path,Vector3 position,Quaternion quaternion,Transform parent = null,bool worldPositionStays = true)
         {
             var gameObject = GetCacheGameObject(path,position,quaternion,parent);
             if (gameObject)
                 return FindRequest(gameObject);
             var assetRequest = ResourceManager.LoadAssetAsync(path, typeof(GameObject));
-            var request = new RequestInstantiete(assetRequest);
+            var request = new InstantieteRequest(assetRequest);
             Main.instance.StartCoroutine(DoInstantiateAsync(assetRequest, request, position,quaternion,parent));
             return request;
         }
         
-        private static IEnumerator DoInstantiateAsync(RequestAsset assetRequest,RequestInstantiete request,Transform parent,bool worldPositionStays)
+        private static IEnumerator DoInstantiateAsync(AssetRequest assetRequest,InstantieteRequest instantieteRequest,Transform parent,bool worldPositionStays)
         {
-            yield return assetRequest;
-            assetRequest.Dispose();
-            request.Instantiate(parent,worldPositionStays);
+            yield return instantieteRequest;
+            instantieteRequest.Dispose();
+            instantieteRequest.Instantiate(parent,worldPositionStays);
         }
         
-        private static IEnumerator DoInstantiateAsync(RequestAsset assetRequest,RequestInstantiete request,Vector3 position,Quaternion quaternion,Transform parent)
+        private static IEnumerator DoInstantiateAsync(AssetRequest assetRequest,InstantieteRequest instantieteRequest,Vector3 position,Quaternion quaternion,Transform parent)
         {
-            yield return assetRequest;
-            assetRequest.Dispose();
-            request.Instantiate(position,quaternion,parent);
+            yield return instantieteRequest;
+            instantieteRequest.Dispose();
+            instantieteRequest.Instantiate(position,quaternion,parent);
         }
         #endregion
         
@@ -140,13 +140,13 @@ namespace Script.Packages.FW_Resource.Manager
             return gameObject;
         }
         
-        private static RequestInstantiete FindRequest(GameObject gameObject)
+        private static InstantieteRequest FindRequest(GameObject gameObject)
         {
             var list = Temp<DisposeOnDestroy>.List;
             gameObject.GetComponents(list);
             for(int i = 0;i < list.Count;i++)
             {
-                var request = list[i].disposable as RequestInstantiete;
+                var request = list[i].disposable as InstantieteRequest;
                 if(request != null)
                 {
                     return request;
@@ -175,15 +175,15 @@ namespace Script.Packages.FW_Resource.Manager
         {
             if (!gameObject)
                 return;
-            RequestInstantiete request = FindRequest(gameObject);
-            if(request != null)
+            InstantieteRequest instantieteRequest = FindRequest(gameObject);
+            if(instantieteRequest != null)
             {
                 Disable(gameObject);
                 Stack<GameObject> items;
-                if(!FreeDic.TryGetValue(request.path,out items))
+                if(!FreeDic.TryGetValue(instantieteRequest.path,out items))
                 {
                     items = new Stack<GameObject>();
-                    FreeDic[request.path] = items;
+                    FreeDic[instantieteRequest.path] = items;
                 }
                 items.Push(gameObject);
             }

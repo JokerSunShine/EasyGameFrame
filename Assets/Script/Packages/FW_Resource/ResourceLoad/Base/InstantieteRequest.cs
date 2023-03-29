@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Script.Packages.FW_Resource.Base
 {
-    public class RequestInstantiete:RequestAsset
+    public class InstantieteRequest:AssetRequest
     {
         #region 数据
         public override bool isDone
@@ -19,7 +19,7 @@ namespace Script.Packages.FW_Resource.Base
         #endregion
         
         #region 构造
-        public RequestInstantiete(RequestAsset request):base(request.task){}
+        public InstantieteRequest(AssetRequest assetRequest):base(assetRequest.task){}
         #endregion
     
         #region 实例化

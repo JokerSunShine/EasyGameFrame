@@ -98,12 +98,12 @@ namespace Script.Packages.FW_Resource.ResourceLoad
         #endregion
   
         #region Asset
-        public override RequestAsset LoadAsset(string path, Type type)
+        public override AssetRequest LoadAsset(string path, Type type)
         {
             return AssetManager.Load(path, type, false);
         }
 
-        public override RequestAsset LoadAssetAsync(string path, Type type)
+        public override AssetRequest LoadAssetAsync(string path, Type type)
         {
             return AssetManager.Load(path, type, true);
         }
@@ -121,12 +121,12 @@ namespace Script.Packages.FW_Resource.ResourceLoad
             return InstantiateManager.Instantiate(path, position,quaternion,parent,worldPositionStays);
         }
 
-        public override RequestInstantiete InstantiateAsync(string path, Transform parent = null, bool worldPositionStays = true)
+        public override InstantieteRequest InstantiateAsync(string path, Transform parent = null, bool worldPositionStays = true)
         {
            return InstantiateManager.InstantiateAsync(path, parent, worldPositionStays);
         }
 
-        public override RequestInstantiete InstantiateAsync(string path, Vector3 position, Quaternion quaternion, Transform parent = null,
+        public override InstantieteRequest InstantiateAsync(string path, Vector3 position, Quaternion quaternion, Transform parent = null,
             bool worldPositionStays = true)
         {
             return InstantiateManager.InstantiateAsync(path, position,quaternion,parent,worldPositionStays);

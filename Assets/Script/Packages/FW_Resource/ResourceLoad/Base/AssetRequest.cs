@@ -3,7 +3,7 @@ using Object = UnityEngine.Object;
 
 namespace Script.Packages.FW_Resource.Base
 {
-    public class RequestAsset:IDisposable
+    public class AssetRequest:IDisposable
     {
         #region 数据
         public TaskBase task;
@@ -11,7 +11,7 @@ namespace Script.Packages.FW_Resource.Base
         #endregion
         
         #region 构造
-        public RequestAsset(TaskBase task)
+        public AssetRequest(TaskBase task)
         {
             this.task = task;
             task.Retain();
