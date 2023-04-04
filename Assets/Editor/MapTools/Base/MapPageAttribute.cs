@@ -2,11 +2,11 @@
 
 namespace MapTools.Base
 {
-    public class PageAttribute : Attribute
+    public class MapPageAttribute : Attribute
     {
         public int layer;
         public string menuName;
-        public PageAttribute(int layer,string menuName = default(string))
+        public MapPageAttribute(int layer,string menuName = default(string))
         {
             this.layer = layer;
             this.menuName = menuName;

@@ -90,7 +90,7 @@ namespace XLua.CSObjectWrap
                     string _path = LuaAPI.lua_tostring(L, 1);
                     System.Type _type = (System.Type)translator.GetObject(L, 2, typeof(System.Type));
                     
-                        Script.Packages.FW_Resource.Base.RequestAsset gen_ret = Framework.ResourceManager.LoadAsset( _path, _type );
+                        Script.Packages.FW_Resource.Base.AssetRequest gen_ret = Framework.ResourceManager.LoadAsset( _path, _type );
                         translator.Push(L, gen_ret);
                     
                     
@@ -118,7 +118,7 @@ namespace XLua.CSObjectWrap
                     string _path = LuaAPI.lua_tostring(L, 1);
                     System.Type _type = (System.Type)translator.GetObject(L, 2, typeof(System.Type));
                     
-                        Script.Packages.FW_Resource.Base.RequestAsset gen_ret = Framework.ResourceManager.LoadAssetAsync( _path, _type );
+                        Script.Packages.FW_Resource.Base.AssetRequest gen_ret = Framework.ResourceManager.LoadAssetAsync( _path, _type );
                         translator.Push(L, gen_ret);
                     
                     
@@ -247,7 +247,7 @@ namespace XLua.CSObjectWrap
                     UnityEngine.Transform _parent = (UnityEngine.Transform)translator.GetObject(L, 2, typeof(UnityEngine.Transform));
                     bool _worldPositionStays = LuaAPI.lua_toboolean(L, 3);
                     
-                        Script.Packages.FW_Resource.Base.RequestInstantiete gen_ret = Framework.ResourceManager.InstantiateAsync( _path, _parent, _worldPositionStays );
+                        Script.Packages.FW_Resource.Base.InstantieteRequest gen_ret = Framework.ResourceManager.InstantiateAsync( _path, _parent, _worldPositionStays );
                         translator.Push(L, gen_ret);
                     
                     
@@ -259,7 +259,7 @@ namespace XLua.CSObjectWrap
                     string _path = LuaAPI.lua_tostring(L, 1);
                     UnityEngine.Transform _parent = (UnityEngine.Transform)translator.GetObject(L, 2, typeof(UnityEngine.Transform));
                     
-                        Script.Packages.FW_Resource.Base.RequestInstantiete gen_ret = Framework.ResourceManager.InstantiateAsync( _path, _parent );
+                        Script.Packages.FW_Resource.Base.InstantieteRequest gen_ret = Framework.ResourceManager.InstantiateAsync( _path, _parent );
                         translator.Push(L, gen_ret);
                     
                     
@@ -270,7 +270,7 @@ namespace XLua.CSObjectWrap
                 {
                     string _path = LuaAPI.lua_tostring(L, 1);
                     
-                        Script.Packages.FW_Resource.Base.RequestInstantiete gen_ret = Framework.ResourceManager.InstantiateAsync( _path );
+                        Script.Packages.FW_Resource.Base.InstantieteRequest gen_ret = Framework.ResourceManager.InstantiateAsync( _path );
                         translator.Push(L, gen_ret);
                     
                     
@@ -285,7 +285,7 @@ namespace XLua.CSObjectWrap
                     UnityEngine.Transform _parent = (UnityEngine.Transform)translator.GetObject(L, 4, typeof(UnityEngine.Transform));
                     bool _worldPositionStays = LuaAPI.lua_toboolean(L, 5);
                     
-                        Script.Packages.FW_Resource.Base.RequestInstantiete gen_ret = Framework.ResourceManager.InstantiateAsync( _path, _position, _quaternion, _parent, _worldPositionStays );
+                        Script.Packages.FW_Resource.Base.InstantieteRequest gen_ret = Framework.ResourceManager.InstantiateAsync( _path, _position, _quaternion, _parent, _worldPositionStays );
                         translator.Push(L, gen_ret);
                     
                     
@@ -299,7 +299,7 @@ namespace XLua.CSObjectWrap
                     UnityEngine.Quaternion _quaternion;translator.Get(L, 3, out _quaternion);
                     UnityEngine.Transform _parent = (UnityEngine.Transform)translator.GetObject(L, 4, typeof(UnityEngine.Transform));
                     
-                        Script.Packages.FW_Resource.Base.RequestInstantiete gen_ret = Framework.ResourceManager.InstantiateAsync( _path, _position, _quaternion, _parent );
+                        Script.Packages.FW_Resource.Base.InstantieteRequest gen_ret = Framework.ResourceManager.InstantiateAsync( _path, _position, _quaternion, _parent );
                         translator.Push(L, gen_ret);
                     
                     
@@ -312,7 +312,7 @@ namespace XLua.CSObjectWrap
                     UnityEngine.Vector3 _position;translator.Get(L, 2, out _position);
                     UnityEngine.Quaternion _quaternion;translator.Get(L, 3, out _quaternion);
                     
-                        Script.Packages.FW_Resource.Base.RequestInstantiete gen_ret = Framework.ResourceManager.InstantiateAsync( _path, _position, _quaternion );
+                        Script.Packages.FW_Resource.Base.InstantieteRequest gen_ret = Framework.ResourceManager.InstantiateAsync( _path, _position, _quaternion );
                         translator.Push(L, gen_ret);
                     
                     

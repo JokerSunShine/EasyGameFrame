@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace MapTools.TerrainTool
 {
-    [PageAttribute(1,"地形工具")]
+    [MapPage(1,"地形工具")]
     public class TerrainTool : MapToolBase
     {
         #region 数据

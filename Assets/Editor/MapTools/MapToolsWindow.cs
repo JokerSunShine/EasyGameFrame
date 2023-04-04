@@ -40,7 +40,7 @@ namespace MapTools
             Type[] types = assembly.GetTypes();
             for(int i = 0;i < types.Length;i++)
             {
-                PageAttribute attribute = types[i].GetCustomAttribute<PageAttribute>();
+                MapPageAttribute attribute = types[i].GetCustomAttribute<MapPageAttribute>();
                 if(attribute != null)
                 {
                     pageTreeViewItemList.Add(new PageTreeViewItem(attribute,types[i]));

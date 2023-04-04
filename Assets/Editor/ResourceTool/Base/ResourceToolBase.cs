@@ -1,10 +1,10 @@
-﻿using System.Reflection;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-namespace MapTools.Base
+namespace ResourceTool.Base
 {
-    public abstract class MapToolBase : EditorWindow
+    public abstract class ResourceToolBase : EditorWindow
     {
         #region 数据
         private string titleName;
@@ -14,9 +14,9 @@ namespace MapTools.Base
         #endregion
         
         #region 构造
-        public MapToolBase()
+        public ResourceToolBase()
         {
-            MapPageAttribute mapPage = GetType().GetCustomAttribute<MapPageAttribute>();
+            ResourcePageAttribute mapPage = GetType().GetCustomAttribute<ResourcePageAttribute>();
             if(mapPage != null)
             {
                 titleName = string.Format("<color=#D2D2D2>{0}</color>", mapPage.menuName);

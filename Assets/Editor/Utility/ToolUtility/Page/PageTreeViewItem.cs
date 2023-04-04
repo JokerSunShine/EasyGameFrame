@@ -24,7 +24,7 @@ namespace MapTools.Page
         #endregion
         
         #region 数据
-        private PageAttribute attribute;
+        private MapPageAttribute attribute;
         private Type curClass;
         public MapToolBase tool;
         public int priority
@@ -37,7 +37,7 @@ namespace MapTools.Page
         #endregion
         
         #region 构造
-        public PageTreeViewItem(PageAttribute attribute,Type curClass)
+        public PageTreeViewItem(MapPageAttribute attribute,Type curClass)
         {
             this.attribute = attribute;
             this.curClass = curClass;
