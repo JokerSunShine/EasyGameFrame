@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using MapTools.Base;
 using MapTools.Page;
-using Unity.Burst;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;

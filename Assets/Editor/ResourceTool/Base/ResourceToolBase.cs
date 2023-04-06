@@ -7,32 +7,18 @@ namespace ResourceTool.Base
     public abstract class ResourceToolBase : EditorWindow
     {
         #region 数据
-        private string titleName;
-        private Rect ToolShowRect = Rect.zero;
-        private GUIStyle titleFontStyle;
-        private Vector2 scrollPosition;
+        private ResourcePageAttribute mapPage;
         #endregion
         
         #region 构造
         public ResourceToolBase()
         {
-            ResourcePageAttribute mapPage = GetType().GetCustomAttribute<ResourcePageAttribute>();
-            if(mapPage != null)
-            {
-                titleName = string.Format("<color=#D2D2D2>{0}</color>", mapPage.menuName);
-
-            }
+            mapPage = GetType().GetCustomAttribute<ResourcePageAttribute>();
         }
         #endregion
         
         #region 初始化
-        public virtual void Init()
-        {
-            titleFontStyle = new GUIStyle();
-            titleFontStyle.richText = true;
-            titleFontStyle.fontStyle = FontStyle.Bold;
-            titleFontStyle.fontSize = 20;
-        }
+        public virtual void Init(){}
         #endregion
 
         #region 刷新
@@ -40,25 +26,12 @@ namespace ResourceTool.Base
         #endregion
        
         #region GUI
-        public void OnDrawGUI(Rect rect)
+        public void OnDrawGUI()
         {
-            ToolShowRect.Set(rect.width + 10,rect.y + 10,1000 - rect.width,rect.height);
-            GUILayout.BeginArea(ToolShowRect);
-            GUILayout.BeginVertical();
-            {
-                GUILayout.Label(titleName,titleFontStyle);
-                scrollPosition = GUILayout.BeginScrollView(scrollPosition);
-                OnToolGUI();
-                GUILayout.EndScrollView();
-            }
-            GUILayout.EndVertical();
-            GUILayout.EndArea();
+            OnToolGUI();
         }
         
-        public virtual void OnToolGUI()
-        {
-            
-        }
+        public virtual void OnToolGUI(){}
         #endregion
  
         #region 关闭
