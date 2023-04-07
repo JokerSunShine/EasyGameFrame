@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
+using Framework;
 
 public class XluaNameSpaceMapGenerator
 {
@@ -37,9 +38,9 @@ public class XluaNameSpaceMapGenerator
 
     private static IEnumerator GenAllSync()
     {
-        if (!Directory.Exists(CommonLoadPath.CreateLuaGrammarTipPath))
+        if (!Directory.Exists(Utility.Path.CreateLuaGrammarTipPath))
         {
-            Directory.CreateDirectory(CommonLoadPath.CreateLuaGrammarTipPath);
+            Directory.CreateDirectory(Utility.Path.CreateLuaGrammarTipPath);
         }
         yield return GenAllNameSpace();
         GenAllMethod();
@@ -52,7 +53,7 @@ public class XluaNameSpaceMapGenerator
         yield return null;
         List<string> noNameSpaceList = new List<string>();
         List<string> nameSpaceList = new List<string>();
-        List<Type> typeList = CommonUtility.GetAllTypes();
+        List<Type> typeList = Utility.Type.GetAllTypes();
         for (int i = 0; i < typeList.Count; i++)
         {
             Type type = typeList[i];
@@ -121,7 +122,7 @@ public class XluaNameSpaceMapGenerator
         string luaScriptFileName = NameSpaceZipName + ".lua";
         byte[] luaScriptsBytes = Encoding.UTF8.GetBytes(stringBuilder.ToString());
         Dictionary<string, byte[]> zipFileDict = new Dictionary<string, byte[]>() { { luaScriptFileName, luaScriptsBytes } };
-        string zipFileName = CommonLoadPath.CreateLuaGrammarTipPath + "/" + NameSpaceZipName + ".zip";
+        string zipFileName = Utility.Path.CreateLuaGrammarTipPath + "/" + NameSpaceZipName + ".zip";
         ZipManager.CreateZip(zipFileName, zipFileDict);
         CSDebug.Log("成功创建 " + zipFileName);
     }
@@ -130,11 +131,11 @@ public class XluaNameSpaceMapGenerator
     #region 生成脚本提示
     private static void GenAllMethod()
     {
-        if (!Directory.Exists(CommonLoadPath.CreateCSClientTipPath))
+        if (!Directory.Exists(Utility.Path.CreateCSClientTipPath))
         {
-            Directory.CreateDirectory(CommonLoadPath.CreateCSClientTipPath);
+            Directory.CreateDirectory(Utility.Path.CreateCSClientTipPath);
         }
-        List<Type> typeList = CommonUtility.GetAllTypes();
+        List<Type> typeList = Utility.Type.GetAllTypes();
         for (int i = 0; i < typeList.Count; i++)
         {
             Type type = typeList[i];
@@ -142,7 +143,7 @@ public class XluaNameSpaceMapGenerator
             {
                 continue;
             }
-            string fileName = CommonUtility.GetTypeFileName(type) + "_Wrap.lua";
+            string fileName = Utility.Type.GetTypeFileName(type) + "_Wrap.lua";
             EditorUtility.DisplayProgressBar("生成中", "生成" + fileName, (float)(i + 1) / typeList.Count);
             List<string> NoTipsGenericList = new List<string>();
             if (IsContainsIgnoreSubClass(type))
@@ -156,10 +157,10 @@ public class XluaNameSpaceMapGenerator
             try
             {
                 GenNameSpaceFile(type);
-                using (StreamWriter writer = new StreamWriter(CommonLoadPath.CreateCSClientTipPath + fileName, false, System.Text.Encoding.UTF8))
+                using (StreamWriter writer = new StreamWriter(Utility.Path.CreateCSClientTipPath + fileName, false, System.Text.Encoding.UTF8))
                 {
                     writer.Write("---@class ");
-                    writer.Write(CommonUtility.GetTypeTagName(type));
+                    writer.Write(type.GetTypeTagName());
                     MethodInfo methodInfo = null;
                     if (type.IsEnum)
                     {
@@ -179,7 +180,7 @@ public class XluaNameSpaceMapGenerator
                         if (baseType != null && baseType != typeof(object))
                         {
                             writer.Write(" : ");
-                            writer.WriteLine(CommonUtility.GetTypeTagName(baseType));
+                            writer.WriteLine(baseType.GetTypeTagName());
                         }
                         else
                         {
@@ -224,18 +225,18 @@ public class XluaNameSpaceMapGenerator
         }
         EditorUtility.DisplayProgressBar("正在生成zip", "", 1);
 
-        DirectoryInfo wrapDir = new DirectoryInfo(CommonLoadPath.CreateCSClientTipPath);
+        DirectoryInfo wrapDir = new DirectoryInfo(Utility.Path.CreateCSClientTipPath);
         FileInfo[] files = wrapDir.GetFiles("*", SearchOption.AllDirectories);
         Dictionary<string, byte[]> fileDict = new Dictionary<string, byte[]>();
         foreach (var cur in files)
         {
-            string fileName = CommonUtility_Filed.GetFileName(cur.FullName) + ".lua";
+            string fileName = Utility.Filed.GetFileName(cur.FullName) + ".lua";
             if (fileDict.ContainsKey(fileName)) continue;
             string content = File.ReadAllText(cur.FullName, Encoding.UTF8);
             byte[] luaScriptBytes = Encoding.UTF8.GetBytes(content);
             fileDict.Add(fileName, luaScriptBytes);
         }
-        ZipManager.CreateZip(CommonLoadPath.CreateLuaGrammarTipPath + "/CSClient.zip", fileDict);
+        ZipManager.CreateZip(Utility.Path.CreateLuaGrammarTipPath + "/CSClient.zip", fileDict);
         EditorUtility.ClearProgressBar();
     }
 
@@ -265,7 +266,7 @@ public class XluaNameSpaceMapGenerator
         if (string.IsNullOrEmpty(type.Namespace)) return;
         string fileName = type.GetTypeTagName();
         string wrapPath = fileName + "_Wrap.lua";
-        using (StreamWriter writer = new StreamWriter(CommonLoadPath.CreateCSClientTipPath + wrapPath, false, System.Text.Encoding.UTF8))
+        using (StreamWriter writer = new StreamWriter(Utility.Path.CreateCSClientTipPath + wrapPath, false, System.Text.Encoding.UTF8))
         {
             writer.WriteLine(type.Namespace + " = {};");
         }

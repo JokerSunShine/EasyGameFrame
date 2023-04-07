@@ -1675,7 +1675,7 @@ namespace CSObjectWrapEditor
             {
                 try
                 {
-                    searchPaths.Add(Path.GetDirectoryName(path));
+                    searchPaths.Add(System.IO.Path.GetDirectoryName(path));
                 }
                 catch { }
             }

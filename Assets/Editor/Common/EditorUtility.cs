@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using Framework;
 
 public partial class EditorUtil {
     public static bool EditorIsPlaying()

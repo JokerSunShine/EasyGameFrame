@@ -15,11 +15,10 @@ public class QuickXMLpublic
             {
                   return;
             }
-
             XmlWriterSettings settings = new XmlWriterSettings();
             settings.Encoding = new UTF8Encoding(false);
             settings.Indent = true;
-            XmlWriter xmlWriter = XmlWriter.Create(CommonLoadPath.ServerXmlPath, settings);
+            XmlWriter xmlWriter = XmlWriter.Create(Framework.Utility.Path.ServerXmlPath, settings);
             xElement.Save(xmlWriter);
             xmlWriter.Flush();
             xmlWriter.Close();

@@ -3,6 +3,7 @@ using MapTools.Base;
 using Packages.FW_Common.Other;
 using UnityEditor;
 using UnityEngine;
+using Framework;
 
 namespace MapTools.TerrainTool
 {
@@ -66,7 +67,7 @@ namespace MapTools.TerrainTool
         {
             string sceneName = sceneNames[ChooseIndex];
             string assetsPath = string.Format("{0}/Art/SceneRes/{1}/Textures/PassMaps",Application.dataPath, sceneName);
-            string[] assetsDataPath = CommonUtility_Directory.GetAllFilePath(assetsPath, "*.png");
+            string[] assetsDataPath = Framework.Utility.Directory.GetAllFilePath(assetsPath, "*.png");
             texture2Ds = null;
             if(assetsDataPath == null || assetsDataPath.Length <= 0)
             {
@@ -77,7 +78,7 @@ namespace MapTools.TerrainTool
             texture2Ds = new Texture2D[assetsDataPath.Length];
             for(int i = 0;i < assetsDataPath.Length;i++)
             {
-                string path = assetsDataPath[i].Replace(CommonLoadPath.LoadOriginRootPath + "/", "");
+                string path = assetsDataPath[i].Replace(Utility.Path.LoadOriginRootPath + "/", "");
                 texture2Ds[i] = AssetDatabase.LoadAssetAtPath<Texture2D>(path);
             }
             serializedObject = new SerializedObject(this);

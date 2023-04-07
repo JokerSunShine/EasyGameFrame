@@ -666,7 +666,7 @@ namespace MikuLuaProfiler
 
                 if (!File.Exists(s.captureUrl))
                 {
-                    string dir = Path.GetDirectoryName(s.captureUrl);
+                    string dir = System.IO.Path.GetDirectoryName(s.captureUrl);
                     if (!Directory.Exists(dir))
                     {
                         Directory.CreateDirectory(dir);

@@ -436,7 +436,7 @@ namespace MikuLuaProfiler
             {
                 try
                 {
-                    string dir = Path.GetDirectoryName(path);
+                    string dir = System.IO.Path.GetDirectoryName(path);
                     if (!paths.Contains(dir))
                     {
                         paths.Add(dir);

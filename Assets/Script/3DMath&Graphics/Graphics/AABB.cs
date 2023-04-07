@@ -2,6 +2,7 @@ using System.Diagnostics;
 using _3DMath;
 using UnityEngine;
 using Vector3 = _3DMath.Vector3;
+using Framework;
 
 namespace Graphics
 {
@@ -483,7 +484,7 @@ namespace Graphics
                 //Check for interval out of order
                 if(xEnter > xLeave)
                 {
-                    CommonUtility.Swap(xEnter,xLeave);
+                    Utility.Swap(xEnter,xLeave);
                 }
                 //Update interval
                 if (xEnter > tEnter) tEnter = xEnter;
@@ -516,7 +517,7 @@ namespace Graphics
                 //Check for interval out of order
                 if(yEnter > yLeave)
                 {
-                    CommonUtility.Swap(yEnter,yLeave);
+                    Utility.Swap(yEnter,yLeave);
                 }
                 //Update interval
                 if (yEnter > tEnter) tEnter = yEnter;
@@ -549,7 +550,7 @@ namespace Graphics
                 //Check for interval out of order
                 if(zEnter > zLeave)
                 {
-                    CommonUtility.Swap(zEnter,zLeave);
+                    Utility.Swap(zEnter,zLeave);
                 }
                 //Update interval
                 if (zEnter > tEnter) tEnter = zEnter;

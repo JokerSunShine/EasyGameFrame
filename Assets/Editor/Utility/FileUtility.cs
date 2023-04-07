@@ -11,7 +11,7 @@ namespace ExtendEditor
             path = AssetDatabase.GetAssetPath(obj);
             if (File.Exists(path))
             {
-                path = Path.GetDirectoryName(path);
+                path = System.IO.Path.GetDirectoryName(path);
             }
             return path;
         }

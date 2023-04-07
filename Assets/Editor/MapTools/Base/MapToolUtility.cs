@@ -73,7 +73,7 @@ namespace MapTools.Base
             for(int i = 0;i < scenes.Length;i++)
             {
                 sceneGUID = scenes[i];
-                scenes[i] = Path.GetFileNameWithoutExtension(AssetDatabase.GUIDToAssetPath(sceneGUID));
+                scenes[i] = System.IO.Path.GetFileNameWithoutExtension(AssetDatabase.GUIDToAssetPath(sceneGUID));
             }
             return scenes;
         }

@@ -142,7 +142,7 @@ public class LuaResTool_AutoReloadLua
     private static void FileSystemWatcher_Changed(object sender, FileSystemEventArgs e)
     {
         string changedFilePath = e.FullPath;
-        string extension = Path.GetExtension(changedFilePath);
+        string extension = System.IO.Path.GetExtension(changedFilePath);
         if (extension == ".lua" && !string.IsNullOrEmpty(changedFilePath))
         {
             int index = changedFilePath.IndexOf("luaRes\\");

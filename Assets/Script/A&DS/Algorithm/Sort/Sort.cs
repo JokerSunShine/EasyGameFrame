@@ -286,7 +286,7 @@ namespace Algorithm.Sort
         /// <returns></returns>
         public static int[] CountingSort(int[] array)
         {
-            int maxValue = CommonUtility_Num.GetMaxNum(array);
+            int maxValue = Framework.Utility.Num.GetMaxNum(array);
             int bucketLength = maxValue + 1;
             //计数列表
             int[] bucket = new int[bucketLength];
@@ -333,8 +333,8 @@ namespace Algorithm.Sort
         
         private static int GetMaxDigit(int[] array)
         {
-            int maxNum = CommonUtility_Num.GetMaxNum(array);
-            return CommonUtility_Num.GetMaxDigit(maxNum);
+            int maxNum = Framework.Utility.Num.GetMaxNum(array);
+            return Framework.Utility.Num.GetMaxDigit(maxNum);
         }
         
         private static int[] radixSort(int[] array,int maxDigit)
@@ -350,7 +350,7 @@ namespace Algorithm.Sort
                 for(int j = 0;j < array.Length;j++)
                 {
                     int bucketIndex = array[j] % mod / dev;
-                    counter[bucketIndex] = Commonutility_Array.ArrayAppend(counter[bucketIndex], array[j]);
+                    counter[bucketIndex] = Framework.Utility.Array.ArrayAppend(counter[bucketIndex], array[j]);
                 }
 
                 int pos = 0;
@@ -400,7 +400,7 @@ namespace Algorithm.Sort
             for(int i = 0;i < array.Length;i++)
             {
                 int index = (int) Math.Floor((float) (array[i] - minValue) / bucketSize);
-                buckets[index] = Commonutility_Array.ArrayAppend(buckets[index], array[i]);
+                buckets[index] = Framework.Utility.Array.ArrayAppend(buckets[index], array[i]);
             }
             
             int arrayIndex = 0;

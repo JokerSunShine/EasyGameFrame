@@ -24,13 +24,13 @@ namespace ExtendEditor
             }
             foreach(string path in paths)
             {
-                string fileName = Path.GetFileNameWithoutExtension(path);
+                string fileName = System.IO.Path.GetFileNameWithoutExtension(path);
                 Object ob = ScriptableObject.CreateInstance(fileName);
                 if(ob == null)
                 {
                     continue;
                 }
-                string extension = Path.GetExtension(path);
+                string extension = System.IO.Path.GetExtension(path);
                 string targetPath = path.Replace(".cs", ".asset");
                 AssetDatabase.CreateAsset(ob,targetPath);
                 AssetDatabase.SaveAssets();

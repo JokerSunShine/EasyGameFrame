@@ -81,7 +81,7 @@ namespace MikuLuaProfiler {
                 {
                     string projectRootPath = paths[i];
                     Debug.Log(projectRootPath);
-                    filePath = Path.Combine(projectRootPath.Trim(), cacheFilePath);//+ ".lua"; 
+                    filePath = System.IO.Path.Combine(projectRootPath.Trim(), cacheFilePath);//+ ".lua"; 
                     filePath = filePath.Replace(LuaDeepProfilerSetting.Instance.luaDirName+"/", "");
                     Debug.Log(filePath);
                     if (File.Exists(filePath + ".lua"))
@@ -142,7 +142,7 @@ namespace MikuLuaProfiler {
 
             foreach (var item in pathArray)
             {
-                if (Path.GetFileNameWithoutExtension(item) == fileName)
+                if (System.IO.Path.GetFileNameWithoutExtension(item) == fileName)
                 {
                     path = item;
                     return true;
@@ -155,7 +155,7 @@ namespace MikuLuaProfiler {
 
             foreach (var item in pathArray)
             {
-                if (Path.GetFileNameWithoutExtension(item).Replace(".lua", "") == fileName)
+                if (System.IO.Path.GetFileNameWithoutExtension(item).Replace(".lua", "") == fileName)
                 {
                     path = item;
                     return true;
@@ -168,7 +168,7 @@ namespace MikuLuaProfiler {
 
             foreach (var item in pathArray)
             {
-                if (Path.GetFileNameWithoutExtension(item) == fileName)
+                if (System.IO.Path.GetFileNameWithoutExtension(item) == fileName)
                 {
                     path = item;
                     return true;
@@ -190,12 +190,12 @@ namespace MikuLuaProfiler {
 
             foreach (var item in pathArray)
             {
-                path = Path.Combine(item, fileName + ".txt");
+                path = System.IO.Path.Combine(item, fileName + ".txt");
                 if (File.Exists(path))
                 {
                     return true;
                 }
-                path = Path.Combine(item, fileName + ".bytes");
+                path = System.IO.Path.Combine(item, fileName + ".bytes");
                 if (File.Exists(path))
                 {
                     return true;

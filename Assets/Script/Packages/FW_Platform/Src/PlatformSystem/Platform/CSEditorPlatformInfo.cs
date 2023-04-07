@@ -1,5 +1,6 @@
-﻿public class CSEditorPlatformInfo : AbstractPlatformInfo
+﻿using Framework;
+public class CSEditorPlatformInfo : AbstractPlatformInfo
 {
-    public static string LuaRoot = CommonLoadPath.LoadRootPath + "/luaRes";
-    public static string XLuaMainPath = CommonLoadPath.LoadRootPath + "main.lua";
+    public static string LuaRoot = Utility.Path.LoadRootPath + "/luaRes";
+    public static string XLuaMainPath = Utility.Path.LoadRootPath + "main.lua";
 }
