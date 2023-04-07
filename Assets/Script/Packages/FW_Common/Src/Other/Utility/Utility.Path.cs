@@ -6,6 +6,7 @@ namespace Framework
     {
         public static class Path 
         {
+            #region 数据
             private static string localProjectName;
             public static string LocalProjectName {
                 get {
@@ -154,6 +155,50 @@ namespace Framework
                     return cilentScenePath;
                 }
             }
+
+            private static string configPath;
+            public static string ConfigPath
+            {
+                get
+                {
+                    if(string.IsNullOrEmpty(configPath))
+                    {
+                        configPath = ClientResourcePath + "/Configs";
+                    }
+                    return configPath;
+                }
+            }
+
+            private static string resourceCollectionConfigFilePath;
+            public static string ResourceCollectionConfigFilePath
+            {
+                get
+                {
+                    if(string.IsNullOrEmpty(resourceCollectionConfigFilePath))
+                    {
+                        resourceCollectionConfigFilePath = ConfigPath + "/ResourceCollection.xml";
+                    }
+                    return resourceCollectionConfigFilePath;
+                }
+            }
+            #endregion
+          
+            #region 功能
+            /// <summary>
+            /// 规范化地址
+            /// </summary>
+            /// <param name="path"></param>
+            /// <returns></returns>
+            public static string GetRegularPath(string path)
+            {
+                if(path == null)
+                {
+                    return null;
+                }
+
+                return path.Replace('\\', '/');
+            }
+            #endregion
         }
     }
 }

@@ -230,7 +230,7 @@ public class XluaNameSpaceMapGenerator
         Dictionary<string, byte[]> fileDict = new Dictionary<string, byte[]>();
         foreach (var cur in files)
         {
-            string fileName = Utility.Filed.GetFileName(cur.FullName) + ".lua";
+            string fileName = Utility.File.GetFileName(cur.FullName) + ".lua";
             if (fileDict.ContainsKey(fileName)) continue;
             string content = File.ReadAllText(cur.FullName, Encoding.UTF8);
             byte[] luaScriptBytes = Encoding.UTF8.GetBytes(content);

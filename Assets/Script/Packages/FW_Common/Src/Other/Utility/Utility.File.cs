@@ -2,7 +2,7 @@
 {
     public static partial class Utility
     {
-        public static class Filed
+        public static class File
         {
             public static string GetFileName(string path)
             {
