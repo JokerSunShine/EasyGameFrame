@@ -6,20 +6,20 @@ namespace Instance.LogAOP
     // {
     //     public int TestMethod(int a,int b)
     //     {
-    //         Debug.Log("Process Test 1");
+    //         CSDebug.Log("Process Test 1");
     //         return a + b;
     //     }
     //     
     //     public static void Before(ref int a,ref int b)
     //     {
-    //         Debug.Log("start:");
+    //         CSDebug.Log("start:");
     //         a = 200;
     //         b = 400;
     //     }
     //     
     //     public static void After(int result)
     //     {
-    //         Debug.Log("End:" +result);
+    //         CSDebug.Log("End:" +result);
     //     }
     // }
 }

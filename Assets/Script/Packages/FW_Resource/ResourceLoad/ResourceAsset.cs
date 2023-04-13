@@ -68,7 +68,6 @@ namespace Script.Packages.FW_Resource.ResourceLoad
         }
         #endregion
 
-        
         #region File
         public override  bool FileExists(string path)
         {

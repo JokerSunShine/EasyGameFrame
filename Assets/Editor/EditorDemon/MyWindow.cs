@@ -52,7 +52,7 @@ public class MyWindow : EditorWindow
     {
         if(Directory.Exists(path) == false || Directory.Exists(path) == false)
         {
-            UnityEngine.Debug.Log("不存在目录或文件夹\r\n" + path);
+            CSDebug.Log("不存在目录或文件夹\r\n" + path);
             return false;
         }
         pathList.Add(path);

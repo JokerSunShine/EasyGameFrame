@@ -105,7 +105,7 @@ namespace MikuLuaProfiler
 
         private static void AcceptThread()
         {
-            UnityEngine.Debug.Log("<color=#00ff00>begin listerner</color>");
+            CSDebug.Log("<color=#00ff00>begin listerner</color>");
             tcpClient = null;
 
             while (true)

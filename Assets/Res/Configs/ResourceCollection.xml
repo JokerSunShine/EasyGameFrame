@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResourceCollection>
+  <Resources>
+    <Resource Name="bingfenggu_chuansongmen" LoadType="0" Packed="False" />
+    <Resource Name="bingfenggu_heiyanhuo" LoadType="0" Packed="False" />
+    <Resource Name="flick" Variant="1" LoadType="0" Packed="False" />
+    <Resource Name="flick" Variant="5" LoadType="0" Packed="False" />
+    <Resource Name="flick" Variant="6" LoadType="0" Packed="False" />
+    <Resource Name="huo" LoadType="0" Packed="False" />
+    <Resource Name="shiluo" LoadType="0" Packed="False" />
+  </Resources>
+  <Assets>
+    <Asset GUID="4ddef0083bf11b14a9a69b07f9946a3e" ResourceName="flick" ResourceVariant="1" />
+    <Asset GUID="6dd82b758d465cf4d86a4989d3a48291" ResourceName="flick" ResourceVariant="6" />
+    <Asset GUID="704fa92b19e7105459d718140bcb167e" ResourceName="bingfenggu_heiyanhuo" />
+    <Asset GUID="8fec2f7143d35794c9367293bdb6e8c4" ResourceName="huo" />
+    <Asset GUID="a77f56cc31511914e94901ea9f0966ff" ResourceName="shiluo" />
+    <Asset GUID="dd5728bec6bdb3c4d9f39d2434694a33" ResourceName="bingfenggu_chuansongmen" />
+    <Asset GUID="fd07a843075fb9c4da8c508dead816c8" ResourceName="flick" ResourceVariant="5" />
+  </Assets>
+</ResourceCollection>
