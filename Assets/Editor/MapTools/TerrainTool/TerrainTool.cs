@@ -99,11 +99,11 @@ namespace MapTools.TerrainTool
         #region GUI
         public override void OnToolGUI()
         {
-            GUILayout.BeginVertical();
+            EditorGUILayout.BeginVertical();
             {
-                GUILayout.BeginHorizontal();
+                EditorGUILayout.BeginHorizontal();
                 ChooseIndex = EditorGUILayout.Popup("Scene", ChooseIndex, sceneNames, GUILayout.Width(250));
-                GUILayout.EndHorizontal();
+                EditorGUILayout.EndHorizontal();
                 if(passMaps_serializedProperty != null)
                     EditorGUILayout.PropertyField(passMaps_serializedProperty);
                 hollowMap = EditorGUILayout.ObjectField("HollowMap", hollowMap, typeof(Texture2D), false,GUILayout.Width(250)) as Texture2D;
@@ -113,15 +113,15 @@ namespace MapTools.TerrainTool
                     EditorGUILayout.FloatField("Height Offset", heightMapData.heightOffset, GUILayout.Width(250));
                 heightMapData.heightScale =
                     EditorGUILayout.FloatField("Height Offset", heightMapData.heightScale, GUILayout.Width(250));
-                GUILayout.BeginHorizontal();
+                EditorGUILayout.BeginHorizontal();
                 terrainMat = EditorGUILayout.ObjectField("TerrainMat", terrainMat, typeof(Material), false,GUILayout.Width(250)) as Material;
                 if(GUILayout.Button("创建地形材质",GUILayout.Width(100)))
                 {
                       
                 }
-                GUILayout.EndHorizontal();
+                EditorGUILayout.EndHorizontal();
             }
-            GUILayout.EndVertical();
+            EditorGUILayout.EndVertical();
         }
         #endregion
         

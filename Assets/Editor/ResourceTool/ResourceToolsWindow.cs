@@ -11,7 +11,7 @@ namespace ResourceTool
     public class ResourceToolsWindow : EditorWindow
     {
         #region 数据
-        private static Rect windowRect = new Rect(0,0,700,700);
+        private static Rect windowRect = new Rect(0,0,1000,700);
         private List<ResourcePageItem> pages = new List<ResourcePageItem>();
         private string[] toogleNames;
         private int toolIndex = 0;
@@ -67,7 +67,7 @@ namespace ResourceTool
         private void RefreshToogle()
         {
             GUILayout.BeginHorizontal();
-            GUILayout.Space(EditorUtil.ButtonSpace);
+            GUILayout.Space(EditorUtil.CommonSpace);
             toolIndex = GUILayout.Toolbar(toolIndex, toogleNames, "LargeButton", GUILayout.Width(position.width));
             GUILayout.EndHorizontal();
         }

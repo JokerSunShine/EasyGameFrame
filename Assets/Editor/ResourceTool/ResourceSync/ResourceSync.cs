@@ -25,7 +25,7 @@ namespace ResourceTool
         public override void OnToolGUI()
         {
             GUILayout.BeginVertical();
-            GUILayout.Space(EditorUtil.ButtonSpace);
+            GUILayout.Space(EditorUtil.CommonSpace);
             if(GUILayout.Button("移除所有Asset Bundle配置",GUILayout.Height(EditorUtil.ButtonHegiht)))
             {
                 if (!controller.RemoveAllAssetBundleNames())
@@ -35,7 +35,7 @@ namespace ResourceTool
                 AssetDatabase.Refresh();
             }
             
-            GUILayout.Space(EditorUtil.ButtonSpace);
+            GUILayout.Space(EditorUtil.CommonSpace);
             if(GUILayout.Button("ResourceCollection.xml同步到工程",GUILayout.Height(EditorUtil.ButtonHegiht)))
             {
                 if(!controller.ResourceCollectionXmlToProject())
@@ -45,7 +45,7 @@ namespace ResourceTool
                 AssetDatabase.Refresh();
             }
 
-            GUILayout.Space(EditorUtil.ButtonSpace);
+            GUILayout.Space(EditorUtil.CommonSpace);
             if(GUILayout.Button("工程Asset Bundle配置同步到ResourceCollection.xml",GUILayout.Height(EditorUtil.ButtonHegiht)))
             {
                 if(!controller.ResourceCollectionXmlFromProject())

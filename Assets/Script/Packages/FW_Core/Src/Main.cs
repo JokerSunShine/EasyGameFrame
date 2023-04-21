@@ -2,8 +2,10 @@
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Numerics;
+using System.Security.Cryptography;
 using _3DMath;
 using Algorithm.GraphArithmetic;
 using Algorithm.MiniSpanTree.MiniSpanTree;
@@ -38,13 +40,16 @@ using Algorithm.StringMatch;
 using Script.DataStruct.Tree.Heap.MinHeap;
 using DataStruct.Tree.Heap.MaxHeap;
 using DataStruct.Tree.Heap.BinomialHeap;
+using Newtonsoft.Json.Converters;
 using Script.Algorithm.BagAlgorithm;
 using Script.Packages.FW_Core.Src;
 using Script.Packages.FW_Resource.ResourceLoad;
 using Script.Packages.FW_Resource.Task;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using Toggle = UnityEngine.UIElements.Toggle;
+using Utility = Framework.Utility;
 
 public class Main : MonoBehaviour
 {
@@ -71,7 +76,7 @@ public class Main : MonoBehaviour
         AOPTest();
         BagItem[] bagItems = new BagItem[5]
         {
-            new BagItem(1, 2, 3),
+            new BagItem(1, 2, 3),                                     
             new BagItem(2, 6, 5),
             new BagItem(3, 5, 10),
             new BagItem(4, 4, 7),

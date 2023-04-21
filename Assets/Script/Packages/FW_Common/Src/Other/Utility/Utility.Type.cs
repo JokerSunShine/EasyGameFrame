@@ -11,9 +11,19 @@ namespace Framework
         {
             private static string[] IgnoreFileNameChars = new string[] { "+",".", "`","&","[","]","," };
             private static string[] IgnoreTagNameChars = new string[] { "+", ".", "`", "&", "[", "]", "," };
+
+            private static readonly string[] AssemblyNames =
+            {
+                "Assembly-CSharp"
+            };
+            
+            private static readonly string[] EditorAssemblyNames =
+            {
+                "Assembly-CSharp-Editor"
+            };
             
             /// <summary>
-            /// 获取当前所有程序域下所有程序集的Type
+            /// 获取当前所有程序域下所有程序集
             /// </summary>
             public static List<System.Type> GetAllTypes()
             {
@@ -108,6 +118,48 @@ namespace Framework
                 }
                 return typeName;
             }
+            
+            public static string[] GetTypeNames(System.Type typeBase)
+            {
+                return GetTypeNames(typeBase, AssemblyNames);
+            }
+            
+            public static string[] GetEditorTypeNames(System.Type typeBase)
+            {
+                return GetTypeNames(typeBase, EditorAssemblyNames);
+            }
+            
+            private static string[] GetTypeNames(System.Type typeBase,string[] assemblyNames)
+            {
+                List<string> typeNames = new List<string>();
+                foreach(string assemblyName in assemblyNames)
+                {
+                    Assembly assembly;
+                    try
+                    {
+                        assembly = Assembly.Load(assemblyName);
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                    if(assembly == null)
+                    {
+                        continue;
+                    }
+
+                    System.Type[] types = assembly.GetTypes();
+                    foreach(System.Type type in types)
+                    {
+                        if(type.IsClass && !type.IsAbstract && typeBase.IsAssignableFrom(type))
+                        {
+                            typeNames.Add(type.FullName);
+                        }
+                    }
+                }
+                typeNames.Sort();
+                return typeNames.ToArray();
+            }
         }
         
         /// <summary>
@@ -119,7 +171,6 @@ namespace Framework
         {
             return Type.GetTypeTagName(type.ToString());
         }
-
 
         /// <summary>
         /// 是否是指定的类型
