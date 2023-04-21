@@ -30,7 +30,7 @@ namespace Framework
                 List<System.Type> typeList = new List<System.Type>();
                 try
                 {
-                    List<Assembly> assemblyList = new List<Assembly>();
+                    List<System.Reflection.Assembly> assemblyList = new List<System.Reflection.Assembly>();
                     var assemblies = AppDomain.CurrentDomain.GetAssemblies();
                     assemblyList.AddRange(assemblies);
                     for (int i = 0; i < assemblyList.Count; i++)
@@ -134,10 +134,10 @@ namespace Framework
                 List<string> typeNames = new List<string>();
                 foreach(string assemblyName in assemblyNames)
                 {
-                    Assembly assembly;
+                    System.Reflection.Assembly assembly;
                     try
                     {
-                        assembly = Assembly.Load(assemblyName);
+                        assembly = System.Reflection.Assembly.Load(assemblyName);
                     }
                     catch
                     {
