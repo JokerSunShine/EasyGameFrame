@@ -21,24 +21,6 @@ public class CSPlatformManagerObject : ManagerObject,I_CSPlatformManager {
         }
     }
 
-    public UnityEditor.BuildTargetGroup BuildTargetGroup {
-        get {
-            if (RunTimePlatform == RuntimePlatform.WindowsEditor || RunTimePlatform == RuntimePlatform.WindowsPlayer)
-            {
-                return UnityEditor.BuildTargetGroup.Standalone;
-            }
-            else if (RunTimePlatform == RuntimePlatform.Android)
-            {
-                return UnityEditor.BuildTargetGroup.Android;
-            }
-            else if (RunTimePlatform == RuntimePlatform.IPhonePlayer)
-            {
-                return UnityEditor.BuildTargetGroup.iOS;
-            }
-            return UnityEditor.BuildTargetGroup.Unknown;
-        }
-    }
-
     private OperationPlatform operationPlatform;
     public OperationPlatform OperationPlatform {
         get {

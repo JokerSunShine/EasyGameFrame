@@ -11,6 +11,9 @@ using UnityEngine;
 
 namespace ResourceTool
 {
+    /// <summary>
+    /// 资源采集工具
+    /// </summary>
     public class ResourceCollection
     {
         #region 数据

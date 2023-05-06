@@ -31,7 +31,7 @@ namespace Framework
                 try
                 {
                     List<System.Reflection.Assembly> assemblyList = new List<System.Reflection.Assembly>();
-                    var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+                    var assemblies = Assembly.GetAssemblies();
                     assemblyList.AddRange(assemblies);
                     for (int i = 0; i < assemblyList.Count; i++)
                     {

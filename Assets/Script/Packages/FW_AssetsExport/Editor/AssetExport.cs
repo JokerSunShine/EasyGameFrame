@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Framework;
 using UnityEditor;
 using UnityEditor.Experimental;
 using UnityEngine;
@@ -11,5 +12,6 @@ public class AssetExport : AssetsModifiedProcessor
         AssetMoveInfo[] movedAssets)
     {
         Debug.LogError("资源设置变动");
+        Utility.Assembly.AssetChange();
     }
 }

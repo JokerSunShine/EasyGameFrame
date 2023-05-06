@@ -38,7 +38,28 @@ namespace XLua
 #endif
 		}
         
-		public int __Gen_Delegate_Imp1(int p0, string p1, out Tutorial.CSCallLua.DClass p2)
+		public void __Gen_Delegate_Imp1()
+		{
+#if THREAD_SAFE || HOTFIX_ENABLE
+            lock (luaEnv.luaEnvLock)
+            {
+#endif
+                RealStatePtr L = luaEnv.rawL;
+                int errFunc = LuaAPI.pcall_prepare(L, errorFuncRef, luaReference);
+                
+                
+                PCall(L, 0, 0, errFunc);
+                
+                
+                
+                LuaAPI.lua_settop(L, errFunc - 1);
+                
+#if THREAD_SAFE || HOTFIX_ENABLE
+            }
+#endif
+		}
+        
+		public int __Gen_Delegate_Imp2(int p0, string p1, out Tutorial.CSCallLua.DClass p2)
 		{
 #if THREAD_SAFE || HOTFIX_ENABLE
             lock (luaEnv.luaEnvLock)
@@ -62,7 +83,7 @@ namespace XLua
 #endif
 		}
         
-		public System.Action __Gen_Delegate_Imp2()
+		public System.Action __Gen_Delegate_Imp3()
 		{
 #if THREAD_SAFE || HOTFIX_ENABLE
             lock (luaEnv.luaEnvLock)
@@ -97,14 +118,19 @@ namespace XLua
 			    return new XluaMgr.XLuaMgr_Init(__Gen_Delegate_Imp0);
 			}
 		
+		    if (type == typeof(XluaMgr.XLuaMgr_Update))
+			{
+			    return new XluaMgr.XLuaMgr_Update(__Gen_Delegate_Imp1);
+			}
+		
 		    if (type == typeof(Tutorial.CSCallLua.FDelegate))
 			{
-			    return new Tutorial.CSCallLua.FDelegate(__Gen_Delegate_Imp1);
+			    return new Tutorial.CSCallLua.FDelegate(__Gen_Delegate_Imp2);
 			}
 		
 		    if (type == typeof(Tutorial.CSCallLua.GetE))
 			{
-			    return new Tutorial.CSCallLua.GetE(__Gen_Delegate_Imp2);
+			    return new Tutorial.CSCallLua.GetE(__Gen_Delegate_Imp3);
 			}
 		
 		    return null;

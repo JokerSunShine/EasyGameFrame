@@ -251,12 +251,14 @@ public class CSNetWorkManager : ManagerObject
     {
         if (Client == null || !Client.Connected) { return; }
 
-        byte[] msgBytes;
+        byte[] msgBytes = null;
 
         using (MemoryStream stream = new MemoryStream())
         {
+#if UNITY_EDITOR 
             ProtoBuf.Serializer.Serialize(stream, msg);
             msgBytes = stream.ToArray();
+#endif
         }
 #if MSGDEBUG
         if (msg != null)

@@ -1,0 +1,841 @@
+package roleV2;
+
+import "fight.proto";
+import "active.proto";
+import "bag.proto";
+import "appearance.proto";
+import "marry.proto";
+import "element.proto";
+import "imprint.proto";
+import "equip.proto";
+import "collect.proto";
+import "zhenfa.proto";
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "RoleProto";
+
+message PetBean {
+  required int64 id = 1;//宠物id
+  optional int32 type = 2;//1 神兽 2 白虎
+}
+
+message AttributeInfo {
+  required bytes attributeType = 1;//属性类型
+  required int64 attributeValue = 2;//属性值
+}
+
+message SpecialRingBean {
+  required int32 type = 1;//特戒类型
+  required int32 level = 2;//特戒等级
+}
+
+message ReinItemBean {
+  required int32 itemId = 1;//道具id
+  optional int32 useNum =2;//已使用次数
+}
+
+message VeinBean {
+  required int32 newId = 1;//现在的配置表id
+  optional int32 fightValue = 2;//战斗力
+}
+
+message InnerPowerInfoBean {
+  required int32 innerCfgId = 1;//内功配置表id
+  required int64 innerExp =2;//内功当前经验值
+}
+
+message RoleSettingBean {
+  required int32 id = 1;
+  optional bool state =2;//勾选为true,去掉勾选为false
+  required int32 roleSettingValue = 3;//参数值
+}
+
+message HandyKeyBean {
+  required int32 index = 1;//编号
+  optional int32 type = 2;//类型
+  optional int32 param = 3;//参数
+}
+
+//其他玩家的通用信息
+message OtherPlayerCommonInfo {
+  required int64 otherRoleId = 1; //其他玩家的Id
+  required int64 teamId = 2; //指定玩家的队伍Id
+  required int64 selfTeamId = 3; //请求者本队伍的队长Id
+  optional bool isFriend = 4; //false：添加好友 true：删除好友
+  optional bool isBlack = 5;//false:加入黑名单 true：移除黑名单
+}
+
+//其他玩家信息
+message RoleToOtherInfo {
+  optional int64 roleId = 1; //角色ID
+  optional string roleName = 2; //名称
+  optional int32 level = 3; //等级
+  optional int32 career = 4; //职业
+  optional int32 sex = 5; //性别
+  optional int32 mapId = 6; //所在地图
+  optional int32 line = 7; //所在分线
+  optional int64 hp = 8; //血量
+  optional int64 maxHp = 9; //最大血量
+  optional int32 weapon = 10; //武器
+  optional int32 armor = 11; //衣服
+  repeated fightV2.BufferInfo buffers = 12; //身上的buff
+  optional int64 mp = 13; //魔法值
+  optional int64 maxMp = 14; //最大魔法值
+  optional int32 vipLevel = 15; //vip等级
+  optional int32 wing = 16; //光翼等级
+  optional string unionName = 17; //行会名称
+  optional int32 unionPos = 18; //行会职位20：会长 15：副会 10：长老 5：护法 0：成员
+  optional int32 x = 19;
+  optional int32 y = 20;
+  repeated bagV2.BagItemInfo equipList = 21;
+  optional int32 helmet = 22;//头盔
+  repeated bagV2.ExtraEquip extraEquipList = 23; //额外装备
+  repeated appearanceV2.wearPosition wearPosition = 24;//穿戴的时装
+  optional marryV2.ResPlayerMarriageInformation marryInfo = 25;//结婚信息
+  optional string appellation = 26;//称谓
+  repeated PlayerAttribute attr = 27;//属性
+  optional int32 nbValue = 28; // 战斗力
+  repeated imprintV2.ImprintInfo imprint = 29;//印记
+  repeated elementV2.ElementInfo element = 30;//元素
+  optional int32 face = 31; // 面巾
+  repeated int32 monthCard = 32; //商会月卡的id
+  optional int32 isChairman = 33;//是否是代理会长 默认0不是，1是
+  optional int32 hostId = 34;//远程主机id  serverId * 1000 + platId
+  optional equipV2.AllMagicWeaponInfo magicWeapon = 35;//法宝信息
+  optional int32 rein = 36;//转生
+  optional int32 officialPosistionId = 37; //官职.
+  optional equipV2.WholeSoulEquips soulEquip = 38;//镶嵌魂装
+  optional int32 emperorTokenId     = 39; //虎符ID.
+  optional collect.CabinetInfo cabinetInfo = 40; // 藏品
+  optional VipMember vipMember = 41; //会员信息
+  optional int32 sealMarkId = 42 ; //封号等级
+  optional zhenfaV2.ZhenfaInfo zhenfa = 43; //阵法信息
+}
+
+//会员信息
+message VipMember {
+	optional int32 level = 1;  //等级
+}
+
+message PlayerAttribute {
+  required int32 type = 1; //属性类型
+  required int64 num = 2; //属性值
+}
+
+//通知属性发生变化
+message ResPlayerAttributeChange {
+  required int64 uid = 1;//玩家id
+  optional int32 power = 2;//战斗力
+  repeated PlayerAttribute attr = 3;//属性
+  repeated PlayerAttribute changeAttr = 4;//改变的属性
+  optional int32 changePower = 5;//改变的战斗力
+}
+
+enum AttributeType {
+  NULL = 0;
+  MaxHp = 1;//血量
+  MaxMp = 2;//魔法
+  InnerPowerMax = 3;//内力
+  PhyAttackMin = 4;//攻击下限
+  PhyAttackMax = 5;//攻击上限
+  MagicAttackMin = 6;//魔法攻击下限
+  MagicAttackMax = 7;//魔法攻击上限
+  TaoAttackMin = 8;//道术攻击下限
+  TaoAttackMax = 9;//道术攻击上限
+  PhyDefenceMin = 10;//物防
+  PhyDefenceMax = 11;//物防
+  MagicDefenceMin = 12; //魔防
+  MagicDefenceMax = 13; //魔防
+  Critical = 14; //暴击
+  CriticalDamage = 15; //爆伤
+  Accurate = 16; //准确
+  Dodge = 17; //闪避
+  HpRecover = 18; //生命回复
+  MpRecover = 19; //魔防回复
+  InnerPowerRecover = 20; //内力回复
+  Luck = 21; //幸运
+  ResistanceCrit = 22; //抗暴
+  HolyAttackMax = 26; //最大神圣攻击
+  AttackSpeed = 27; //攻速
+  PkAtt = 28; //PK攻击
+  PkDef = 29; //PK防御
+  PenetrationAttributes = 31; //穿透
+  Brawn = 32; //腕力
+  BearingWeight = 33; //负重
+  ElectricAttackMax = 35;//最大电攻
+  FireAttackMax = 36;//火攻
+  IceAttackMax = 37;//冰攻
+  DarkAttackMax = 38;//暗攻
+  PunctureAttackMax = 39;//穿刺攻
+  ElectricDefenceMax = 40;//最大电防
+  FireDefenceMax = 41;//火防
+  IceDefenceMax = 42;//冰防
+  DarkDefenceMax = 43;//暗防
+  PunctureDefenceMax = 44;//穿刺防
+  zsResistPercent = 45;
+  fsResistPercent = 46;
+  dsResistPercent = 47;
+  phantomHp = 48;//暗防
+  curse = 49;//诅咒
+  MbRate = 50;//麻痹
+  HolyDefenceMax = 51;//最大神圣防御
+  HolyAttackMin = 58; //最大神圣攻击
+  HolyDefenceMin = 59;//最小神圣防御
+  ElectricAttackMin = 60;//最小电攻
+  FireAttackMin = 61;//
+  IceAttackMin = 62;//
+  DarkAttackMin = 63;//
+  PunctureAttackMin = 64;//
+  ElectricDefenceMin = 65;//最小电防
+  FireDefenceMin = 66;//
+  IceDefenceMin = 67;//
+  DarkDefenceMin = 68;//
+  PunctureDefenceMin = 69;//
+  MonsterDieAddExpBei = 70; //打怪经验倍数
+  showCritical = 71; // 客户端显示的暴击
+  showPhyAttackMin = 72; //客户端显示的攻击下限（仅客户端使用）
+  showPhyAttackMax = 73; //客户端显示的攻击上限（仅客户端使用）
+  showMagicAttackMin = 74; //客户端显示的魔法攻击下限（仅客户端使用）
+  showMagicAttackMax = 75; //客户端显示的魔法攻击上限（仅客户端使用）
+  showTaoAttackMin = 76; //客户端显示的道术攻击下限（仅客户端使用）
+  showTaoAttackMax = 77; //客户端显示的道术攻击上限（仅客户端使用）
+}
+
+//玩家基本数据
+message ResPlayerBasicInfo {
+  optional int32 power = 1;//战斗力
+  repeated PlayerAttribute attr = 2;//属性 对应AttributeType
+  optional int64 hp = 3;
+  optional int32 mp = 4;
+  optional int32 innerPower = 5;
+  optional string name = 6;
+  optional int32 level = 7;
+  optional int32 reinLevel = 8;//转生等级
+  optional int32 career = 9;
+  optional int32 sex = 10;
+  optional int64 exp = 11;
+  optional int32 createTime = 12;//创角时间 (s)
+  optional int32 mapId = 13; //所在地图
+  optional int32 line = 14; //所在分线
+  optional int64 maxHp = 15; //最大血量
+  optional int32 maxMp = 16; //最大魔法值
+  optional int32 x = 17; //
+  optional int32 y = 18; //
+  optional int32 maxInnerPower = 19; //最大内力值
+  optional int64 roleId = 20; //角色ID
+  optional string unionName = 21; //行会名称
+  optional RoleExtraValues roleExtraValues = 22;
+  optional activeV2.ActiveInfo activeInfo = 23; //活跃度
+  repeated int64 roleSettings = 24;//玩家基础设置
+  repeated CDBean cds = 25; // 所有的cd
+  repeated int64 skillShortcut = 26; //技能快捷键
+  optional int64 unionId = 27;//工会ID
+  optional int32 vipLevel = 28;
+  optional int32 titleId = 29;
+  optional int32 unionPos = 30; //行会职位
+  optional bool isSabacUnion = 31;//是否是沙巴克行会
+  optional int64 openServerTime = 32;//开服时间
+  optional int64 combineServerTime = 33; //合服时间
+  optional int32 nbValueMax = 34;//历史最大战斗力
+  repeated fightV2.BufferInfo buffers = 35; //身上的buff
+  repeated int32 roleSkillSettings = 36;//玩家技能开关设置
+  optional int32 thisJunXianId = 37;//玩家军衔ID
+  optional int32 reinExp = 38;//修为
+  optional int32 mergeCount = 39; //合服次数
+  optional int32 firstRecharge = 40;//0 没有首冲 1 已经首冲
+  optional int32 zeroLevel = 41; //零点等级
+  optional int32 zeroRein = 42; //零点转生
+  optional int64 auctionDiamond = 43;//钻石消费额度
+  optional int64 sabacUnionId = 44; // 沙城霸主行会 id
+  optional int32 groupMemberAllowMode = 45; //当没队伍时设置允许组队
+  optional string sabacUnionName = 46; // 沙巴克霸主行会名字
+  repeated int32 monthCard = 47; //商会月卡的id
+  optional int32 unionRank = 48;//帮会排名
+  optional int32 wanLi = 49;//腕力
+  optional int32 sealMarkId = 50;//封号Id
+  optional bool isSabacUniteUnion = 51;//是否是沙巴克联盟
+  optional int32 SabacUniteType = 52;//沙巴克联盟类型
+  optional VipMember vipMember = 53; //会员信息
+  optional int32 rechargeFirst = 54; //首充
+  optional int32 rechargeTotal = 55; //总充值金额
+  optional int32 automaticCollectCount = 56;//自动战斗采集剩余数量
+}
+
+//联服相关信息
+message GameBasicShareInfo {
+  optional int32 type = 1;  //1:初始化 2.更新
+  optional int32 shareNum = 2; //联服的次数
+  optional int64 willUniteUnionTimeOpen = 3;  //联盟开始的时间
+  repeated int32 willCrossServerGroup = 4;    //预备跨服组
+  optional int64 unionVoteBeginTime = 5; //投票开始的时间
+  optional int64 unionVoteEndTime = 6; //投票结束的时间
+  optional int32 enterShare = 7; //是否能进联服
+  optional int32 voteUnionType = 8; //玩家投票的联盟类型
+  repeated ShareOpenTimeInfo shareOpenTimes = 9; //跨服开启的历史记录
+  optional int32 enterShareNum = 10; //进入联服次数
+  optional int64 shareOpenTime = 11; //联服开启的时间
+}
+
+//跨服开启的时间
+message ShareOpenTimeInfo {
+	optional int32 shareNum = 1;  //当前开启的次数
+	optional int64 time = 2; //开启的时间
+	optional string shareServers = 3;   //跨在一起的服务器， 格式：1001,1003
+}
+
+//额外数据
+message RoleExtraValues {
+  optional int32 freeReliveCount = 1;//剩余免费复活次数
+  optional int64 nextReliveTime = 2; //下次复活时间
+  optional int32 weapon = 3; //武器
+  optional int32 clothes = 4;//衣服
+  optional int32 helmet = 5;//头盔
+  optional int32 face = 6; //面巾
+}
+
+//通知玩家经验发生变化
+message ResPlayerExpChange {
+  required int64 curExp = 1;//当前经验
+  required int32 logAction = 2;//经验来源
+  required int64 addExp = 3;//增加的经验
+  required int64 curInnerPowerExp = 4;//当前内功经验
+  required int32 addInnerPowerExp = 5;//增加的内功经验
+  required int32 addHsExp = 6;//增加的元灵经验
+}
+
+//通知玩家等级发生变化
+message ResPlayerLevelChange {
+  required int64 uid = 1;//玩家id
+  required int64 curExp = 2;//当前经验
+  required int32 curLevel = 3;//当前等级
+  optional int32 levelPower = 4;//等级战力
+}
+
+//发送角色转生信息
+message ResSendRoleReinInfo {
+  required int32 cfgId = 1;//转生配置表id
+  optional int32 reinNum = 2;//当前修为
+  optional int32 fightValue = 3;//战斗力
+  optional int32 exchangeNum = 4;//剩余兑换次数
+  repeated ReinItemBean useNum = 5;//修为丹已使用次数
+  optional int32 reinLevel = 6;//当前转生等级
+}
+
+//转生成功
+message ResRoleReinSuccess {
+}
+
+//发送角色兑换修为结果
+message ResRoleExchangeReinResult {
+  required int32 reinNum = 1;//当前修为
+  required int32 exchangeNum = 2;//剩余兑换次数
+  required int32 roleLevel = 3;//兑换后角色等级
+  required int32 exchange = 4;//兑换的修为
+}
+
+//发送总战斗力
+message ResTotalFightValueChange {
+   required int32 totalFightValue = 1;//总战斗力
+}
+
+//发送宠物列表
+message ResPetList {
+  repeated PetBean petBean = 1;//宠物列表
+}
+
+//发送玩家宠物信息
+message ResCreatePet {
+  required int64 petId = 1;//宠物id
+  required int32 type =2;//1 神兽 2 白虎
+}
+
+//请求改变玩家死亡状态
+message ChangeRoleDieStateRequest {
+  required int32 type = 1;//类型 1死亡 2复活
+}
+
+//请求角色设置
+message RoleSettingRequest {
+   required int32 id = 1;
+   optional bool state = 2;//勾选为true,去掉勾选为false
+   optional int32 roleSettingValue = 3;//参数值
+}
+
+//角色设置变化返回
+message ResRoleSettingChange {
+   required RoleSettingBean roleSettingBean = 1;//变化设置
+}
+
+//角色设置消息
+message ResRoleSettingInfo {
+   repeated RoleSettingBean roleSettingBean = 1;//角色设置
+}
+
+//发送角色经脉信息
+message ResSendRoleVeinInfo {
+   required VeinBean roleVein = 1;//角色经脉信息
+}
+
+//发送内功信息
+message ResSendInnerPowerInfo {
+   required InnerPowerInfoBean powerBeans = 1;//内功信息
+}
+
+//内功信息变化
+message ResInnerPowerInfoChange {
+   required InnerPowerInfoBean changeBean = 1;//变化内功信息
+}
+
+//请求快捷键设置
+message HandyKeySettingRequest {
+   optional int32 index = 1;//编号
+   optional int32 type = 2;//类型
+   optional int32 num = 3;//参数值
+}
+
+//请求交换快捷键设置
+message ExchangeHandyKeyRequest {
+   required int32 leftIndex = 1;//左编号
+   required int32 rightIndex = 2;//右编号
+}
+
+//返回快捷键设置信息
+message ResHandyKeySettingInfos {
+   repeated HandyKeyBean list = 1;//快捷键列表
+}
+
+message GetRoleInfo {
+  required int64 targetId = 1;
+}
+
+//保存玩家设置请求
+message SaveRoleSettingsMsg {
+  repeated int64 roleSettings = 1;
+}
+
+//保存玩家技能设置请求
+message SaveRoleSkillSettingsMsg {
+  repeated int32 skillId = 1;
+}
+
+//cool down
+message CDBean {
+  required int32 type = 1; //见 CdType
+  required int64 key = 2; //一般是技能 id, buff id, 物品 id
+  required int64 endTime = 3;
+}
+
+enum CdType {
+  // 回血CD
+  DOWN_RECOVER_HP = 1;
+  // 伤害时回血
+  HURT_RECOVER_HP = 2;
+  // 特殊属性
+  SPEC_ATT = 3;
+  SKILL = 4;
+  SKILL_COMMON = 5;
+  BUFFER = 6;
+  ITEM_USE = 7;
+}
+
+message EditName {
+  required string name = 1;
+  required int32 type = 2;// 1玩家改名 2行会改名
+}
+
+message ResEditName {
+  optional int32 isSuccess = 1;//0失败:1成功
+  optional int32 type = 2;
+  optional string reason = 3;
+}
+
+message SystemOpenReminder {
+  optional int64 rid = 1;//玩家ID
+  optional int32 configId = 2;//configId
+  optional int32 levelDiffer = 3;//相差的等级
+  repeated int32 yiKaiQi = 4;//已开启的系统ID
+}
+
+//泡点在线经验
+message ResBubbleOnlineExp {
+  optional int64 exp = 1;//获得经验
+  optional int32 bubbleTime = 2;//已经泡点时间
+  optional int32 totalTime = 3;//泡点总时间
+  optional int64 endTime = 4;//截止时间戳
+  optional int32 servantExp = 5;//获得灵兽经验
+}
+//泡点可领离线经验
+message BubbleOfflineExp {
+  optional int64 exp = 1;//离线总经验
+  optional int64 vipExp = 2;//vip总经验
+  optional int64 developExp = 3;//繁荣总经验
+  optional int64 offlineTime = 4;//累计离线时间
+  optional int32 vipPercent = 5;//vip加成百分比
+}
+//自动寻路，自动战斗
+message AutoOperate {
+  optional bool autoFind = 1; //自动寻路
+  optional bool autoFight = 2;//自动战斗
+}
+
+//刷新活动数据
+message ResRefreshInfo {
+ optional activeV2.ActiveInfo activeInfo = 1; //活跃度
+}
+
+//返回查看矿工信息
+message ResGetMinerInfo {
+  repeated MinerInfo miner = 1;//矿工信息
+  repeated MineInfo mine = 2;//挖到的矿石信息
+}
+
+//矿工信息
+message MinerInfo {
+  optional int32 id = 1;//矿工Id
+  optional int32 type = 2;//矿工type
+  optional int32 activityType = 3;//0是可雇佣 1是正在挖矿 2是完成 3是死亡可继续雇佣
+  optional int64 endTime = 4;//挖矿结束时间
+  optional int32 count = 5;//剩余可雇佣次数
+  optional string point = 6;//矿工坐标（X#Y）
+
+}
+
+message MineInfo {
+  optional int32 itemId = 1;
+  optional int32 count = 2;
+}
+
+//刷新矿石信息
+message ResUpdateMineInfo {
+  repeated MineInfo mine = 3;//挖到的矿石信息
+}
+
+//请求雇佣矿工
+message ReqHireMiner {
+  optional int32 id = 1;
+  optional int32 x = 2;
+  optional int32 y = 3;
+}
+
+//变间谍信息
+message ResPlayerSpyInfo {
+  optional int32 isSpy = 1; //1变间谍 0否
+  optional string name = 2;
+  optional string unionName = 3;
+  optional int32 career = 4;
+  optional int32 sex = 5;
+  optional int32 wing = 6;
+  optional int32 titleId = 7;
+  optional int32 thisJunXianId = 8;
+  optional appearanceV2.TitleInfo appellation = 9;//称谓信息
+  repeated appearanceV2.wearPosition wearInfo = 10;
+  optional RoleExtraValues extraValues = 11;
+  optional int64 remainTime = 12;//剩余毫秒
+}
+
+//请求保存或修改小秘书记录
+message ReqSaveSecretaryInfo {
+  optional int32 secretaryType = 1;//1是提问 2是回答 3是问题反馈
+  optional string problem = 2;//保存提问
+  optional int32 answerType = 3;//回答类型 1 字符串  2 配置ID客户端读表
+  optional string solution = 4;//回答
+  optional int32 answerId = 5;//回答ID
+  optional int32 submissionProblem = 6;//是否已提交问题反馈 默认0未提交 1是已提交
+  optional string compulsoryProblem = 7;//问题反馈必填项
+  optional string wrongCompulsoryProblem = 8;//问题反馈非必填项
+  optional int64 lid = 9;//历史几率的唯一Id
+  optional int32 saveOrUpdate = 10;//是保存还是修改 0是保存，1是修改
+}
+
+//返回查看小秘书历史记录
+message ResSeeSecretaryInfo {
+  repeated Secretary secretaryInfo = 1;//小秘书历史记录
+}
+
+//返回小秘书历史记录
+message ResBackSecretaryInfo {
+  optional Secretary secretaryInfo = 1;//小秘书历史记录
+}
+
+
+//小秘书消息
+message Secretary {
+  optional int32 secretaryType = 1;//1是提问 2是回答 3是问题反馈
+  optional string problem = 2;//保存提问
+  optional int32 answerType = 3;//回答类型 1 字符串  2 配置ID客户端读表
+  optional string solution = 4;//回答
+  optional int32 answerId = 5;//回答ID
+  optional int32 submissionProblem = 6;//是否已提交问题反馈 默认0未提交 1是已提交
+  optional string compulsoryProblem = 7;//问题反馈必填项
+  optional string wrongCompulsoryProblem = 8;//问题反馈非必填项
+  optional int64 lid = 9;//历史几率的唯一Id
+  optional int64 createTime = 10;//创建时间
+}
+
+//请求删除小秘书记录
+message ReqDeleteSecretaryInfo {
+  optional int64 lid = 1;//要删除的历史记录的唯一ID
+}
+
+//小秘书推送
+message ResSecretaryPush {
+  optional int32 pushId = 1;//推送的id
+}
+
+message ResRoleFirstRechargeChange {
+  optional int32 firstRecharge = 40;//0 没有首冲 1 已经首冲
+}
+
+//检查小秘书推送前置任务是否完成
+message ReqCheckPreTaskIsComplete {
+  optional int32 taskId = 1;//任务ID‘
+  optional int32 tableId = 2;//客户端用
+}
+
+//返回前置任务是否完成
+message ResCheckPreTaskIsComplete {
+  optional int32 isComplete = 1;//0是未完成 1是已完成
+  optional int32 tableId = 2;//客户端用
+}
+
+//小秘书主线任务推送
+message ReqMainTaskPush {
+  optional int32 type = 1;//类型 1点击任务，判断是否推送过
+  optional int32 taskId = 2; //任务ID
+}
+
+//返回小秘书主线推送是否已经发过
+message ResMainTaskPush {
+  optional int32 type = 1;//类型
+  optional int32 taskId = 2; //任务ID
+  optional int32 send = 3;//是否发送过 默认0发送过， 1未发送
+}
+message ReqRefineMasterPanel {
+  required int32 type = 1; // 1 修为， 2 灵力, 3-功勋
+}
+
+//返回炼制大师面板
+message ResRefineMasterPanel {
+  optional int32 cfgId = 1;//表id
+  optional int32 count = 2;//当天已炼制次数
+  optional int32 type = 3;
+}
+message ReqRefine {
+  required int32 type = 1;  //炼制类型：1-修为，2-灵力，3-功勋
+  optional int32 servantType = 2; // 炼制灵力时填灵兽类型
+  optional int32 times = 3; // 收益倍数：1-3，默认1倍
+}
+
+//炼制大师红点
+message ResRefineMasterRedDot{
+  optional int32 reinExp = 1;         //修为是否红点
+  optional int32 feats = 2;        //功勋是否红点
+  optional int32 servantReinExp = 3;  //灵力是否红点
+}
+
+//返回炼制结果
+message ResRefineResult {
+  optional int32 isSuccess = 1;//0失败1成功
+  optional int32 reason = 2;//失败原因
+  optional int32 gain = 3;//获得的值
+  optional int32 count = 4;//已炼制次数
+  optional int32 type = 5;
+}
+
+message UpdateAuctionDiamond {
+  optional int64 auctionDiamond = 1;//钻石消费额度
+}
+
+//发送小秘书问题
+message ReqSendQuestionInfo {
+    optional string content = 1;
+}
+
+//身上的装备掉落变动
+message ResPlayerDieDropEquipByWear {
+  optional int32 dropType = 1; //掉落type
+  optional int64 itemLid = 2;//装备的唯一Id
+}
+
+//请求千纸鹤传送
+message ReqPaperCraneDelivery{
+	optional int32 mapId = 1;
+	optional int32 x = 2;
+	optional int32 y = 3;
+	optional int32 line = 4;
+}
+
+//千纸鹤传送返回
+message ResPaperCraneDelivery{
+	optional int32 isSuccess = 1;//0成功 1失败
+}
+
+//新服优势推送
+message ResNewFirstChargePush{
+	optional int64 endTime = 1;//倒计时结束时间
+}
+
+//系统开起感叹号提示
+message ResNeedPrompt{
+	repeated int32 needPromptList = 1;//已开启的系统中需要提示感叹号的系统ID
+}
+
+//腕力刷新
+message ResRoleRefreshWanLi{
+	optional int64 rid = 1;//玩家ID
+	optional int32 wanLi = 2;//腕力值
+}
+
+//给客户端发送假buff消息
+message RoleAddFakeBuff{
+	optional fightV2.BufferInfo buffers = 1; //要加的假buff
+	optional int32 addOrRemove = 2;//0默认添加 1移除
+}
+
+//给客户端发送驯服次数信息
+message ResRoleTame {
+  optional int32 goldTameCount = 1; //当日元宝驯服次数
+  optional int32 diamondTameCount = 2;  //当日钻石驯服次数，次数不同，消耗钻石不同
+}
+
+//给客户端发送封号天赋数据
+message ResTitleTianfu {
+	optional int32 zhanAddPoint = 1; //对战增伤点数
+	optional int32 zhanReducePoint = 2; //对战减伤点数
+	optional int32 faAddPoint = 3; //对法增伤点数
+	optional int32 faReducePoint = 4; //对法减伤点数
+	optional int32 daoAddPoint = 5; //对道增伤点数
+	optional int32 daoReducePoint = 6; //对道减伤点数
+	optional int32 available = 7; //当前可用点数
+}
+
+//客户端请求 保存封号天赋
+message ReqSaveTitleTianfu {
+	optional int32 zhanAddPoint = 1; //对战增伤新增点数,>=0
+	optional int32 zhanReducePoint = 2; //对战减伤新增点数,>=0
+	optional int32 faAddPoint = 3; //对法增伤新增点数,>=0
+	optional int32 faReducePoint = 4; //对法减伤新增点数,>=0
+	optional int32 daoAddPoint = 5; //对道增伤新增点数,>=0
+	optional int32 daoReducePoint = 6; //对道减伤新增点数,>=0
+} 
+//发给客户端的练功房时间限制
+message ResKongFuHouseTimeLimit{
+	repeated int64 times = 1;//前三十二位是地图id，后三十二位是剩余时间
+}
+
+//潜能信息
+message potentialInfo {
+  optional int32 id = 1; //潜能表id
+  optional int32 type = 2;  //潜能类型 石化等等
+  optional int32 star = 3;  //潜能星级 
+  optional int32 isOpen = 4;  //是否已激活 
+}
+//全部潜能信息
+message RespotentialInfo {
+  repeated potentialInfo info = 1; //潜能信息
+}
+//潜能红点包
+message ResPotentialRedPoint {
+   optional int32 type = 1;  //潜能类型 石化等等
+   optional int32 state = 2; //0表示无红点 1表示有红点
+}
+//请求激活潜能
+message ReqActivePotential {
+   optional int32 type = 1;  //潜能类型 石化等等
+}
+//请求升级潜能
+message ReqUpgradePotential {
+   optional int32 type = 1;  //潜能类型 石化等等
+}
+//设置
+message SettingBean {
+  required int32 id = 1;
+  optional int32 state =2;//勾选为1,去掉勾选为0
+}
+//回收设置
+message CollectionSetting {
+  repeated SettingBean setting = 1;
+}
+//自动拾取配置
+message PickUpSettingBean {
+  required int32 id = 1;
+  optional int32 parentId = 2; //parentId为0时父级选项 parentId为父级id是为子级选项
+  optional int32 state =3;//勾选为1,去掉勾选为0
+}
+
+//自动拾取配置信息
+message PickUpSetting {
+  repeated PickUpSettingBean setting = 1;
+}
+//玩家模型信息
+message ReqRoleModelInfo{
+    optional int64 roleId= 1;//玩家id
+}
+
+//玩家模型信息
+message RoleModelInfo{
+	optional int32 career = 1; //职业
+	optional int32 sex = 2; //性别
+	optional int32 armor = 3; //衣服
+	optional int32 weapon = 4; //武器
+	optional int32 helmet = 5;//头盔
+	optional int32 face = 6; //面巾
+	repeated appearanceV2.wearPosition wearPosition = 7;//穿戴的时装
+	optional int64 roleId = 8;//玩家id
+	optional string unionName =9;//行会名称
+}
+
+message ReqMysteriousExchange{
+  optional int32 changId = 1;
+}
+
+message ResMysteriousExchange{
+   repeated MysteriousExchangInfo info = 1;
+}
+
+message MysteriousExchangInfo{
+   optional int32 changId = 1;
+   optional int32 changeNum = 2;
+}
+
+message BossKillData{
+	repeated BossTypeKillData killDatas = 1;
+}
+
+message BossTypeKillData{
+	required int32 surTimes = 1;//剩余次数
+	required int32 maxTimes = 2;//次数上限
+	required int32 type = 3;//boss类型
+	required int32 buyTimes = 4;//已购买次数
+}
+
+message ReqAddBossKillTimes{
+	required int32 type = 1;//boss类型
+	required int32 addType = 2;//1使用卷轴 2消耗砖石
+}
+
+//玩家系统预告开启信息
+message ResRoleSystemPreview{
+	repeated SystemPreview info = 1;//预告信息 
+}
+
+message SystemPreview{
+	optional int32 id = 1;//表id
+	optional int32 rewardType = 2;//2是不可领取 1是可领取 3是已领取
+}
+
+//请求领取系统预告奖励
+message ReqRewardSystemPreview{
+	optional int32 id = 1;//领取的ID
+}
+
+//请求消耗资源兑换经验
+message ReqAddRoleExpByResources{
+	optional int32 gear = 1;//兑换的档位
+}
+
+//返回当前累计的经验值
+message ResRoleExpAccumulate{
+	optional int32 hasCount = 1;//剩余兑换次数
+	optional int64 hasExp = 2;//当前拥有的经验
+}

@@ -181,6 +181,17 @@ namespace Framework
                     return resourceCollectionConfigFilePath;
                 }
             }
+
+            private static string resourceBuilderConfigFilePath;
+            public static string ResourceBuilderConfigFilePath
+            {
+                get
+                {
+                    if(string.IsNullOrEmpty(resourceBuilderConfigFilePath))
+                        resourceBuilderConfigFilePath = ConfigPath + "/ResourceBuilderConfig.xml";
+                    return resourceBuilderConfigFilePath;
+                }
+            }
             #endregion
           
             #region 功能

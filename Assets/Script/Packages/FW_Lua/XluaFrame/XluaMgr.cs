@@ -6,6 +6,8 @@ public class XluaMgr:ManagerObject
     #region 委托类型
     [CSharpCallLua]
     public delegate void XLuaMgr_Init(object obj);
+    [CSharpCallLua]
+    public delegate void XLuaMgr_Update();
 
     private Action outGame;
     public Action OutGame
@@ -46,6 +48,20 @@ public class XluaMgr:ManagerObject
             return luaUIManager;
         }
     }
+
+    private XLuaMgr_Update luaUpdate;
+    private XLuaMgr_Update LuaUpdate
+    {
+        get
+        {
+            if(luaUpdate == null)
+            {
+                luaUpdate = luaEnv.Global.Get<XLuaMgr_Update>("Update");
+            }
+
+            return luaUpdate;
+        }
+    }
     #endregion
 
     #region 构造函数
@@ -58,7 +74,6 @@ public class XluaMgr:ManagerObject
     #endregion
 
     #region 初始化
-
     private void Init()
     {
         luaEnv = new LuaEnv();
@@ -69,7 +84,7 @@ public class XluaMgr:ManagerObject
         {
             init(gameManager);
         }
-        outGame = luaEnv.Global.Get<Action>("OutGame");
+        outGame = luaEnv.Global.Get<Action>("OutGame"); 
     }
 
     public override void Update()
@@ -78,6 +93,8 @@ public class XluaMgr:ManagerObject
         if (curTime - lastLuaGcTime > LuaGcInterval) {
             Tick();
         }
+
+        LuaUpdate();
     }
 
     private void Tick()

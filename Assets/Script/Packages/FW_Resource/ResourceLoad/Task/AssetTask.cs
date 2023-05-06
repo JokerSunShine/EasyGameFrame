@@ -53,9 +53,11 @@ namespace Script.Packages.FW_Resource.Task
         {
             if(Main.instance.resource.ResConfig.mode == ResourceMode.Editor)
             {
+#if UNITY_EDITOR
                 string assetPath = "Assets/Res/" + path;
                 var asset = AssetDatabase.LoadAssetAtPath(assetPath, type);
                 SetAsset(asset);
+#endif
             }
             else
             {
@@ -67,9 +69,11 @@ namespace Script.Packages.FW_Resource.Task
         {
             if(Main.instance.resource.ResConfig.mode == ResourceMode.Editor)
             {
+#if UNITY_EDITOR
                 string assetPath = "Assets/Res/" + path;
                 var asset = AssetDatabase.LoadAssetAtPath(assetPath, type);
                 SetAsset(asset);
+#endif
             }
             else
             {

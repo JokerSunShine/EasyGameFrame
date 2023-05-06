@@ -5,6 +5,9 @@ using UnityEditor;
 
 namespace ResourceTool
 {
+    /// <summary>
+    /// 资源同步控制器
+    /// </summary>
     public class ResourceSyncController
     {
         #region 事件

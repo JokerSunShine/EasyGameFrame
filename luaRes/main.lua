@@ -23,3 +23,8 @@ function Init(gameManager)
     log(gameMgr2.test2)
     CS.Framework.ResourceManager.Instantiate("Effect/Scene/huo.prefab",nil,false)
 end
+
+function Update()
+    log("LuaUpdate")
+    local s = "1" .. "23"
+end
